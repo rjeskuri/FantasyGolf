@@ -2,13 +2,27 @@
 name = "FantasyGolf"
 version = "0.1.0"
 description = ""
-requires-python = ">=3.10"
-dependencies = []
+requires-python = ">=3.12"
+dependencies = [
+    "duckdb>=1.5.6",
+    "httpx>=0.28.1",
+    "numpy>=2.2.6",
+    "pandas>=2.3.3",
+    "rapidfuzz>=3.14.5",
+    "scikit-learn>=1.7.2",
+]
+
+[project.scripts]
+fantasygolf = "fantasygolf.cli:main"
 
 [dependency-groups]
 dev = [
     "pytest>=8",
     "ruff>=0.6",
+]
+notebook = [
+    "jupyterlab>=4.6.6",
+    "matplotlib>=3.10.9",
 ]
 
 [build-system]
