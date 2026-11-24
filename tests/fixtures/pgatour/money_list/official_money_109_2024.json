@@ -1,0 +1,1020 @@
+{
+ "data": {
+  "statDetails": {
+   "__typename": "StatDetails",
+   "tourCode": "R",
+   "year": 2024,
+   "displaySeason": "2024",
+   "statId": "109",
+   "statType": "YTD",
+   "tournamentPills": [
+    {
+     "tournamentId": "R2024493",
+     "displayName": "The RSM Classic"
+    },
+    {
+     "tournamentId": "R2024528",
+     "displayName": "Butterfield Bermuda Championship"
+    },
+    {
+     "tournamentId": "R2024457",
+     "displayName": "World Wide Technology Championship"
+    },
+    {
+     "tournamentId": "R2024527",
+     "displayName": "ZOZO CHAMPIONSHIP"
+    },
+    {
+     "tournamentId": "R2024047",
+     "displayName": "Shriners Children's Open"
+    },
+    {
+     "tournamentId": "R2024554",
+     "displayName": "Black Desert Championship"
+    },
+    {
+     "tournamentId": "R2024054",
+     "displayName": "Sanderson Farms Championship"
+    },
+    {
+     "tournamentId": "R2024464",
+     "displayName": "Procore Championship"
+    },
+    {
+     "tournamentId": "R2024028",
+     "displayName": "BMW Championship"
+    },
+    {
+     "tournamentId": "R2024027",
+     "displayName": "FedEx St. Jude Championship"
+    },
+    {
+     "tournamentId": "R2024013",
+     "displayName": "Wyndham Championship"
+    },
+    {
+     "tournamentId": "R2024525",
+     "displayName": "3M Open"
+    },
+    {
+     "tournamentId": "R2024100",
+     "displayName": "The Open Championship"
+    },
+    {
+     "tournamentId": "R2024472",
+     "displayName": "Barracuda Championship"
+    },
+    {
+     "tournamentId": "R2024518",
+     "displayName": "ISCO Championship"
+    },
+    {
+     "tournamentId": "R2024541",
+     "displayName": "Genesis Scottish Open"
+    },
+    {
+     "tournamentId": "R2024030",
+     "displayName": "John Deere Classic"
+    },
+    {
+     "tournamentId": "R2024524",
+     "displayName": "Rocket Mortgage Classic"
+    },
+    {
+     "tournamentId": "R2024034",
+     "displayName": "Travelers Championship"
+    },
+    {
+     "tournamentId": "R2024026",
+     "displayName": "U.S. Open"
+    },
+    {
+     "tournamentId": "R2024023",
+     "displayName": "the Memorial Tournament presented by Workday"
+    },
+    {
+     "tournamentId": "R2024032",
+     "displayName": "RBC Canadian Open"
+    },
+    {
+     "tournamentId": "R2024021",
+     "displayName": "Charles Schwab Challenge"
+    },
+    {
+     "tournamentId": "R2024033",
+     "displayName": "PGA Championship"
+    },
+    {
+     "tournamentId": "R2024480",
+     "displayName": "Wells Fargo Championship"
+    },
+    {
+     "tournamentId": "R2024553",
+     "displayName": "Myrtle Beach Classic"
+    },
+    {
+     "tournamentId": "R2024019",
+     "displayName": "THE CJ CUP Byron Nelson"
+    },
+    {
+     "tournamentId": "R2024018",
+     "displayName": "Zurich Classic of New Orleans"
+    },
+    {
+     "tournamentId": "R2024012",
+     "displayName": "RBC Heritage"
+    },
+    {
+     "tournamentId": "R2024522",
+     "displayName": "Corales Puntacana Championship"
+    },
+    {
+     "tournamentId": "R2024014",
+     "displayName": "Masters Tournament"
+    },
+    {
+     "tournamentId": "R2024041",
+     "displayName": "Valero Texas Open"
+    },
+    {
+     "tournamentId": "R2024020",
+     "displayName": "Texas Children's Houston Open"
+    },
+    {
+     "tournamentId": "R2024475",
+     "displayName": "Valspar Championship"
+    },
+    {
+     "tournamentId": "R2024011",
+     "displayName": "THE PLAYERS Championship"
+    },
+    {
+     "tournamentId": "R2024483",
+     "displayName": "Puerto Rico Open"
+    },
+    {
+     "tournamentId": "R2024009",
+     "displayName": "Arnold Palmer Invitational presented by Mastercard"
+    },
+    {
+     "tournamentId": "R2024010",
+     "displayName": "Cognizant Classic in The Palm Beaches"
+    },
+    {
+     "tournamentId": "R2024540",
+     "displayName": "Mexico Open at Vidanta"
+    },
+    {
+     "tournamentId": "R2024007",
+     "displayName": "The Genesis Invitational"
+    },
+    {
+     "tournamentId": "R2024003",
+     "displayName": "WM Phoenix Open"
+    },
+    {
+     "tournamentId": "R2024005",
+     "displayName": "AT&T Pebble Beach Pro-Am"
+    },
+    {
+     "tournamentId": "R2024004",
+     "displayName": "Farmers Insurance Open"
+    },
+    {
+     "tournamentId": "R2024002",
+     "displayName": "The American Express"
+    },
+    {
+     "tournamentId": "R2024006",
+     "displayName": "Sony Open in Hawaii"
+    },
+    {
+     "tournamentId": "R2024016",
+     "displayName": "The Sentry"
+    }
+   ],
+   "yearPills": [
+    {
+     "year": 2026,
+     "displaySeason": "2026"
+    },
+    {
+     "year": 2025,
+     "displaySeason": "2025"
+    },
+    {
+     "year": 2024,
+     "displaySeason": "2024"
+    },
+    {
+     "year": 2023,
+     "displaySeason": "2022-2023"
+    },
+    {
+     "year": 2022,
+     "displaySeason": "2021-2022"
+    },
+    {
+     "year": 2021,
+     "displaySeason": "2020-2021"
+    },
+    {
+     "year": 2020,
+     "displaySeason": "2019-2020"
+    },
+    {
+     "year": 2019,
+     "displaySeason": "2018-2019"
+    },
+    {
+     "year": 2018,
+     "displaySeason": "2017-2018"
+    },
+    {
+     "year": 2017,
+     "displaySeason": "2016-2017"
+    },
+    {
+     "year": 2016,
+     "displaySeason": "2015-2016"
+    },
+    {
+     "year": 2015,
+     "displaySeason": "2014-2015"
+    },
+    {
+     "year": 2014,
+     "displaySeason": "2013-2014"
+    },
+    {
+     "year": 2013,
+     "displaySeason": "2013"
+    },
+    {
+     "year": 2012,
+     "displaySeason": "2012"
+    },
+    {
+     "year": 2011,
+     "displaySeason": "2011"
+    },
+    {
+     "year": 2010,
+     "displaySeason": "2010"
+    },
+    {
+     "year": 2009,
+     "displaySeason": "2009"
+    },
+    {
+     "year": 2008,
+     "displaySeason": "2008"
+    },
+    {
+     "year": 2007,
+     "displaySeason": "2007"
+    },
+    {
+     "year": 2006,
+     "displaySeason": "2006"
+    },
+    {
+     "year": 2005,
+     "displaySeason": "2005"
+    },
+    {
+     "year": 2004,
+     "displaySeason": "2004"
+    },
+    {
+     "year": 2003,
+     "displaySeason": "2003"
+    },
+    {
+     "year": 2002,
+     "displaySeason": "2002"
+    },
+    {
+     "year": 2001,
+     "displaySeason": "2001"
+    },
+    {
+     "year": 2000,
+     "displaySeason": "2000"
+    },
+    {
+     "year": 1999,
+     "displaySeason": "1999"
+    },
+    {
+     "year": 1998,
+     "displaySeason": "1998"
+    },
+    {
+     "year": 1997,
+     "displaySeason": "1997"
+    },
+    {
+     "year": 1996,
+     "displaySeason": "1996"
+    },
+    {
+     "year": 1995,
+     "displaySeason": "1995"
+    },
+    {
+     "year": 1994,
+     "displaySeason": "1994"
+    },
+    {
+     "year": 1993,
+     "displaySeason": "1993"
+    },
+    {
+     "year": 1992,
+     "displaySeason": "1992"
+    },
+    {
+     "year": 1991,
+     "displaySeason": "1991"
+    },
+    {
+     "year": 1990,
+     "displaySeason": "1990"
+    },
+    {
+     "year": 1989,
+     "displaySeason": "1989"
+    },
+    {
+     "year": 1988,
+     "displaySeason": "1988"
+    },
+    {
+     "year": 1987,
+     "displaySeason": "1987"
+    }
+   ],
+   "statTitle": "Official Money",
+   "statDescription": "The total official money a player has earned year-to-date. Note: This is for PGA TOUR members only. (109)",
+   "tourAvg": null,
+   "lastProcessed": "Through Week Ending: 12-30-2024",
+   "statHeaders": [
+    "Money",
+    "YTD Victories"
+   ],
+   "rows": [
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46046",
+     "playerName": "Scottie Scheffler",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 1,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$29,228,357",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "7",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "48081",
+     "playerName": "Xander Schauffele",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 2,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$18,385,320",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "2",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "32839",
+     "playerName": "Hideki Matsuyama",
+     "country": "Japan",
+     "countryFlag": "JPN",
+     "rank": 3,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$11,257,969",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "2",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51766",
+     "playerName": "Wyndham Clark",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 4,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$10,901,416",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "1",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "28237",
+     "playerName": "Rory McIlroy",
+     "country": "Northern Ireland",
+     "countryFlag": "NIR",
+     "rank": 5,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$10,893,790",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "2",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "52955",
+     "playerName": "Ludvig Åberg",
+     "country": "Sweden",
+     "countryFlag": "SWE",
+     "rank": 6,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$9,833,547",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51634",
+     "playerName": "Sahith Theegala",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 7,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$8,474,215",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "50525",
+     "playerName": "Collin Morikawa",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 8,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$8,383,572",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33141",
+     "playerName": "Keegan Bradley",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 9,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$6,879,455",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "1",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "39971",
+     "playerName": "Sungjae Im",
+     "country": "Republic of Korea",
+     "countryFlag": "KOR",
+     "rank": 10,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$6,286,205",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "35450",
+     "playerName": "Patrick Cantlay",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 11,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$6,279,965",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "47504",
+     "playerName": "Sam Burns",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 12,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$6,185,830",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33204",
+     "playerName": "Shane Lowry",
+     "country": "Ireland",
+     "countryFlag": "IRL",
+     "rank": 13,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$6,095,881",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "1",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "30926",
+     "playerName": "Chris Kirk",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 14,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$6,061,136",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "1",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33948",
+     "playerName": "Byeong Hun An",
+     "country": "Republic of Korea",
+     "countryFlag": "KOR",
+     "rank": 15,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,871,643",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "29725",
+     "playerName": "Tony Finau",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 16,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,706,467",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "52215",
+     "playerName": "Robert MacIntyre",
+     "country": "Scotland",
+     "countryFlag": "SCO",
+     "rank": 17,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,400,384",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "2",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "56630",
+     "playerName": "Akshay Bhatia",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 18,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,344,905",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "1",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "49771",
+     "playerName": "J.T. Poston",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 19,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,271,598",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "1",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "48153",
+     "playerName": "Matthieu Pavon",
+     "country": "France",
+     "countryFlag": "FRA",
+     "rank": 20,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,254,412",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "1",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33448",
+     "playerName": "Justin Thomas",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 21,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,223,561",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "27644",
+     "playerName": "Brian Harman",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 22,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,201,770",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "34098",
+     "playerName": "Russell Henley",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 23,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,080,969",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "-",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "57362",
+     "playerName": "Austin Eckroat",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 24,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,054,871",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "2",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "29420",
+     "playerName": "Billy Horschel",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 25,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "$5,037,278",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "YTD Victories",
+       "statValue": "1",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,1155 @@
+{
+ "data": {
+  "statDetails": {
+   "__typename": "StatDetails",
+   "tourCode": "R",
+   "year": 2024,
+   "displaySeason": "2024",
+   "statId": "186",
+   "statType": "YTD",
+   "tournamentPills": [],
+   "yearPills": [
+    {
+     "year": 2026,
+     "displaySeason": "2026"
+    },
+    {
+     "year": 2025,
+     "displaySeason": "2025"
+    },
+    {
+     "year": 2024,
+     "displaySeason": "2024"
+    },
+    {
+     "year": 2023,
+     "displaySeason": "2022-2023"
+    },
+    {
+     "year": 2022,
+     "displaySeason": "2021-2022"
+    },
+    {
+     "year": 2021,
+     "displaySeason": "2020-2021"
+    },
+    {
+     "year": 2020,
+     "displaySeason": "2019-2020"
+    },
+    {
+     "year": 2019,
+     "displaySeason": "2018-2019"
+    },
+    {
+     "year": 2018,
+     "displaySeason": "2017-2018"
+    },
+    {
+     "year": 2017,
+     "displaySeason": "2016-2017"
+    },
+    {
+     "year": 2016,
+     "displaySeason": "2015-2016"
+    },
+    {
+     "year": 2015,
+     "displaySeason": "2014-2015"
+    },
+    {
+     "year": 2014,
+     "displaySeason": "2013-2014"
+    },
+    {
+     "year": 2013,
+     "displaySeason": "2013"
+    },
+    {
+     "year": 2012,
+     "displaySeason": "2012"
+    },
+    {
+     "year": 2011,
+     "displaySeason": "2011"
+    },
+    {
+     "year": 2010,
+     "displaySeason": "2010"
+    },
+    {
+     "year": 2009,
+     "displaySeason": "2009"
+    },
+    {
+     "year": 2008,
+     "displaySeason": "2008"
+    },
+    {
+     "year": 2007,
+     "displaySeason": "2007"
+    },
+    {
+     "year": 2006,
+     "displaySeason": "2006"
+    },
+    {
+     "year": 2005,
+     "displaySeason": "2005"
+    },
+    {
+     "year": 2004,
+     "displaySeason": "2004"
+    },
+    {
+     "year": 2003,
+     "displaySeason": "2003"
+    },
+    {
+     "year": 2002,
+     "displaySeason": "2002"
+    },
+    {
+     "year": 2001,
+     "displaySeason": "2001"
+    },
+    {
+     "year": 2000,
+     "displaySeason": "2000"
+    },
+    {
+     "year": 1999,
+     "displaySeason": "1999"
+    },
+    {
+     "year": 1998,
+     "displaySeason": "1998"
+    },
+    {
+     "year": 1997,
+     "displaySeason": "1997"
+    },
+    {
+     "year": 1996,
+     "displaySeason": "1996"
+    },
+    {
+     "year": 1995,
+     "displaySeason": "1995"
+    }
+   ],
+   "statTitle": "Official World Golf Ranking",
+   "statDescription": "The Official World Golf Ranking, which is endorsed by the four major championships and the five professional tours which make up the International Federation of PGA Tours, is issued every Monday, following completion of the previous week's tournaments from around the world. This statistic is the average number of points earned per event in the last 104 weeks. These points are awarded based upon finish position as well as the strength of the field. The points are initially worth double their original value and decline gradually over this two-year period. There are 8 13-week periods and points decline by .25 times their value each period. (186)",
+   "tourAvg": null,
+   "lastProcessed": "Through Week Ending: 12-30-2024",
+   "statHeaders": [
+    "Avg Points",
+    "Total Points",
+    "Points lost",
+    "Points gained"
+   ],
+   "rows": [
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46046",
+     "playerName": "Scottie Scheffler",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 1,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "15.6000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "655.1999",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-513.5227",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "727.4548",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "48081",
+     "playerName": "Xander Schauffele",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 2,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "9.2273",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "396.7746",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-274.0754",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "444.2496",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "28237",
+     "playerName": "Rory McIlroy",
+     "country": "Northern Ireland",
+     "countryFlag": "NIR",
+     "rank": 3,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "7.6744",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "360.6972",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-358.2875",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "347.8940",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "50525",
+     "playerName": "Collin Morikawa",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 4,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "5.4132",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "238.1809",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-169.3031",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "243.9563",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "52955",
+     "playerName": "Ludvig Åberg",
+     "country": "Sweden",
+     "countryFlag": "SWE",
+     "rank": 5,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "5.3173",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "212.6903",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-114.1371",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "221.6311",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "32839",
+     "playerName": "Hideki Matsuyama",
+     "country": "Japan",
+     "countryFlag": "JPN",
+     "rank": 6,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "4.7224",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "212.5059",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-122.5376",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "249.3404",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51766",
+     "playerName": "Wyndham Clark",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 7,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "4.6470",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "213.7632",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-217.4530",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "222.3401",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46717",
+     "playerName": "Viktor Hovland",
+     "country": "Norway",
+     "countryFlag": "NOR",
+     "rank": 8,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "4.3429",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "173.7161",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-253.6124",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "104.1527",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "30911",
+     "playerName": "Tommy Fleetwood",
+     "country": "England",
+     "countryFlag": "ENG",
+     "rank": 9,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.7925",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "197.2088",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-175.1059",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "185.4421",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "47959",
+     "playerName": "Bryson DeChambeau",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 10,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.7693",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "150.7713",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-59.1636",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "179.0000",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "35450",
+     "playerName": "Patrick Cantlay",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 11,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.5191",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "140.7652",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-205.8097",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "130.3452",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33141",
+     "playerName": "Keegan Bradley",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 12,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.5105",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "157.9707",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-146.9160",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "155.2142",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51634",
+     "playerName": "Sahith Theegala",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 13,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.5040",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "178.7021",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-154.3118",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "199.8829",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "52215",
+     "playerName": "Robert MacIntyre",
+     "country": "Scotland",
+     "countryFlag": "SCO",
+     "rank": 14,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.3753",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "175.5140",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-88.5130",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "182.4060",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "34363",
+     "playerName": "Tyrrell Hatton",
+     "country": "England",
+     "countryFlag": "ENG",
+     "rank": 15,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.3107",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "132.4264",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-154.4294",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "100.4707",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "29420",
+     "playerName": "Billy Horschel",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 16,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.3086",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "165.4309",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-89.1782",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "182.0011",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "34098",
+     "playerName": "Russell Henley",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 17,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.2325",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "132.5318",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-122.8936",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "134.1667",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "24502",
+     "playerName": "Adam Scott",
+     "country": "Australia",
+     "countryFlag": "AUS",
+     "rank": 18,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "3.0252",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "145.2074",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-92.1402",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "146.5150",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33448",
+     "playerName": "Justin Thomas",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 19,
+     "rankDiff": "1",
+     "rankChangeTendency": "UP",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "2.9000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "124.7019",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-125.6460",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "128.9508",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "47504",
+     "playerName": "Sam Burns",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 20,
+     "rankDiff": "1",
+     "rankChangeTendency": "DOWN",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "2.8924",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "130.1559",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-144.2787",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "133.5946",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "55182",
+     "playerName": "Tom Kim",
+     "country": "Republic of Korea",
+     "countryFlag": "KOR",
+     "rank": 21,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "2.8905",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "150.3056",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-170.6503",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "122.3668",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46414",
+     "playerName": "Aaron Rai",
+     "country": "England",
+     "countryFlag": "ENG",
+     "rank": 22,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "2.8614",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "148.7920",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-75.5343",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "148.9786",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "39971",
+     "playerName": "Sungjae Im",
+     "country": "Republic of Korea",
+     "countryFlag": "KOR",
+     "rank": 23,
+     "rankDiff": "1",
+     "rankChangeTendency": "UP",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "2.7505",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "143.0281",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-142.5233",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "147.0895",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33948",
+     "playerName": "Byeong Hun An",
+     "country": "Republic of Korea",
+     "countryFlag": "KOR",
+     "rank": 24,
+     "rankDiff": "1",
+     "rankChangeTendency": "UP",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "2.7215",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "127.9084",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-92.1436",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "144.1739",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46970",
+     "playerName": "Jon Rahm",
+     "country": "Spain",
+     "countryFlag": "ESP",
+     "rank": 25,
+     "rankDiff": "2",
+     "rankChangeTendency": "DOWN",
+     "stats": [
+      {
+       "statName": "Avg Points",
+       "statValue": "2.7196",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total Points",
+       "statValue": "108.7859",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points lost",
+       "statValue": "-292.6664",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Points gained",
+       "statValue": "55.2815",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    }
+   ]
+  }
+ }
+}

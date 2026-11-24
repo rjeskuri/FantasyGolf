@@ -1,0 +1,41 @@
+{
+ "data": {
+  "player": {
+   "id": "46046",
+   "firstName": "Scottie",
+   "lastName": "Scheffler",
+   "displayName": "Scottie Scheffler",
+   "country": "United States",
+   "countryFlag": "USA",
+   "owgr": 1,
+   "rank": {
+    "rank": 1,
+    "statName": "FedExCup Fall Standings"
+   },
+   "playerBio": {
+    "heightImperial": "6'3\"",
+    "heightMeters": "1.9",
+    "weightImperial": "200",
+    "weightKilograms": "91",
+    "age": "30",
+    "born": "Jun 21, 1996",
+    "turnedPro": "2018",
+    "school": "University of Texas",
+    "degree": null,
+    "graduationYear": null,
+    "careerEarnings": "$130,955,999",
+    "pronunciation": null,
+    "exemptions": [
+     {
+      "tour": "R",
+      "description": "Winner, PGA Championship (thru 2031)",
+      "expirationDate": null
+     }
+    ],
+    "deceased": false,
+    "deceasedDate": null,
+    "primaryTour": "R"
+   }
+  }
+ }
+}

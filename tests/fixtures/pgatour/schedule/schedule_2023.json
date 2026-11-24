@@ -1,0 +1,1721 @@
+{
+ "data": {
+  "schedule": {
+   "tour": "R",
+   "seasonYear": "2022 - 2023",
+   "completed": [
+    {
+     "month": "September",
+     "year": "2022",
+     "monthSort": 202209,
+     "tournaments": [
+      {
+       "id": "R2023464",
+       "tournamentName": "Fortinet Championship",
+       "date": "Sep 15 - 18",
+       "startDate": 1663200000000,
+       "sortDate": "10",
+       "sequenceNumber": 10,
+       "city": "Napa",
+       "state": "California",
+       "country": "United States of America",
+       "courseName": "Silverado Resort (North Course)",
+       "champion": "Max Homa",
+       "championId": "39977",
+       "champions": [
+        {
+         "displayName": "Max Homa",
+         "playerId": "39977"
+        }
+       ],
+       "championEarnings": "$1,440,000",
+       "purse": "$8,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023500",
+       "tournamentName": "Presidents Cup",
+       "date": "Sep 22 - 25",
+       "startDate": 1663804800000,
+       "sortDate": "20",
+       "sequenceNumber": 20,
+       "city": "Charlotte",
+       "state": "North Carolina",
+       "country": "United States of America",
+       "courseName": "Quail Hollow Club",
+       "champion": "United States",
+       "championId": "33448",
+       "champions": [
+        {
+         "displayName": "United States",
+         "playerId": ""
+        }
+       ],
+       "championEarnings": "",
+       "purse": "$0",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": null,
+       "tourStandingValue": null,
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023054",
+       "tournamentName": "Sanderson Farms Championship",
+       "date": "Sep 29 - Oct 2",
+       "startDate": 1664409600000,
+       "sortDate": "30",
+       "sequenceNumber": 30,
+       "city": "Jackson",
+       "state": "Mississippi",
+       "country": "United States of America",
+       "courseName": "The Country Club of Jackson",
+       "champion": "Mackenzie Hughes",
+       "championId": "35506",
+       "champions": [
+        {
+         "displayName": "Mackenzie Hughes",
+         "playerId": "35506"
+        }
+       ],
+       "championEarnings": "$1,422,000",
+       "purse": "$7,900,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "October",
+     "year": "2022",
+     "monthSort": 202210,
+     "tournaments": [
+      {
+       "id": "R2023047",
+       "tournamentName": "Shriners Children's Open",
+       "date": "Oct 6 - 9",
+       "startDate": 1665014400000,
+       "sortDate": "40",
+       "sequenceNumber": 40,
+       "city": "Las Vegas",
+       "state": "Nevada",
+       "country": "United States of America",
+       "courseName": "TPC Summerlin",
+       "champion": "Tom Kim",
+       "championId": "55182",
+       "champions": [
+        {
+         "displayName": "Tom Kim",
+         "playerId": "55182"
+        }
+       ],
+       "championEarnings": "$1,440,000",
+       "purse": "$8,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023527",
+       "tournamentName": "ZOZO CHAMPIONSHIP",
+       "date": "Oct 13 - 16",
+       "startDate": 1665619200000,
+       "sortDate": "50",
+       "sequenceNumber": 50,
+       "city": "Chiba",
+       "state": "",
+       "country": "Japan",
+       "courseName": "ACCORDIA GOLF Narashino Country Club",
+       "champion": "Keegan Bradley",
+       "championId": "33141",
+       "champions": [
+        {
+         "displayName": "Keegan Bradley",
+         "playerId": "33141"
+        }
+       ],
+       "championEarnings": "$1,980,000",
+       "purse": "$11,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023521",
+       "tournamentName": "THE CJ CUP in South Carolina",
+       "date": "Oct 20 - 23",
+       "startDate": 1666224000000,
+       "sortDate": "60",
+       "sequenceNumber": 60,
+       "city": "Ridgeland",
+       "state": "South Carolina",
+       "country": "United States of America",
+       "courseName": "Congaree Golf Club",
+       "champion": "Rory McIlroy",
+       "championId": "28237",
+       "champions": [
+        {
+         "displayName": "Rory McIlroy",
+         "playerId": "28237"
+        }
+       ],
+       "championEarnings": "$1,890,000",
+       "purse": "$10,500,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023528",
+       "tournamentName": "Butterfield Bermuda Championship",
+       "date": "Oct 27 - 30",
+       "startDate": 1666828800000,
+       "sortDate": "70",
+       "sequenceNumber": 70,
+       "city": "Southampton",
+       "state": "",
+       "country": "Bermuda",
+       "courseName": "Port Royal Golf Course",
+       "champion": "Seamus Power",
+       "championId": "28252",
+       "champions": [
+        {
+         "displayName": "Seamus Power",
+         "playerId": "28252"
+        }
+       ],
+       "championEarnings": "$1,170,000",
+       "purse": "$6,500,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "November",
+     "year": "2022",
+     "monthSort": 202211,
+     "tournaments": [
+      {
+       "id": "R2023457",
+       "tournamentName": "World Wide Technology Championship",
+       "date": "Nov 3 - 6",
+       "startDate": 1667433600000,
+       "sortDate": "80",
+       "sequenceNumber": 80,
+       "city": "Riviera Maya",
+       "state": "",
+       "country": "Mexico",
+       "courseName": "El Camaleón Golf Course at Mayakoba",
+       "champion": "Russell Henley",
+       "championId": "34098",
+       "champions": [
+        {
+         "displayName": "Russell Henley",
+         "playerId": "34098"
+        }
+       ],
+       "championEarnings": "$1,476,000",
+       "purse": "$8,200,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023020",
+       "tournamentName": "Cadence Bank Houston Open",
+       "date": "Nov 10 - 13",
+       "startDate": 1668038400000,
+       "sortDate": "90",
+       "sequenceNumber": 90,
+       "city": "Houston",
+       "state": "Texas",
+       "country": "United States of America",
+       "courseName": "Memorial Park Golf Course",
+       "champion": "Tony Finau",
+       "championId": "29725",
+       "champions": [
+        {
+         "displayName": "Tony Finau",
+         "playerId": "29725"
+        }
+       ],
+       "championEarnings": "$1,512,000",
+       "purse": "$8,400,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023493",
+       "tournamentName": "The RSM Classic",
+       "date": "Nov 17 - 20",
+       "startDate": 1668643200000,
+       "sortDate": "100",
+       "sequenceNumber": 100,
+       "city": "St. Simons Island",
+       "state": "Georgia",
+       "country": "United States of America",
+       "courseName": "Sea Island Golf Club (Seaside Course)",
+       "champion": "Adam Svensson",
+       "championId": "40115",
+       "champions": [
+        {
+         "displayName": "Adam Svensson",
+         "playerId": "40115"
+        }
+       ],
+       "championEarnings": "$1,458,000",
+       "purse": "$8,100,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "December",
+     "year": "2022",
+     "monthSort": 202212,
+     "tournaments": [
+      {
+       "id": "R2023478",
+       "tournamentName": "Hero World Challenge",
+       "date": "Dec 1 - 4",
+       "startDate": 1669852800000,
+       "sortDate": "105",
+       "sequenceNumber": 105,
+       "city": "Albany",
+       "state": "",
+       "country": "Bahamas",
+       "courseName": "Albany GC",
+       "champion": "Viktor Hovland",
+       "championId": "46717",
+       "champions": [
+        {
+         "displayName": "Viktor Hovland",
+         "playerId": "46717"
+        }
+       ],
+       "championEarnings": "$1,000,000",
+       "purse": "$3,500,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": null,
+       "tourStandingValue": null,
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023058",
+       "tournamentName": "QBE Shootout",
+       "date": "Dec 9 - 11",
+       "startDate": 1670544000000,
+       "sortDate": "110",
+       "sequenceNumber": 110,
+       "city": "Naples",
+       "state": "Florida",
+       "country": "United States of America",
+       "courseName": "Tiburón Golf Course",
+       "champion": "Tom Hoge, Sahith Theegala",
+       "championId": "35532",
+       "champions": [
+        {
+         "displayName": "Tom Hoge",
+         "playerId": "35532"
+        },
+        {
+         "displayName": "Sahith Theegala",
+         "playerId": "51634"
+        }
+       ],
+       "championEarnings": "$475,000",
+       "purse": "$3,800,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": null,
+       "tourStandingValue": null,
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "January",
+     "year": "2023",
+     "monthSort": 202301,
+     "tournaments": [
+      {
+       "id": "R2023016",
+       "tournamentName": "Sentry Tournament of Champions",
+       "date": "Jan 5 - 8",
+       "startDate": 1672876800000,
+       "sortDate": "120",
+       "sequenceNumber": 120,
+       "city": "Kapalua, Maui",
+       "state": "Hawaii",
+       "country": "United States of America",
+       "courseName": "Plantation Course at Kapalua",
+       "champion": "Jon Rahm",
+       "championId": "46970",
+       "champions": [
+        {
+         "displayName": "Jon Rahm",
+         "playerId": "46970"
+        }
+       ],
+       "championEarnings": "$2,700,000",
+       "purse": "$15,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "550 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023006",
+       "tournamentName": "Sony Open in Hawaii",
+       "date": "Jan 12 - 15",
+       "startDate": 1673481600000,
+       "sortDate": "130",
+       "sequenceNumber": 130,
+       "city": "Honolulu",
+       "state": "Hawaii",
+       "country": "United States of America",
+       "courseName": "Waialae Country Club",
+       "champion": "Si Woo Kim",
+       "championId": "37455",
+       "champions": [
+        {
+         "displayName": "Si Woo Kim",
+         "playerId": "37455"
+        }
+       ],
+       "championEarnings": "$1,422,000",
+       "purse": "$7,900,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023002",
+       "tournamentName": "The American Express",
+       "date": "Jan 19 - 22",
+       "startDate": 1674086400000,
+       "sortDate": "140",
+       "sequenceNumber": 140,
+       "city": "La Quinta",
+       "state": "California",
+       "country": "United States of America",
+       "courseName": "Pete Dye Stadium Course",
+       "champion": "Jon Rahm",
+       "championId": "46970",
+       "champions": [
+        {
+         "displayName": "Jon Rahm",
+         "playerId": "46970"
+        }
+       ],
+       "championEarnings": "$1,440,000",
+       "purse": "$8,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023004",
+       "tournamentName": "Farmers Insurance Open",
+       "date": "Jan 25 - 28",
+       "startDate": 1674604800000,
+       "sortDate": "150",
+       "sequenceNumber": 150,
+       "city": "San Diego",
+       "state": "California",
+       "country": "United States of America",
+       "courseName": "Torrey Pines Golf Course (South Course)",
+       "champion": "Max Homa",
+       "championId": "39977",
+       "champions": [
+        {
+         "displayName": "Max Homa",
+         "playerId": "39977"
+        }
+       ],
+       "championEarnings": "$1,566,000",
+       "purse": "$8,700,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "February",
+     "year": "2023",
+     "monthSort": 202302,
+     "tournaments": [
+      {
+       "id": "R2023005",
+       "tournamentName": "AT&T Pebble Beach Pro-Am",
+       "date": "Feb 2 - 5",
+       "startDate": 1675296000000,
+       "sortDate": "160",
+       "sequenceNumber": 160,
+       "city": "Pebble Beach",
+       "state": "California",
+       "country": "United States of America",
+       "courseName": "Pebble Beach Golf Links",
+       "champion": "Justin Rose",
+       "championId": "22405",
+       "champions": [
+        {
+         "displayName": "Justin Rose",
+         "playerId": "22405"
+        }
+       ],
+       "championEarnings": "$1,620,000",
+       "purse": "$9,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023003",
+       "tournamentName": "WM Phoenix Open",
+       "date": "Feb 9 - 12",
+       "startDate": 1675900800000,
+       "sortDate": "170",
+       "sequenceNumber": 170,
+       "city": "Scottsdale",
+       "state": "Arizona",
+       "country": "United States of America",
+       "courseName": "TPC Scottsdale (Stadium Course)",
+       "champion": "Scottie Scheffler",
+       "championId": "46046",
+       "champions": [
+        {
+         "displayName": "Scottie Scheffler",
+         "playerId": "46046"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023007",
+       "tournamentName": "The Genesis Invitational",
+       "date": "Feb 16 - 19",
+       "startDate": 1676505600000,
+       "sortDate": "180",
+       "sequenceNumber": 180,
+       "city": "Pacific Palisades",
+       "state": "California",
+       "country": "United States of America",
+       "courseName": "The Riviera Country Club",
+       "champion": "Jon Rahm",
+       "championId": "46970",
+       "champions": [
+        {
+         "displayName": "Jon Rahm",
+         "playerId": "46970"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "550 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023010",
+       "tournamentName": "The Honda Classic",
+       "date": "Feb 23 - 26",
+       "startDate": 1677110400000,
+       "sortDate": "190",
+       "sequenceNumber": 190,
+       "city": "Palm Beach Gardens",
+       "state": "Florida",
+       "country": "United States of America",
+       "courseName": "PGA National Resort (The Champion)",
+       "champion": "Chris Kirk",
+       "championId": "30926",
+       "champions": [
+        {
+         "displayName": "Chris Kirk",
+         "playerId": "30926"
+        }
+       ],
+       "championEarnings": "$1,512,000",
+       "purse": "$8,400,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "March",
+     "year": "2023",
+     "monthSort": 202303,
+     "tournaments": [
+      {
+       "id": "R2023009",
+       "tournamentName": "Arnold Palmer Invitational presented by Mastercard",
+       "date": "Mar 2 - 5",
+       "startDate": 1677715200000,
+       "sortDate": "210",
+       "sequenceNumber": 210,
+       "city": "Orlando",
+       "state": "Florida",
+       "country": "United States of America",
+       "courseName": "Arnold Palmer's Bay Hill Club & Lodge",
+       "champion": "Kurt Kitayama",
+       "championId": "48117",
+       "champions": [
+        {
+         "displayName": "Kurt Kitayama",
+         "playerId": "48117"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "550 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023483",
+       "tournamentName": "Puerto Rico Open",
+       "date": "Mar 2 - 5",
+       "startDate": 1677715200000,
+       "sortDate": "200",
+       "sequenceNumber": 200,
+       "city": "Rio Grande",
+       "state": "",
+       "country": "Puerto Rico",
+       "courseName": "Grand Reserve Golf Club",
+       "champion": "Nico Echavarria",
+       "championId": "51349",
+       "champions": [
+        {
+         "displayName": "Nico Echavarria",
+         "playerId": "51349"
+        }
+       ],
+       "championEarnings": "$684,000",
+       "purse": "$3,800,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "300 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023011",
+       "tournamentName": "THE PLAYERS Championship",
+       "date": "Mar 9 - 12",
+       "startDate": 1678320000000,
+       "sortDate": "220",
+       "sequenceNumber": 220,
+       "city": "Ponte Vedra Beach",
+       "state": "Florida",
+       "country": "United States of America",
+       "courseName": "TPC Sawgrass (THE PLAYERS Stadium Course)",
+       "champion": "Scottie Scheffler",
+       "championId": "46046",
+       "champions": [
+        {
+         "displayName": "Scottie Scheffler",
+         "playerId": "46046"
+        }
+       ],
+       "championEarnings": "$4,500,000",
+       "purse": "$25,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "600 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023475",
+       "tournamentName": "Valspar Championship",
+       "date": "Mar 16 - 19",
+       "startDate": 1678924800000,
+       "sortDate": "230",
+       "sequenceNumber": 230,
+       "city": "Palm Harbor",
+       "state": "Florida",
+       "country": "United States of America",
+       "courseName": "Innisbrook Resort (Copperhead Course)",
+       "champion": "Taylor Moore",
+       "championId": "49947",
+       "champions": [
+        {
+         "displayName": "Taylor Moore",
+         "playerId": "49947"
+        }
+       ],
+       "championEarnings": "$1,458,000",
+       "purse": "$8,100,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023470",
+       "tournamentName": "World Golf Championships-Dell Technologies Match Play",
+       "date": "Mar 22 - 26",
+       "startDate": 1679443200000,
+       "sortDate": "250",
+       "sequenceNumber": 250,
+       "city": "Austin",
+       "state": "Texas",
+       "country": "United States of America",
+       "courseName": "Austin Country Club",
+       "champion": "Sam Burns",
+       "championId": "47504",
+       "champions": [
+        {
+         "displayName": "Sam Burns",
+         "playerId": "47504"
+        }
+       ],
+       "championEarnings": "$3,500,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "550 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023522",
+       "tournamentName": "Corales Puntacana Championship",
+       "date": "Mar 23 - 26",
+       "startDate": 1679529600000,
+       "sortDate": "240",
+       "sequenceNumber": 240,
+       "city": "Punta Cana",
+       "state": "",
+       "country": "Dominican Republic",
+       "courseName": "Puntacana Resort & Club (Corales Golf Course)",
+       "champion": "Matt Wallace",
+       "championId": "48887",
+       "champions": [
+        {
+         "displayName": "Matt Wallace",
+         "playerId": "48887"
+        }
+       ],
+       "championEarnings": "$684,000",
+       "purse": "$3,800,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "300 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023041",
+       "tournamentName": "Valero Texas Open",
+       "date": "Mar 30 - Apr 2",
+       "startDate": 1680134400000,
+       "sortDate": "260",
+       "sequenceNumber": 260,
+       "city": "San Antonio",
+       "state": "Texas",
+       "country": "United States of America",
+       "courseName": "TPC San Antonio (Oaks Course)",
+       "champion": "Corey Conners",
+       "championId": "39997",
+       "champions": [
+        {
+         "displayName": "Corey Conners",
+         "playerId": "39997"
+        }
+       ],
+       "championEarnings": "$1,602,000",
+       "purse": "$8,900,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "April",
+     "year": "2023",
+     "monthSort": 202304,
+     "tournaments": [
+      {
+       "id": "R2023014",
+       "tournamentName": "Masters Tournament",
+       "date": "Apr 6 - 9",
+       "startDate": 1680739200000,
+       "sortDate": "270",
+       "sequenceNumber": 270,
+       "city": "Augusta",
+       "state": "Georgia",
+       "country": "United States of America",
+       "courseName": "Augusta National Golf Club",
+       "champion": "Jon Rahm",
+       "championId": "46970",
+       "champions": [
+        {
+         "displayName": "Jon Rahm",
+         "playerId": "46970"
+        }
+       ],
+       "championEarnings": "$3,240,000",
+       "purse": "$18,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "600 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023012",
+       "tournamentName": "RBC Heritage",
+       "date": "Apr 13 - 16",
+       "startDate": 1681344000000,
+       "sortDate": "280",
+       "sequenceNumber": 280,
+       "city": "Hilton Head Island",
+       "state": "South Carolina",
+       "country": "United States of America",
+       "courseName": "Harbour Town Golf Links",
+       "champion": "Matt Fitzpatrick",
+       "championId": "40098",
+       "champions": [
+        {
+         "displayName": "Matt Fitzpatrick",
+         "playerId": "40098"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023018",
+       "tournamentName": "Zurich Classic of New Orleans",
+       "date": "Apr 20 - 23",
+       "startDate": 1681948800000,
+       "sortDate": "290",
+       "sequenceNumber": 290,
+       "city": "Avondale",
+       "state": "Louisiana",
+       "country": "United States of America",
+       "courseName": "TPC Louisiana",
+       "champion": "Davis Riley, Nick Hardy",
+       "championId": "47995",
+       "champions": [
+        {
+         "displayName": "Davis Riley",
+         "playerId": "47995"
+        },
+        {
+         "displayName": "Nick Hardy",
+         "playerId": "47988"
+        }
+       ],
+       "championEarnings": "$1,242,700",
+       "purse": "$8,600,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "400 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023540",
+       "tournamentName": "Mexico Open at Vidanta",
+       "date": "Apr 27 - 30",
+       "startDate": 1682553600000,
+       "sortDate": "300",
+       "sequenceNumber": 300,
+       "city": "Vallarta",
+       "state": "",
+       "country": "Mexico",
+       "courseName": "Vidanta Vallarta",
+       "champion": "Tony Finau",
+       "championId": "29725",
+       "champions": [
+        {
+         "displayName": "Tony Finau",
+         "playerId": "29725"
+        }
+       ],
+       "championEarnings": "$1,386,000",
+       "purse": "$7,700,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "May",
+     "year": "2023",
+     "monthSort": 202305,
+     "tournaments": [
+      {
+       "id": "R2023480",
+       "tournamentName": "Wells Fargo Championship",
+       "date": "May 4 - 7",
+       "startDate": 1683158400000,
+       "sortDate": "310",
+       "sequenceNumber": 310,
+       "city": "Charlotte",
+       "state": "North Carolina",
+       "country": "United States of America",
+       "courseName": "Quail Hollow Club",
+       "champion": "Wyndham Clark",
+       "championId": "51766",
+       "champions": [
+        {
+         "displayName": "Wyndham Clark",
+         "playerId": "51766"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023019",
+       "tournamentName": "AT&T Byron Nelson",
+       "date": "May 11 - 14",
+       "startDate": 1683763200000,
+       "sortDate": "320",
+       "sequenceNumber": 320,
+       "city": "McKinney",
+       "state": "Texas",
+       "country": "United States of America",
+       "courseName": "TPC Craig Ranch",
+       "champion": "Jason Day",
+       "championId": "28089",
+       "champions": [
+        {
+         "displayName": "Jason Day",
+         "playerId": "28089"
+        }
+       ],
+       "championEarnings": "$1,710,000",
+       "purse": "$9,500,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023033",
+       "tournamentName": "PGA Championship",
+       "date": "May 18 - 21",
+       "startDate": 1684368000000,
+       "sortDate": "330",
+       "sequenceNumber": 330,
+       "city": "Rochester",
+       "state": "New York",
+       "country": "United States of America",
+       "courseName": "Oak Hill Country Club - East Course",
+       "champion": "Brooks Koepka",
+       "championId": "36689",
+       "champions": [
+        {
+         "displayName": "Brooks Koepka",
+         "playerId": "36689"
+        }
+       ],
+       "championEarnings": "$3,150,000",
+       "purse": "$15,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "600 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023021",
+       "tournamentName": "Charles Schwab Challenge",
+       "date": "May 25 - 28",
+       "startDate": 1684972800000,
+       "sortDate": "340",
+       "sequenceNumber": 340,
+       "city": "Fort Worth",
+       "state": "Texas",
+       "country": "United States of America",
+       "courseName": "Colonial Country Club",
+       "champion": "Emiliano Grillo",
+       "championId": "31646",
+       "champions": [
+        {
+         "displayName": "Emiliano Grillo",
+         "playerId": "31646"
+        }
+       ],
+       "championEarnings": "$1,566,000",
+       "purse": "$8,700,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "June",
+     "year": "2023",
+     "monthSort": 202306,
+     "tournaments": [
+      {
+       "id": "R2023023",
+       "tournamentName": "the Memorial Tournament presented by Workday",
+       "date": "Jun 1 - 4",
+       "startDate": 1685577600000,
+       "sortDate": "350",
+       "sequenceNumber": 350,
+       "city": "Dublin",
+       "state": "Ohio",
+       "country": "United States of America",
+       "courseName": "Muirfield Village Golf Club",
+       "champion": "Viktor Hovland",
+       "championId": "46717",
+       "champions": [
+        {
+         "displayName": "Viktor Hovland",
+         "playerId": "46717"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "550 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023032",
+       "tournamentName": "RBC Canadian Open",
+       "date": "Jun 8 - 11",
+       "startDate": 1686182400000,
+       "sortDate": "360",
+       "sequenceNumber": 360,
+       "city": "Toronto, Ontario",
+       "state": "",
+       "country": "Canada",
+       "courseName": "Oakdale Golf & Country Club",
+       "champion": "Nick Taylor",
+       "championId": "25493",
+       "champions": [
+        {
+         "displayName": "Nick Taylor",
+         "playerId": "25493"
+        }
+       ],
+       "championEarnings": "$1,620,000",
+       "purse": "$9,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023026",
+       "tournamentName": "U.S. Open",
+       "date": "Jun 15 - 18",
+       "startDate": 1686787200000,
+       "sortDate": "370",
+       "sequenceNumber": 370,
+       "city": "Los Angeles",
+       "state": "California",
+       "country": "United States of America",
+       "courseName": "The Los Angeles Country Club (North Course)",
+       "champion": "Wyndham Clark",
+       "championId": "51766",
+       "champions": [
+        {
+         "displayName": "Wyndham Clark",
+         "playerId": "51766"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$0",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "600 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023034",
+       "tournamentName": "Travelers Championship",
+       "date": "Jun 22 - 25",
+       "startDate": 1687392000000,
+       "sortDate": "380",
+       "sequenceNumber": 380,
+       "city": "Cromwell",
+       "state": "Connecticut",
+       "country": "United States of America",
+       "courseName": "TPC River Highlands",
+       "champion": "Keegan Bradley",
+       "championId": "33141",
+       "champions": [
+        {
+         "displayName": "Keegan Bradley",
+         "playerId": "33141"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023524",
+       "tournamentName": "Rocket Mortgage Classic",
+       "date": "Jun 29 - Jul 2",
+       "startDate": 1687996800000,
+       "sortDate": "390",
+       "sequenceNumber": 390,
+       "city": "Detroit",
+       "state": "Michigan",
+       "country": "United States of America",
+       "courseName": "Detroit Golf Club",
+       "champion": "Rickie Fowler",
+       "championId": "32102",
+       "champions": [
+        {
+         "displayName": "Rickie Fowler",
+         "playerId": "32102"
+        }
+       ],
+       "championEarnings": "$1,584,000",
+       "purse": "$8,800,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "July",
+     "year": "2023",
+     "monthSort": 202307,
+     "tournaments": [
+      {
+       "id": "R2023030",
+       "tournamentName": "John Deere Classic",
+       "date": "Jul 6 - 9",
+       "startDate": 1688601600000,
+       "sortDate": "400",
+       "sequenceNumber": 400,
+       "city": "Silvis",
+       "state": "Illinois",
+       "country": "United States of America",
+       "courseName": "TPC Deere Run",
+       "champion": "Sepp Straka",
+       "championId": "49960",
+       "champions": [
+        {
+         "displayName": "Sepp Straka",
+         "playerId": "49960"
+        }
+       ],
+       "championEarnings": "$1,332,000",
+       "purse": "$7,400,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023541",
+       "tournamentName": "Genesis Scottish Open",
+       "date": "Jul 13 - 16",
+       "startDate": 1689206400000,
+       "sortDate": "420",
+       "sequenceNumber": 420,
+       "city": "North Berwick",
+       "state": "",
+       "country": "Scotland",
+       "courseName": "The Renaissance Club",
+       "champion": "Rory McIlroy",
+       "championId": "28237",
+       "champions": [
+        {
+         "displayName": "Rory McIlroy",
+         "playerId": "28237"
+        }
+       ],
+       "championEarnings": "$1,575,000",
+       "purse": "$9,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023518",
+       "tournamentName": "Barbasol Championship",
+       "date": "Jul 13 - 16",
+       "startDate": 1689206400000,
+       "sortDate": "410",
+       "sequenceNumber": 410,
+       "city": "Nicholasville",
+       "state": "Kentucky",
+       "country": "United States of America",
+       "courseName": "Keene Trace Golf Club (Champion Trace)",
+       "champion": "Vincent Norrman",
+       "championId": "51070",
+       "champions": [
+        {
+         "displayName": "Vincent Norrman",
+         "playerId": "51070"
+        }
+       ],
+       "championEarnings": "$684,000",
+       "purse": "$3,800,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "300 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023100",
+       "tournamentName": "The Open Championship",
+       "date": "Jul 20 - 23",
+       "startDate": 1689811200000,
+       "sortDate": "440",
+       "sequenceNumber": 440,
+       "city": "Hoylake, Wirral",
+       "state": "",
+       "country": "England",
+       "courseName": "Royal Liverpool",
+       "champion": "Brian Harman",
+       "championId": "27644",
+       "champions": [
+        {
+         "displayName": "Brian Harman",
+         "playerId": "27644"
+        }
+       ],
+       "championEarnings": "$3,000,000",
+       "purse": "$16,500,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "600 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023472",
+       "tournamentName": "Barracuda Championship",
+       "date": "Jul 20 - 23",
+       "startDate": 1689811200000,
+       "sortDate": "430",
+       "sequenceNumber": 430,
+       "city": "Truckee",
+       "state": "California",
+       "country": "United States of America",
+       "courseName": "Tahoe Mountain Club (Old Greenwood)",
+       "champion": "Akshay Bhatia",
+       "championId": "56630",
+       "champions": [
+        {
+         "displayName": "Akshay Bhatia",
+         "playerId": "56630"
+        }
+       ],
+       "championEarnings": "$684,000",
+       "purse": "$3,800,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "300 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023525",
+       "tournamentName": "3M Open",
+       "date": "Jul 27 - 30",
+       "startDate": 1690416000000,
+       "sortDate": "450",
+       "sequenceNumber": 450,
+       "city": "Blaine",
+       "state": "Minnesota",
+       "country": "United States of America",
+       "courseName": "TPC Twin Cities",
+       "champion": "Lee Hodges",
+       "championId": "54628",
+       "champions": [
+        {
+         "displayName": "Lee Hodges",
+         "playerId": "54628"
+        }
+       ],
+       "championEarnings": "$1,404,000",
+       "purse": "$7,800,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "August",
+     "year": "2023",
+     "monthSort": 202308,
+     "tournaments": [
+      {
+       "id": "R2023013",
+       "tournamentName": "Wyndham Championship",
+       "date": "Aug 3 - 6",
+       "startDate": 1691020800000,
+       "sortDate": "460",
+       "sequenceNumber": 460,
+       "city": "Greensboro",
+       "state": "North Carolina",
+       "country": "United States of America",
+       "courseName": "Sedgefield Country Club",
+       "champion": "Lucas Glover",
+       "championId": "25900",
+       "champions": [
+        {
+         "displayName": "Lucas Glover",
+         "playerId": "25900"
+        }
+       ],
+       "championEarnings": "$1,368,000",
+       "purse": "$7,600,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023027",
+       "tournamentName": "FedEx St. Jude Championship",
+       "date": "Aug 10 - 13",
+       "startDate": 1691625600000,
+       "sortDate": "470",
+       "sequenceNumber": 470,
+       "city": "Memphis",
+       "state": "Tennessee",
+       "country": "United States of America",
+       "courseName": "TPC Southwind",
+       "champion": "Lucas Glover",
+       "championId": "25900",
+       "champions": [
+        {
+         "displayName": "Lucas Glover",
+         "playerId": "25900"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "2,000 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023028",
+       "tournamentName": "BMW Championship",
+       "date": "Aug 17 - 20",
+       "startDate": 1692230400000,
+       "sortDate": "480",
+       "sequenceNumber": 480,
+       "city": "Olympia Fields",
+       "state": "Illinois",
+       "country": "United States of America",
+       "courseName": "Olympia Fields Country Club (North Course)",
+       "champion": "Viktor Hovland",
+       "championId": "46717",
+       "champions": [
+        {
+         "displayName": "Viktor Hovland",
+         "playerId": "46717"
+        }
+       ],
+       "championEarnings": "$3,600,000",
+       "purse": "$20,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP",
+       "tourStandingValue": "2,000 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023060",
+       "tournamentName": "TOUR Championship",
+       "date": "Aug 24 - 27",
+       "startDate": 1692835200000,
+       "sortDate": "490",
+       "sequenceNumber": 490,
+       "city": "Atlanta",
+       "state": "Georgia",
+       "country": "United States of America",
+       "courseName": "East Lake Golf Club",
+       "champion": "Viktor Hovland",
+       "championId": "46717",
+       "champions": [
+        {
+         "displayName": "Viktor Hovland",
+         "playerId": "46717"
+        }
+       ],
+       "championEarnings": "",
+       "purse": "$0",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": null,
+       "tourStandingValue": null,
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "September",
+     "year": "2023",
+     "monthSort": 202309,
+     "tournaments": [
+      {
+       "id": "R2023543",
+       "tournamentName": "Fortinet Championship",
+       "date": "Sep 14 - 17",
+       "startDate": 1694649600000,
+       "sortDate": "500",
+       "sequenceNumber": 500,
+       "city": "Napa",
+       "state": "California",
+       "country": "United States of America",
+       "courseName": "Silverado Resort (North Course)",
+       "champion": "Sahith Theegala",
+       "championId": "51634",
+       "champions": [
+        {
+         "displayName": "Sahith Theegala",
+         "playerId": "51634"
+        }
+       ],
+       "championEarnings": "$1,512,000",
+       "purse": "$8,400,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP FALL PTS",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023468",
+       "tournamentName": "Ryder Cup",
+       "date": "Sep 29 - Oct 1",
+       "startDate": 1695945600000,
+       "sortDate": "510",
+       "sequenceNumber": 510,
+       "city": "Rome",
+       "state": "",
+       "country": "Italy",
+       "courseName": "Marco Simone Golf & Country Club",
+       "champion": "Europe",
+       "championId": "46970",
+       "champions": [
+        {
+         "displayName": "Europe",
+         "playerId": ""
+        }
+       ],
+       "championEarnings": "",
+       "purse": "$0",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": null,
+       "tourStandingValue": null,
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "October",
+     "year": "2023",
+     "monthSort": 202310,
+     "tournaments": [
+      {
+       "id": "R2023544",
+       "tournamentName": "Sanderson Farms Championship",
+       "date": "Oct 5 - 8",
+       "startDate": 1696464000000,
+       "sortDate": "520",
+       "sequenceNumber": 520,
+       "city": "Jackson",
+       "state": "Mississippi",
+       "country": "United States of America",
+       "courseName": "The Country Club of Jackson",
+       "champion": "Luke List",
+       "championId": "27129",
+       "champions": [
+        {
+         "displayName": "Luke List",
+         "playerId": "27129"
+        }
+       ],
+       "championEarnings": "$1,476,000",
+       "purse": "$8,200,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP FALL PTS",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023545",
+       "tournamentName": "Shriners Children's Open",
+       "date": "Oct 12 - 15",
+       "startDate": 1697068800000,
+       "sortDate": "530",
+       "sequenceNumber": 530,
+       "city": "Las Vegas",
+       "state": "Nevada",
+       "country": "United States of America",
+       "courseName": "TPC Summerlin",
+       "champion": "Tom Kim",
+       "championId": "55182",
+       "champions": [
+        {
+         "displayName": "Tom Kim",
+         "playerId": "55182"
+        }
+       ],
+       "championEarnings": "$1,512,000",
+       "purse": "$8,400,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP FALL PTS",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023546",
+       "tournamentName": "ZOZO CHAMPIONSHIP",
+       "date": "Oct 19 - 22",
+       "startDate": 1697673600000,
+       "sortDate": "540",
+       "sequenceNumber": 540,
+       "city": "Chiba",
+       "state": "",
+       "country": "Japan",
+       "courseName": "ACCORDIA GOLF Narashino Country Club",
+       "champion": "Collin Morikawa",
+       "championId": "50525",
+       "champions": [
+        {
+         "displayName": "Collin Morikawa",
+         "playerId": "50525"
+        }
+       ],
+       "championEarnings": "$1,530,000",
+       "purse": "$8,500,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP FALL PTS",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "November",
+     "year": "2023",
+     "monthSort": 202311,
+     "tournaments": [
+      {
+       "id": "R2023547",
+       "tournamentName": "World Wide Technology Championship",
+       "date": "Nov 2 - 5",
+       "startDate": 1698883200000,
+       "sortDate": "550",
+       "sequenceNumber": 550,
+       "city": "Los Cabos",
+       "state": "",
+       "country": "Mexico",
+       "courseName": "El Cardonal at Diamante",
+       "champion": "Erik van Rooyen",
+       "championId": "40006",
+       "champions": [
+        {
+         "displayName": "Erik van Rooyen",
+         "playerId": "40006"
+        }
+       ],
+       "championEarnings": "$1,476,000",
+       "purse": "$8,200,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP FALL PTS",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023548",
+       "tournamentName": "Butterfield Bermuda Championship",
+       "date": "Nov 9 - 12",
+       "startDate": 1699488000000,
+       "sortDate": "560",
+       "sequenceNumber": 560,
+       "city": "Southampton",
+       "state": "",
+       "country": "Bermuda",
+       "courseName": "Port Royal Golf Course",
+       "champion": "Camilo Villegas",
+       "championId": "27770",
+       "champions": [
+        {
+         "displayName": "Camilo Villegas",
+         "playerId": "27770"
+        }
+       ],
+       "championEarnings": "$1,170,000",
+       "purse": "$6,500,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP FALL PTS",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023549",
+       "tournamentName": "The RSM Classic",
+       "date": "Nov 16 - 19",
+       "startDate": 1700092800000,
+       "sortDate": "570",
+       "sequenceNumber": 570,
+       "city": "St. Simons Island",
+       "state": "Georgia",
+       "country": "United States of America",
+       "courseName": "Sea Island Golf Club (Seaside Course)",
+       "champion": "Ludvig Åberg",
+       "championId": "52955",
+       "champions": [
+        {
+         "displayName": "Ludvig Åberg",
+         "playerId": "52955"
+        }
+       ],
+       "championEarnings": "$1,512,000",
+       "purse": "$8,400,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": "FEDEXCUP FALL PTS",
+       "tourStandingValue": "500 pts",
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023550",
+       "tournamentName": "Hero World Challenge",
+       "date": "Nov 30 - Dec 3",
+       "startDate": 1701302400000,
+       "sortDate": "580",
+       "sequenceNumber": 580,
+       "city": "Albany",
+       "state": "",
+       "country": "Bahamas",
+       "courseName": "Albany GC",
+       "champion": "Scottie Scheffler",
+       "championId": "46046",
+       "champions": [
+        {
+         "displayName": "Scottie Scheffler",
+         "playerId": "46046"
+        }
+       ],
+       "championEarnings": "$1,000,000",
+       "purse": "$4,500,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": null,
+       "tourStandingValue": null,
+       "tournamentCategoryInfo": null
+      }
+     ]
+    },
+    {
+     "month": "December",
+     "year": "2023",
+     "monthSort": 202312,
+     "tournaments": [
+      {
+       "id": "R2023551",
+       "tournamentName": "Grant Thornton Invitational",
+       "date": "Dec 8 - 10",
+       "startDate": 1701993600000,
+       "sortDate": "585",
+       "sequenceNumber": 585,
+       "city": "Naples",
+       "state": "Florida",
+       "country": "United States of America",
+       "courseName": "Tiburón Golf Club",
+       "champion": "Lydia Ko, Jason Day",
+       "championId": "57427",
+       "champions": [
+        {
+         "displayName": "Lydia Ko",
+         "playerId": "57427"
+        },
+        {
+         "displayName": "Jason Day",
+         "playerId": "28089"
+        }
+       ],
+       "championEarnings": "",
+       "purse": "$4,000,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": null,
+       "tourStandingValue": null,
+       "tournamentCategoryInfo": null
+      },
+      {
+       "id": "R2023088",
+       "tournamentName": "PGA TOUR Q-School presented by Korn Ferry",
+       "date": "Dec 14 - 17",
+       "startDate": 1702512000000,
+       "sortDate": "595",
+       "sequenceNumber": 595,
+       "city": "Ponte Vedra Beach",
+       "state": "Florida",
+       "country": "United States of America",
+       "courseName": "Dye's Valley Course",
+       "champion": "Harrison Endycott",
+       "championId": "47079",
+       "champions": [
+        {
+         "displayName": "Harrison Endycott",
+         "playerId": "47079"
+        }
+       ],
+       "championEarnings": "$50,000",
+       "purse": "$510,000",
+       "tournamentStatus": "COMPLETED",
+       "tourStandingHeading": null,
+       "tourStandingValue": null,
+       "tournamentCategoryInfo": null
+      }
+     ]
+    }
+   ],
+   "upcoming": []
+  }
+ }
+}

@@ -1,0 +1,1448 @@
+{
+ "data": {
+  "statDetails": {
+   "__typename": "StatDetails",
+   "tourCode": "R",
+   "year": 2024,
+   "displaySeason": "2024",
+   "statId": "02675",
+   "statType": "YTD",
+   "tournamentPills": [
+    {
+     "tournamentId": "R2024493",
+     "displayName": "The RSM Classic"
+    },
+    {
+     "tournamentId": "R2024527",
+     "displayName": "ZOZO CHAMPIONSHIP"
+    },
+    {
+     "tournamentId": "R2024047",
+     "displayName": "Shriners Children's Open"
+    },
+    {
+     "tournamentId": "R2024554",
+     "displayName": "Black Desert Championship"
+    },
+    {
+     "tournamentId": "R2024054",
+     "displayName": "Sanderson Farms Championship"
+    },
+    {
+     "tournamentId": "R2024464",
+     "displayName": "Procore Championship"
+    },
+    {
+     "tournamentId": "R2024060",
+     "displayName": "TOUR Championship"
+    },
+    {
+     "tournamentId": "R2024028",
+     "displayName": "BMW Championship"
+    },
+    {
+     "tournamentId": "R2024027",
+     "displayName": "FedEx St. Jude Championship"
+    },
+    {
+     "tournamentId": "R2024013",
+     "displayName": "Wyndham Championship"
+    },
+    {
+     "tournamentId": "R2024525",
+     "displayName": "3M Open"
+    },
+    {
+     "tournamentId": "R2024518",
+     "displayName": "ISCO Championship"
+    },
+    {
+     "tournamentId": "R2024541",
+     "displayName": "Genesis Scottish Open"
+    },
+    {
+     "tournamentId": "R2024030",
+     "displayName": "John Deere Classic"
+    },
+    {
+     "tournamentId": "R2024524",
+     "displayName": "Rocket Mortgage Classic"
+    },
+    {
+     "tournamentId": "R2024034",
+     "displayName": "Travelers Championship"
+    },
+    {
+     "tournamentId": "R2024026",
+     "displayName": "U.S. Open"
+    },
+    {
+     "tournamentId": "R2024023",
+     "displayName": "the Memorial Tournament presented by Workday"
+    },
+    {
+     "tournamentId": "R2024032",
+     "displayName": "RBC Canadian Open"
+    },
+    {
+     "tournamentId": "R2024021",
+     "displayName": "Charles Schwab Challenge"
+    },
+    {
+     "tournamentId": "R2024033",
+     "displayName": "PGA Championship"
+    },
+    {
+     "tournamentId": "R2024480",
+     "displayName": "Wells Fargo Championship"
+    },
+    {
+     "tournamentId": "R2024553",
+     "displayName": "Myrtle Beach Classic"
+    },
+    {
+     "tournamentId": "R2024019",
+     "displayName": "THE CJ CUP Byron Nelson"
+    },
+    {
+     "tournamentId": "R2024012",
+     "displayName": "RBC Heritage"
+    },
+    {
+     "tournamentId": "R2024041",
+     "displayName": "Valero Texas Open"
+    },
+    {
+     "tournamentId": "R2024020",
+     "displayName": "Texas Children's Houston Open"
+    },
+    {
+     "tournamentId": "R2024475",
+     "displayName": "Valspar Championship"
+    },
+    {
+     "tournamentId": "R2024011",
+     "displayName": "THE PLAYERS Championship"
+    },
+    {
+     "tournamentId": "R2024009",
+     "displayName": "Arnold Palmer Invitational presented by Mastercard"
+    },
+    {
+     "tournamentId": "R2024010",
+     "displayName": "Cognizant Classic in The Palm Beaches"
+    },
+    {
+     "tournamentId": "R2024540",
+     "displayName": "Mexico Open at Vidanta"
+    },
+    {
+     "tournamentId": "R2024007",
+     "displayName": "The Genesis Invitational"
+    },
+    {
+     "tournamentId": "R2024003",
+     "displayName": "WM Phoenix Open"
+    },
+    {
+     "tournamentId": "R2024005",
+     "displayName": "AT&T Pebble Beach Pro-Am"
+    },
+    {
+     "tournamentId": "R2024004",
+     "displayName": "Farmers Insurance Open"
+    },
+    {
+     "tournamentId": "R2024006",
+     "displayName": "Sony Open in Hawaii"
+    },
+    {
+     "tournamentId": "R2024016",
+     "displayName": "The Sentry"
+    }
+   ],
+   "yearPills": [
+    {
+     "year": 2026,
+     "displaySeason": "2026"
+    },
+    {
+     "year": 2025,
+     "displaySeason": "2025"
+    },
+    {
+     "year": 2024,
+     "displaySeason": "2024"
+    },
+    {
+     "year": 2023,
+     "displaySeason": "2022-2023"
+    },
+    {
+     "year": 2022,
+     "displaySeason": "2021-2022"
+    },
+    {
+     "year": 2021,
+     "displaySeason": "2020-2021"
+    },
+    {
+     "year": 2020,
+     "displaySeason": "2019-2020"
+    },
+    {
+     "year": 2019,
+     "displaySeason": "2018-2019"
+    },
+    {
+     "year": 2018,
+     "displaySeason": "2017-2018"
+    },
+    {
+     "year": 2017,
+     "displaySeason": "2016-2017"
+    },
+    {
+     "year": 2016,
+     "displaySeason": "2015-2016"
+    },
+    {
+     "year": 2015,
+     "displaySeason": "2014-2015"
+    },
+    {
+     "year": 2014,
+     "displaySeason": "2013-2014"
+    },
+    {
+     "year": 2013,
+     "displaySeason": "2013"
+    },
+    {
+     "year": 2012,
+     "displaySeason": "2012"
+    },
+    {
+     "year": 2011,
+     "displaySeason": "2011"
+    },
+    {
+     "year": 2010,
+     "displaySeason": "2010"
+    },
+    {
+     "year": 2009,
+     "displaySeason": "2009"
+    },
+    {
+     "year": 2008,
+     "displaySeason": "2008"
+    },
+    {
+     "year": 2007,
+     "displaySeason": "2007"
+    },
+    {
+     "year": 2006,
+     "displaySeason": "2006"
+    },
+    {
+     "year": 2005,
+     "displaySeason": "2005"
+    },
+    {
+     "year": 2004,
+     "displaySeason": "2004"
+    }
+   ],
+   "statTitle": "SG: Total",
+   "statDescription": "The per round average of the number of Strokes the player was better or worse than the field average on the same course & event. (2675)",
+   "tourAvg": null,
+   "lastProcessed": "Through Week Ending: 12-30-2024",
+   "statHeaders": [
+    "Avg",
+    "Total SG:T",
+    "Total SG:T2G",
+    "Total SG:P",
+    "Measured Rounds"
+   ],
+   "rows": [
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46046",
+     "playerName": "Scottie Scheffler",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 1,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "2.496",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "154.741",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "148.864",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "5.878",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "62",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "48081",
+     "playerName": "Xander Schauffele",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 2,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.941",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "133.935",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "98.725",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "35.209",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "69",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "28237",
+     "playerName": "Rory McIlroy",
+     "country": "Northern Ireland",
+     "countryFlag": "NIR",
+     "rank": 3,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.412",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "87.535",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "76.789",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "10.748",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "62",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "32839",
+     "playerName": "Hideki Matsuyama",
+     "country": "Japan",
+     "countryFlag": "JPN",
+     "rank": 4,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.268",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "81.176",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "88.717",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "-7.541",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "64",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "50525",
+     "playerName": "Collin Morikawa",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 5,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.203",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "83.022",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "74.681",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "8.341",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "69",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46414",
+     "playerName": "Aaron Rai",
+     "country": "England",
+     "countryFlag": "ENG",
+     "rank": 6,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.185",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "88.874",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "84.793",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "4.082",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "75",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "52955",
+     "playerName": "Ludvig Åberg",
+     "country": "Sweden",
+     "countryFlag": "SWE",
+     "rank": 7,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.064",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "70.211",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "61.292",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "8.919",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "66",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "58168",
+     "playerName": "Davis Thompson",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 8,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.060",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "84.766",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "81.409",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "3.359",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "80",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46442",
+     "playerName": "Maverick McNealy",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 9,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.037",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "81.898",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "54.135",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "27.764",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "79",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "29725",
+     "playerName": "Tony Finau",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 10,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.033",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "73.363",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "94.405",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "-21.044",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "71",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51766",
+     "playerName": "Wyndham Clark",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 11,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.032",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "63.954",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "34.441",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "29.512",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "62",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "27349",
+     "playerName": "Alex Noren",
+     "country": "Sweden",
+     "countryFlag": "SWE",
+     "rank": 12,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.011",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "60.644",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "47.892",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "12.753",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "60",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "47504",
+     "playerName": "Sam Burns",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 13,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "1.003",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "66.208",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "33.478",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "32.730",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "66",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "39997",
+     "playerName": "Corey Conners",
+     "country": "Canada",
+     "countryFlag": "CAN",
+     "rank": 14,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.962",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "75.059",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "88.159",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "-13.099",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "78",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "34098",
+     "playerName": "Russell Henley",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 15,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.950",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "60.797",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "41.334",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "19.462",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "64",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51634",
+     "playerName": "Sahith Theegala",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 16,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.944",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "80.198",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "58.358",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "21.839",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "85",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "24502",
+     "playerName": "Adam Scott",
+     "country": "Australia",
+     "countryFlag": "AUS",
+     "rank": 17,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.938",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "58.174",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "33.460",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "24.713",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "62",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "40250",
+     "playerName": "Taylor Pendrith",
+     "country": "Canada",
+     "countryFlag": "CAN",
+     "rank": 18,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.880",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "62.503",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "20.455",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "42.046",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "71",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "52375",
+     "playerName": "Doug Ghim",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 19,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.871",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "68.774",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "83.887",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "-15.115",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "79",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51977",
+     "playerName": "Max Greyserman",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 20,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.870",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "55.650",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "7.737",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "47.912",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "64",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "39546",
+     "playerName": "Keith Mitchell",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 21,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.822",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "62.474",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "87.545",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "-25.071",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "76",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "39971",
+     "playerName": "Sungjae Im",
+     "country": "Republic of Korea",
+     "countryFlag": "KOR",
+     "rank": 22,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.800",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "63.222",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "52.331",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "10.891",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "79",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "27644",
+     "playerName": "Brian Harman",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 23,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.788",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "62.271",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "39.245",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "23.027",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "79",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51997",
+     "playerName": "Andrew Novak",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 24,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.786",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "60.517",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "60.765",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "-.248",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "77",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33448",
+     "playerName": "Justin Thomas",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 25,
+     "rankDiff": "0",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Avg",
+       "statValue": "0.762",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T",
+       "statValue": "45.698",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:T2G",
+       "statValue": "74.380",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Total SG:P",
+       "statValue": "-28.682",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      },
+      {
+       "statName": "Measured Rounds",
+       "statValue": "60",
+       "color": "BLACK",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
