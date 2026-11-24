@@ -28,6 +28,14 @@ ENTRY_KEYS = {"family", "file", "request", "season", "expect"}
 SECRET_MARKERS = ("x-api-key", "cookie", "authorization")
 # AppSync API keys look like "da2-" followed by 26 lowercase alphanumerics.
 APPSYNC_KEY = re.compile(r"da2-[a-z0-9]{20,}")
+# Player fields that hold personal detail (family, hometown, residence, life narrative) that a
+# fantasy earnings model does not need: never requested, never recorded.
+PERSONAL_FIELDS = ("family", "personal", "birthplace", "residence", "playsFrom")
+PERSONAL_FIELD_TOKEN = re.compile(r"\b(" + "|".join(PERSONAL_FIELDS) + r")\b")
+RELATIVE_WORDS = re.compile(
+    r"\b(wife|husband|spouse|father|mother|sister|brother|son|daughter|children|married)\b",
+    re.IGNORECASE,
+)
 
 
 def _entries() -> list[dict]:
@@ -298,6 +306,42 @@ def test_fixture_client_without_fail_after_never_fails():
         for entry in entries:
             _call(client, entry["request"]["method"], entry["request"]["url"], _payload(entry))
     assert client.calls == 3 * len(entries)
+
+
+def _keys_and_strings(value, keys: set[str], strings: list[str]) -> None:
+    if isinstance(value, dict):
+        for k, v in value.items():
+            keys.add(k)
+            _keys_and_strings(v, keys, strings)
+    elif isinstance(value, list):
+        for v in value:
+            _keys_and_strings(v, keys, strings)
+    elif isinstance(value, str):
+        strings.append(value)
+
+
+def test_fixtures_hold_no_personal_info():
+    entries = _entries()
+    assert any(e["family"] == "player_bio" for e in entries)
+    for entry in entries:
+        name = entry["file"]
+        query = (entry["request"].get("body") or {}).get("query")
+        if query:
+            asked = sorted(set(PERSONAL_FIELD_TOKEN.findall(query)))
+            assert not asked, f"{name} was recorded with a query asking for {asked}"
+
+        keys: set[str] = set()
+        strings: list[str] = []
+        _keys_and_strings(
+            json.loads((FIXTURE_DIR / name).read_text(encoding="utf-8")), keys, strings
+        )
+        held = sorted(keys & set(PERSONAL_FIELDS))
+        assert not held, f"{name} holds personal fields {held}"
+        if entry["family"] == "player_bio":
+            for text in strings:
+                assert not RELATIVE_WORDS.search(text), (
+                    f"{name} has family narrative: {text[:60]!r}"
+                )
 
 
 def test_fixtures_hold_no_secrets():

@@ -194,7 +194,9 @@ rows (`playerId`).
 ### player_bio
 
 `player(id)`: names, country, current `owgr`, `rank {rank, statName}`, and `playerBio` (born,
-age, height, turnedPro, school, birthplace, residence, careerEarnings, exemptions ...).
+age, height, weight, turnedPro, school, careerEarnings, exemptions ...). The query deliberately
+drops the bio's family, personal, birthplace, residence and playsFrom fields: they are personal
+info the model does not need, so do not add them back.
 
 ## Fixtures
 
@@ -263,5 +265,5 @@ query PlayerDirectory($tourCode: TourCode!, $active: Boolean) { playerDirectory(
 ### Player (player_bio)
 
 ```graphql
-query Player($playerId: ID!) { player(id: $playerId) { id firstName lastName displayName country countryFlag owgr rank { rank statName } playerBio { heightImperial heightMeters weightImperial weightKilograms age born birthplace { city state stateCode country countryCode } turnedPro school degree graduationYear residence { city state stateCode country countryCode } playsFrom { city state stateCode country countryCode } family personal careerEarnings pronunciation exemptions { tour description expirationDate } deceased deceasedDate primaryTour } } }
+query Player($playerId: ID!) { player(id: $playerId) { id firstName lastName displayName country countryFlag owgr rank { rank statName } playerBio { heightImperial heightMeters weightImperial weightKilograms age born turnedPro school degree graduationYear careerEarnings pronunciation exemptions { tour description expirationDate } deceased deceasedDate primaryTour } } }
 ```

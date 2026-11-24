@@ -89,11 +89,9 @@ _PLAYER_DIRECTORY_QUERY = (
 _PLAYER_QUERY = (
     "query Player($playerId: ID!) { player(id: $playerId) { id firstName lastName "
     "displayName country countryFlag owgr rank { rank statName } playerBio { "
-    "heightImperial heightMeters weightImperial weightKilograms age born birthplace { city "
-    "state stateCode country countryCode } turnedPro school degree graduationYear "
-    "residence { city state stateCode country countryCode } playsFrom { city state "
-    "stateCode country countryCode } family personal careerEarnings pronunciation "
-    "exemptions { tour description expirationDate } deceased deceasedDate primaryTour } } }"
+    "heightImperial heightMeters weightImperial weightKilograms age born turnedPro school "
+    "degree graduationYear careerEarnings pronunciation exemptions { tour description "
+    "expirationDate } deceased deceasedDate primaryTour } } }"
 )
 
 
@@ -145,7 +143,9 @@ ENDPOINTS: dict[str, Endpoint] = {
         _endpoint(
             "player_bio",
             _PLAYER_QUERY,
-            "Player; variable playerId. Names, country, current owgr and playerBio.",
+            "Player; variable playerId. Names, country, current owgr and playerBio. The "
+            "query deliberately omits family, personal, birthplace, residence and playsFrom: "
+            "personal info the model does not need; do not add them back.",
         ),
         _endpoint(
             "fedex_bonus",
