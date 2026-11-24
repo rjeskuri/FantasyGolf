@@ -7,6 +7,7 @@ from importlib.metadata import entry_points
 from pathlib import Path
 
 import pytest
+
 from fantasygolf.cli import main
 from fantasygolf.config import Paths
 
