@@ -1,0 +1,662 @@
+{
+ "fixtures": [
+  {
+   "family": "schedule",
+   "file": "schedule/schedule_2019.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "Schedule",
+     "query": "query Schedule($tourCode: String!, $year: String) { schedule(tourCode: $tourCode, year: $year) { tour seasonYear completed { month year monthSort tournaments { id tournamentName date startDate sortDate sequenceNumber city state country courseName champion championId champions { displayName playerId } championEarnings purse tournamentStatus tourStandingHeading tourStandingValue tournamentCategoryInfo { type label } } } upcoming { month year monthSort tournaments { id tournamentName date startDate sortDate sequenceNumber city state country courseName champion championId champions { displayName playerId } championEarnings purse tournamentStatus tourStandingHeading tourStandingValue tournamentCategoryInfo { type label } } } } }",
+     "variables": {
+      "tourCode": "R",
+      "year": "2019"
+     }
+    }
+   },
+   "season": 2019,
+   "expect": {
+    "season_year": "2018 - 2019",
+    "tournament_count": 51,
+    "upcoming_count": 0,
+    "signature_count": 0,
+    "first_tournament": {
+     "id": "R2019464",
+     "name": "Safeway Open",
+     "start_date_ms": 1538611200000,
+     "purse": "$6,400,000",
+     "champion": "Kevin Tway",
+     "champion_earnings": "$1,152,000",
+     "fedexcup_points": "500 pts"
+    },
+    "team_event": {
+     "id": "R2019018",
+     "champion": "Ryan Palmer, Jon Rahm",
+     "champion_earnings": "$1,051,200",
+     "purse": "$7,300,000"
+    }
+   }
+  },
+  {
+   "family": "schedule",
+   "file": "schedule/schedule_2023.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "Schedule",
+     "query": "query Schedule($tourCode: String!, $year: String) { schedule(tourCode: $tourCode, year: $year) { tour seasonYear completed { month year monthSort tournaments { id tournamentName date startDate sortDate sequenceNumber city state country courseName champion championId champions { displayName playerId } championEarnings purse tournamentStatus tourStandingHeading tourStandingValue tournamentCategoryInfo { type label } } } upcoming { month year monthSort tournaments { id tournamentName date startDate sortDate sequenceNumber city state country courseName champion championId champions { displayName playerId } championEarnings purse tournamentStatus tourStandingHeading tourStandingValue tournamentCategoryInfo { type label } } } } }",
+     "variables": {
+      "tourCode": "R",
+      "year": "2023"
+     }
+    }
+   },
+   "season": 2023,
+   "expect": {
+    "season_year": "2022 - 2023",
+    "tournament_count": 61,
+    "upcoming_count": 0,
+    "signature_count": 0,
+    "first_tournament": {
+     "id": "R2023464",
+     "name": "Fortinet Championship",
+     "start_date_ms": 1663200000000,
+     "purse": "$8,000,000",
+     "champion": "Max Homa",
+     "champion_earnings": "$1,440,000",
+     "fedexcup_points": "500 pts"
+    },
+    "team_event": {
+     "id": "R2023018",
+     "champion": "Davis Riley, Nick Hardy",
+     "champion_earnings": "$1,242,700",
+     "purse": "$8,600,000"
+    }
+   }
+  },
+  {
+   "family": "schedule",
+   "file": "schedule/schedule_2024.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "Schedule",
+     "query": "query Schedule($tourCode: String!, $year: String) { schedule(tourCode: $tourCode, year: $year) { tour seasonYear completed { month year monthSort tournaments { id tournamentName date startDate sortDate sequenceNumber city state country courseName champion championId champions { displayName playerId } championEarnings purse tournamentStatus tourStandingHeading tourStandingValue tournamentCategoryInfo { type label } } } upcoming { month year monthSort tournaments { id tournamentName date startDate sortDate sequenceNumber city state country courseName champion championId champions { displayName playerId } championEarnings purse tournamentStatus tourStandingHeading tourStandingValue tournamentCategoryInfo { type label } } } } }",
+     "variables": {
+      "tourCode": "R",
+      "year": "2024"
+     }
+    }
+   },
+   "season": 2024,
+   "expect": {
+    "season_year": "2024",
+    "tournament_count": 52,
+    "upcoming_count": 0,
+    "signature_count": 8,
+    "first_tournament": {
+     "id": "R2024016",
+     "name": "The Sentry",
+     "start_date_ms": 1704326400000,
+     "purse": "$20,000,000",
+     "champion": "Chris Kirk",
+     "champion_earnings": "$3,600,000",
+     "fedexcup_points": "700 pts"
+    },
+    "team_event": {
+     "id": "R2024018",
+     "champion": "Rory McIlroy, Shane Lowry",
+     "champion_earnings": "$1,286,050",
+     "purse": "$8,900,000"
+    }
+   }
+  },
+  {
+   "family": "event_results",
+   "file": "event_results/1995_masters_tournament.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "TournamentPastResults",
+     "query": "query TournamentPastResults($tournamentPastResultsId: ID!, $year: Int) { tournamentPastResults(id: $tournamentPastResultsId, year: $year) { id players { id position player { id firstName lastName shortName displayName amateur country countryFlag } rounds { score parRelativeScore } additionalData total parRelativeScore } teams { teamId position players { id firstName lastName shortName displayName amateur country countryFlag } additionalData total parRelativeScore rounds { score parRelativeScore } } rounds additionalDataHeaders availableSeasons { year displaySeason } winner { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } winningTeam { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } } }",
+     "variables": {
+      "tournamentPastResultsId": "R2024014",
+      "year": 19950
+     }
+    }
+   },
+   "season": 1995,
+   "expect": {
+    "tournament_id": "R1995014",
+    "player_row_count": 86,
+    "team_row_count": 0,
+    "additional_data_headers": [
+     "FedExCup Pts",
+     "Official Money"
+    ],
+    "winner": {
+     "player_id": "01235",
+     "name": "Ben Crenshaw",
+     "total_strokes": 274,
+     "total_score": "-14",
+     "fedexcup_points": "0.000",
+     "official_money": "$396,000.00"
+    },
+    "last_position": "W/D"
+   }
+  },
+  {
+   "family": "event_results",
+   "file": "event_results/2019_safeway_open.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "TournamentPastResults",
+     "query": "query TournamentPastResults($tournamentPastResultsId: ID!, $year: Int) { tournamentPastResults(id: $tournamentPastResultsId, year: $year) { id players { id position player { id firstName lastName shortName displayName amateur country countryFlag } rounds { score parRelativeScore } additionalData total parRelativeScore } teams { teamId position players { id firstName lastName shortName displayName amateur country countryFlag } additionalData total parRelativeScore rounds { score parRelativeScore } } rounds additionalDataHeaders availableSeasons { year displaySeason } winner { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } winningTeam { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } } }",
+     "variables": {
+      "tournamentPastResultsId": "R2019464",
+      "year": 20190
+     }
+    }
+   },
+   "season": 2019,
+   "expect": {
+    "tournament_id": "R2019464",
+    "player_row_count": 144,
+    "team_row_count": 0,
+    "additional_data_headers": [
+     "FedExCup Pts",
+     "Official Money"
+    ],
+    "winner": {
+     "player_id": "32333",
+     "name": "Kevin Tway",
+     "total_strokes": 274,
+     "total_score": "-14",
+     "fedexcup_points": "500.000",
+     "official_money": "$1,152,000.00"
+    },
+    "last_position": "CUT"
+   }
+  },
+  {
+   "family": "event_results",
+   "file": "event_results/2023_genesis_invitational.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "TournamentPastResults",
+     "query": "query TournamentPastResults($tournamentPastResultsId: ID!, $year: Int) { tournamentPastResults(id: $tournamentPastResultsId, year: $year) { id players { id position player { id firstName lastName shortName displayName amateur country countryFlag } rounds { score parRelativeScore } additionalData total parRelativeScore } teams { teamId position players { id firstName lastName shortName displayName amateur country countryFlag } additionalData total parRelativeScore rounds { score parRelativeScore } } rounds additionalDataHeaders availableSeasons { year displaySeason } winner { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } winningTeam { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } } }",
+     "variables": {
+      "tournamentPastResultsId": "R2023007",
+      "year": 20230
+     }
+    }
+   },
+   "season": 2023,
+   "expect": {
+    "tournament_id": "R2023007",
+    "player_row_count": 129,
+    "team_row_count": 0,
+    "additional_data_headers": [
+     "FedExCup Pts",
+     "Official Money"
+    ],
+    "winner": {
+     "player_id": "46970",
+     "name": "Jon Rahm",
+     "total_strokes": 267,
+     "total_score": "-17",
+     "fedexcup_points": "550.000",
+     "official_money": "$3,600,000.00"
+    },
+    "last_position": "W/D"
+   }
+  },
+  {
+   "family": "event_results",
+   "file": "event_results/2024_masters_tournament.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "TournamentPastResults",
+     "query": "query TournamentPastResults($tournamentPastResultsId: ID!, $year: Int) { tournamentPastResults(id: $tournamentPastResultsId, year: $year) { id players { id position player { id firstName lastName shortName displayName amateur country countryFlag } rounds { score parRelativeScore } additionalData total parRelativeScore } teams { teamId position players { id firstName lastName shortName displayName amateur country countryFlag } additionalData total parRelativeScore rounds { score parRelativeScore } } rounds additionalDataHeaders availableSeasons { year displaySeason } winner { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } winningTeam { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } } }",
+     "variables": {
+      "tournamentPastResultsId": "R2024014",
+      "year": 20240
+     }
+    }
+   },
+   "season": 2024,
+   "expect": {
+    "tournament_id": "R2024014",
+    "player_row_count": 89,
+    "team_row_count": 0,
+    "additional_data_headers": [
+     "FedExCup Pts",
+     "Official Money"
+    ],
+    "winner": {
+     "player_id": "46046",
+     "name": "Scottie Scheffler",
+     "total_strokes": 277,
+     "total_score": "-11",
+     "fedexcup_points": "750.000",
+     "official_money": "$3,600,000.00"
+    },
+    "last_position": "CUT"
+   }
+  },
+  {
+   "family": "event_results",
+   "file": "event_results/2024_zurich_classic.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "TournamentPastResults",
+     "query": "query TournamentPastResults($tournamentPastResultsId: ID!, $year: Int) { tournamentPastResults(id: $tournamentPastResultsId, year: $year) { id players { id position player { id firstName lastName shortName displayName amateur country countryFlag } rounds { score parRelativeScore } additionalData total parRelativeScore } teams { teamId position players { id firstName lastName shortName displayName amateur country countryFlag } additionalData total parRelativeScore rounds { score parRelativeScore } } rounds additionalDataHeaders availableSeasons { year displaySeason } winner { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } winningTeam { id firstName lastName totalStrokes totalScore countryFlag countryName purse displayPoints displayPurse points seed pointsLabel } } }",
+     "variables": {
+      "tournamentPastResultsId": "R2024018",
+      "year": 20240
+     }
+    }
+   },
+   "season": 2024,
+   "expect": {
+    "tournament_id": "R2024018",
+    "player_row_count": 0,
+    "team_row_count": 80,
+    "additional_data_headers": [
+     "FedExCup Pts",
+     "Official Money"
+    ],
+    "winner": null,
+    "winning_team": {
+     "team_id": "00087",
+     "position": "1",
+     "player_ids": [
+      "33204",
+      "28237"
+     ],
+     "names": [
+      "Shane Lowry",
+      "Rory McIlroy"
+     ],
+     "total": "263",
+     "par_relative_score": "-25",
+     "fedexcup_points_each": "400.000",
+     "official_money_each": "$1,286,050.00"
+    }
+   }
+  },
+  {
+   "family": "stat_catalog",
+   "file": "stat_catalog/stat_overview_2024.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "StatOverview",
+     "query": "query StatOverview($tourCode: TourCode!, $year: Int) { statOverview(tourCode: $tourCode, year: $year) { tourCode year categories { category displayName subCategories { displayName stats { statId statTitle } } categoryType } stats { statName tourAvg statId players { statId playerId statTitle statValue playerName rank country countryFlag } } } }",
+     "variables": {
+      "tourCode": "R",
+      "year": 2024
+     }
+    }
+   },
+   "season": 2024,
+   "expect": {
+    "category_count": 9,
+    "stat_entry_count": 592,
+    "unique_stat_id_count": 476,
+    "includes": {
+     "109": "Official Money",
+     "194": "Total Money (Official and Unofficial)",
+     "02675": "SG: Total",
+     "02396": "FedExCup Bonus Money",
+     "186": "Official World Golf Ranking",
+     "02671": "FedExCup Standings"
+    }
+   }
+  },
+  {
+   "family": "season_stat",
+   "file": "season_stat/sg_total_02675_2024.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "StatDetails",
+     "query": "query StatDetails($tourCode: TourCode!, $statId: String!, $year: Int, $eventQuery: StatDetailEventQuery) { statDetails(tourCode: $tourCode, statId: $statId, year: $year, eventQuery: $eventQuery) { __typename tourCode year displaySeason statId statType tournamentPills { tournamentId displayName } yearPills { year displaySeason } statTitle statDescription tourAvg lastProcessed statHeaders rows { ... on StatDetailsPlayer { __typename playerId playerName country countryFlag rank rankDiff rankChangeTendency stats { statName statValue color supportingData supportingDataColor } } ... on StatDetailTourAvg { __typename displayName value } } } }",
+     "variables": {
+      "tourCode": "R",
+      "statId": "02675",
+      "year": 2024,
+      "eventQuery": null
+     }
+    }
+   },
+   "season": 2024,
+   "expect": {
+    "stat_id": "02675",
+    "year": 2024,
+    "display_season": "2024",
+    "stat_title": "SG: Total",
+    "stat_headers": [
+     "Avg",
+     "Total SG:T",
+     "Total SG:T2G",
+     "Total SG:P",
+     "Measured Rounds"
+    ],
+    "row_count": 25,
+    "original_row_count": 184,
+    "year_pill_count": 23,
+    "earliest_year": 2004,
+    "first": {
+     "player_id": "46046",
+     "player_name": "Scottie Scheffler",
+     "rank": 1,
+     "value": "2.496"
+    },
+    "last": {
+     "player_id": "33448",
+     "player_name": "Justin Thomas",
+     "rank": 25,
+     "value": "0.762"
+    }
+   }
+  },
+  {
+   "family": "money_list",
+   "file": "money_list/official_money_109_1995.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "StatDetails",
+     "query": "query StatDetails($tourCode: TourCode!, $statId: String!, $year: Int, $eventQuery: StatDetailEventQuery) { statDetails(tourCode: $tourCode, statId: $statId, year: $year, eventQuery: $eventQuery) { __typename tourCode year displaySeason statId statType tournamentPills { tournamentId displayName } yearPills { year displaySeason } statTitle statDescription tourAvg lastProcessed statHeaders rows { ... on StatDetailsPlayer { __typename playerId playerName country countryFlag rank rankDiff rankChangeTendency stats { statName statValue color supportingData supportingDataColor } } ... on StatDetailTourAvg { __typename displayName value } } } }",
+     "variables": {
+      "tourCode": "R",
+      "statId": "109",
+      "year": 1995,
+      "eventQuery": null
+     }
+    }
+   },
+   "season": 1995,
+   "expect": {
+    "stat_id": "109",
+    "year": 1995,
+    "display_season": "1995",
+    "stat_title": "Official Money",
+    "stat_headers": [
+     "Money",
+     "YTD Victories"
+    ],
+    "row_count": 25,
+    "original_row_count": 359,
+    "year_pill_count": 40,
+    "earliest_year": 1987,
+    "first": {
+     "player_id": "01876",
+     "player_name": "Greg Norman",
+     "rank": 1,
+     "value": "$1,654,959"
+    },
+    "last": {
+     "player_id": "01143",
+     "player_name": "Brad Bryant",
+     "rank": 25,
+     "value": "$723,834"
+    }
+   }
+  },
+  {
+   "family": "money_list",
+   "file": "money_list/official_money_109_2019.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "StatDetails",
+     "query": "query StatDetails($tourCode: TourCode!, $statId: String!, $year: Int, $eventQuery: StatDetailEventQuery) { statDetails(tourCode: $tourCode, statId: $statId, year: $year, eventQuery: $eventQuery) { __typename tourCode year displaySeason statId statType tournamentPills { tournamentId displayName } yearPills { year displaySeason } statTitle statDescription tourAvg lastProcessed statHeaders rows { ... on StatDetailsPlayer { __typename playerId playerName country countryFlag rank rankDiff rankChangeTendency stats { statName statValue color supportingData supportingDataColor } } ... on StatDetailTourAvg { __typename displayName value } } } }",
+     "variables": {
+      "tourCode": "R",
+      "statId": "109",
+      "year": 2019,
+      "eventQuery": null
+     }
+    }
+   },
+   "season": 2019,
+   "expect": {
+    "stat_id": "109",
+    "year": 2019,
+    "display_season": "2018-2019",
+    "stat_title": "Official Money",
+    "stat_headers": [
+     "Money",
+     "YTD Victories"
+    ],
+    "row_count": 25,
+    "original_row_count": 265,
+    "year_pill_count": 40,
+    "earliest_year": 1987,
+    "first": {
+     "player_id": "36689",
+     "player_name": "Brooks Koepka",
+     "rank": 1,
+     "value": "$9,684,006"
+    },
+    "last": {
+     "player_id": "47959",
+     "player_name": "Bryson DeChambeau",
+     "rank": 25,
+     "value": "$3,186,232"
+    }
+   }
+  },
+  {
+   "family": "money_list",
+   "file": "money_list/official_money_109_2024.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "StatDetails",
+     "query": "query StatDetails($tourCode: TourCode!, $statId: String!, $year: Int, $eventQuery: StatDetailEventQuery) { statDetails(tourCode: $tourCode, statId: $statId, year: $year, eventQuery: $eventQuery) { __typename tourCode year displaySeason statId statType tournamentPills { tournamentId displayName } yearPills { year displaySeason } statTitle statDescription tourAvg lastProcessed statHeaders rows { ... on StatDetailsPlayer { __typename playerId playerName country countryFlag rank rankDiff rankChangeTendency stats { statName statValue color supportingData supportingDataColor } } ... on StatDetailTourAvg { __typename displayName value } } } }",
+     "variables": {
+      "tourCode": "R",
+      "statId": "109",
+      "year": 2024,
+      "eventQuery": null
+     }
+    }
+   },
+   "season": 2024,
+   "expect": {
+    "stat_id": "109",
+    "year": 2024,
+    "display_season": "2024",
+    "stat_title": "Official Money",
+    "stat_headers": [
+     "Money",
+     "YTD Victories"
+    ],
+    "row_count": 25,
+    "original_row_count": 245,
+    "year_pill_count": 40,
+    "earliest_year": 1987,
+    "first": {
+     "player_id": "46046",
+     "player_name": "Scottie Scheffler",
+     "rank": 1,
+     "value": "$29,228,357"
+    },
+    "last": {
+     "player_id": "29420",
+     "player_name": "Billy Horschel",
+     "rank": 25,
+     "value": "$5,037,278"
+    }
+   }
+  },
+  {
+   "family": "fedex_bonus",
+   "file": "fedex_bonus/fedexcup_bonus_money_02396_2024.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "StatDetails",
+     "query": "query StatDetails($tourCode: TourCode!, $statId: String!, $year: Int, $eventQuery: StatDetailEventQuery) { statDetails(tourCode: $tourCode, statId: $statId, year: $year, eventQuery: $eventQuery) { __typename tourCode year displaySeason statId statType tournamentPills { tournamentId displayName } yearPills { year displaySeason } statTitle statDescription tourAvg lastProcessed statHeaders rows { ... on StatDetailsPlayer { __typename playerId playerName country countryFlag rank rankDiff rankChangeTendency stats { statName statValue color supportingData supportingDataColor } } ... on StatDetailTourAvg { __typename displayName value } } } }",
+     "variables": {
+      "tourCode": "R",
+      "statId": "02396",
+      "year": 2024,
+      "eventQuery": null
+     }
+    }
+   },
+   "season": 2024,
+   "expect": {
+    "stat_id": "02396",
+    "year": 2024,
+    "display_season": "2024",
+    "stat_title": "FedExCup Bonus Money",
+    "stat_headers": [
+     "Money"
+    ],
+    "row_count": 25,
+    "original_row_count": 239,
+    "year_pill_count": 19,
+    "earliest_year": 2007,
+    "first": {
+     "player_id": "46046",
+     "player_name": "Scottie Scheffler",
+     "rank": 1,
+     "value": "25,000,000"
+    },
+    "last": {
+     "player_id": "46414",
+     "player_name": "Aaron Rai",
+     "rank": 23,
+     "value": "615,000"
+    }
+   }
+  },
+  {
+   "family": "owgr",
+   "file": "owgr/owgr_186_2024.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "StatDetails",
+     "query": "query StatDetails($tourCode: TourCode!, $statId: String!, $year: Int, $eventQuery: StatDetailEventQuery) { statDetails(tourCode: $tourCode, statId: $statId, year: $year, eventQuery: $eventQuery) { __typename tourCode year displaySeason statId statType tournamentPills { tournamentId displayName } yearPills { year displaySeason } statTitle statDescription tourAvg lastProcessed statHeaders rows { ... on StatDetailsPlayer { __typename playerId playerName country countryFlag rank rankDiff rankChangeTendency stats { statName statValue color supportingData supportingDataColor } } ... on StatDetailTourAvg { __typename displayName value } } } }",
+     "variables": {
+      "tourCode": "R",
+      "statId": "186",
+      "year": 2024,
+      "eventQuery": null
+     }
+    }
+   },
+   "season": 2024,
+   "expect": {
+    "stat_id": "186",
+    "year": 2024,
+    "display_season": "2024",
+    "stat_title": "Official World Golf Ranking",
+    "stat_headers": [
+     "Avg Points",
+     "Total Points",
+     "Points lost",
+     "Points gained"
+    ],
+    "row_count": 25,
+    "original_row_count": 998,
+    "year_pill_count": 32,
+    "earliest_year": 1995,
+    "first": {
+     "player_id": "46046",
+     "player_name": "Scottie Scheffler",
+     "rank": 1,
+     "value": "15.6000"
+    },
+    "last": {
+     "player_id": "46970",
+     "player_name": "Jon Rahm",
+     "rank": 25,
+     "value": "2.7196"
+    }
+   }
+  },
+  {
+   "family": "player_list",
+   "file": "player_list/player_directory_R.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "PlayerDirectory",
+     "query": "query PlayerDirectory($tourCode: TourCode!, $active: Boolean) { playerDirectory(tourCode: $tourCode, active: $active) { tourCode players { id isActive firstName lastName shortName displayName alphaSort country countryFlag playerBio { id education turnedPro age } } } }",
+     "variables": {
+      "tourCode": "R",
+      "active": null
+     }
+    }
+   },
+   "season": null,
+   "expect": {
+    "tour_code": "R",
+    "row_count": 25,
+    "original_row_count": 219,
+    "first": {
+     "player_id": "52955",
+     "display_name": "Ludvig Åberg",
+     "country": "Sweden"
+    },
+    "last": {
+     "player_id": "47591",
+     "display_name": "Eric Cole"
+    }
+   }
+  },
+  {
+   "family": "player_bio",
+   "file": "player_bio/player_46046_scottie_scheffler.json",
+   "request": {
+    "method": "POST",
+    "url": "https://orchestrator.pgatour.com/graphql",
+    "body": {
+     "operationName": "Player",
+     "query": "query Player($playerId: ID!) { player(id: $playerId) { id firstName lastName displayName country countryFlag owgr rank { rank statName } playerBio { heightImperial heightMeters weightImperial weightKilograms age born birthplace { city state stateCode country countryCode } turnedPro school degree graduationYear residence { city state stateCode country countryCode } playsFrom { city state stateCode country countryCode } family personal careerEarnings pronunciation exemptions { tour description expirationDate } deceased deceasedDate primaryTour } } }",
+     "variables": {
+      "playerId": "46046"
+     }
+    }
+   },
+   "season": null,
+   "expect": {
+    "player_id": "46046",
+    "display_name": "Scottie Scheffler",
+    "country": "United States",
+    "owgr": 1,
+    "born": "Jun 21, 1996",
+    "turned_pro": "2018",
+    "school": "University of Texas",
+    "career_earnings": "$130,955,999"
+   }
+  }
+ ]
+}

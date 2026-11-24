@@ -1,0 +1,434 @@
+{
+ "data": {
+  "playerDirectory": {
+   "tourCode": "R",
+   "players": [
+    {
+     "id": "52955",
+     "isActive": true,
+     "firstName": "Ludvig",
+     "lastName": "Åberg",
+     "shortName": "L Åberg",
+     "displayName": "Ludvig Åberg",
+     "alphaSort": "Å",
+     "country": "Sweden",
+     "countryFlag": "SWE",
+     "playerBio": {
+      "id": "52955",
+      "education": "Texas Tech University",
+      "turnedPro": "2023",
+      "age": "27"
+     }
+    },
+    {
+     "id": "22371",
+     "isActive": true,
+     "firstName": "Aaron",
+     "lastName": "Baddeley",
+     "shortName": "A Baddeley",
+     "displayName": "Aaron Baddeley",
+     "alphaSort": "B",
+     "country": "Australia",
+     "countryFlag": "AUS",
+     "playerBio": {
+      "id": "22371",
+      "education": null,
+      "turnedPro": "2000",
+      "age": "45"
+     }
+    },
+    {
+     "id": "48001",
+     "isActive": true,
+     "firstName": "Zach",
+     "lastName": "Bauchou",
+     "shortName": "Z Bauchou",
+     "displayName": "Zach Bauchou",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "48001",
+      "education": "Oklahoma State University",
+      "turnedPro": "2019",
+      "age": "30"
+     }
+    },
+    {
+     "id": "40026",
+     "isActive": true,
+     "firstName": "Daniel",
+     "lastName": "Berger",
+     "shortName": "D Berger",
+     "displayName": "Daniel Berger",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "40026",
+      "education": "Florida State University",
+      "turnedPro": "2013",
+      "age": "33"
+     }
+    },
+    {
+     "id": "45522",
+     "isActive": true,
+     "firstName": "Christiaan",
+     "lastName": "Bezuidenhout",
+     "shortName": "C Bezuidenhout",
+     "displayName": "Christiaan Bezuidenhout",
+     "alphaSort": "B",
+     "country": "South Africa",
+     "countryFlag": "RSA",
+     "playerBio": {
+      "id": "45522",
+      "education": null,
+      "turnedPro": "2015",
+      "age": "32"
+     }
+    },
+    {
+     "id": "56630",
+     "isActive": true,
+     "firstName": "Akshay",
+     "lastName": "Bhatia",
+     "shortName": "A Bhatia",
+     "displayName": "Akshay Bhatia",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "56630",
+      "education": null,
+      "turnedPro": "2019",
+      "age": "24"
+     }
+    },
+    {
+     "id": "40058",
+     "isActive": true,
+     "firstName": "Zac",
+     "lastName": "Blair",
+     "shortName": "Z Blair",
+     "displayName": "Zac Blair",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "40058",
+      "education": "Brigham Young University",
+      "turnedPro": "2014",
+      "age": "36"
+     }
+    },
+    {
+     "id": "54788",
+     "isActive": true,
+     "firstName": "Chandler",
+     "lastName": "Blanchet",
+     "shortName": "C Blanchet",
+     "displayName": "Chandler Blanchet",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "54788",
+      "education": "University of West Florida",
+      "turnedPro": "2018",
+      "age": "30"
+     }
+    },
+    {
+     "id": "33141",
+     "isActive": true,
+     "firstName": "Keegan",
+     "lastName": "Bradley",
+     "shortName": "K Bradley",
+     "displayName": "Keegan Bradley",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "33141",
+      "education": "St. John's University",
+      "turnedPro": "2008",
+      "age": "40"
+     }
+    },
+    {
+     "id": "61522",
+     "isActive": true,
+     "firstName": "Michael",
+     "lastName": "Brennan",
+     "shortName": "M Brennan",
+     "displayName": "Michael Brennan",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "61522",
+      "education": "Wake Forest University",
+      "turnedPro": "2024",
+      "age": "24"
+     }
+    },
+    {
+     "id": "60004",
+     "isActive": true,
+     "firstName": "Jacob",
+     "lastName": "Bridgeman",
+     "shortName": "J Bridgeman",
+     "displayName": "Jacob Bridgeman",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "60004",
+      "education": "Clemson University",
+      "turnedPro": "2022",
+      "age": "26"
+     }
+    },
+    {
+     "id": "66417",
+     "isActive": true,
+     "firstName": "Blades",
+     "lastName": "Brown",
+     "shortName": "B Brown",
+     "displayName": "Blades Brown",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "66417",
+      "education": null,
+      "turnedPro": "2024",
+      "age": "19"
+     }
+    },
+    {
+     "id": "57259",
+     "isActive": true,
+     "firstName": "Dan",
+     "lastName": "Brown",
+     "shortName": "D Brown",
+     "displayName": "Dan Brown",
+     "alphaSort": "B",
+     "country": "England",
+     "countryFlag": "ENG",
+     "playerBio": {
+      "id": "57259",
+      "education": null,
+      "turnedPro": "2017",
+      "age": "32"
+     }
+    },
+    {
+     "id": "47504",
+     "isActive": true,
+     "firstName": "Sam",
+     "lastName": "Burns",
+     "shortName": "S Burns",
+     "displayName": "Sam Burns",
+     "alphaSort": "B",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "47504",
+      "education": "Louisiana State University",
+      "turnedPro": "2017",
+      "age": "30"
+     }
+    },
+    {
+     "id": "46443",
+     "isActive": true,
+     "firstName": "Brian",
+     "lastName": "Campbell",
+     "shortName": "B Campbell",
+     "displayName": "Brian Campbell",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "46443",
+      "education": "University of Illinois",
+      "turnedPro": "2015",
+      "age": "33"
+     }
+    },
+    {
+     "id": "32070",
+     "isActive": true,
+     "firstName": "Rafael",
+     "lastName": "Campos",
+     "shortName": "R Campos",
+     "displayName": "Rafael Campos",
+     "alphaSort": "C",
+     "country": "Puerto Rico",
+     "countryFlag": "PUR",
+     "playerBio": {
+      "id": "32070",
+      "education": "Virginia Commonwealth University",
+      "turnedPro": "2011",
+      "age": "38"
+     }
+    },
+    {
+     "id": "35450",
+     "isActive": true,
+     "firstName": "Patrick",
+     "lastName": "Cantlay",
+     "shortName": "P Cantlay",
+     "displayName": "Patrick Cantlay",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "35450",
+      "education": "UCLA",
+      "turnedPro": "2012",
+      "age": "34"
+     }
+    },
+    {
+     "id": "49590",
+     "isActive": true,
+     "firstName": "Frankie",
+     "lastName": "Capan III",
+     "shortName": "F Capan III",
+     "displayName": "Frankie Capan III",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "49590",
+      "education": "Florida Gulf Coast University",
+      "turnedPro": "2022",
+      "age": "27"
+     }
+    },
+    {
+     "id": "59440",
+     "isActive": true,
+     "firstName": "Ricky",
+     "lastName": "Castillo",
+     "shortName": "R Castillo",
+     "displayName": "Ricky Castillo",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "59440",
+      "education": "University of Florida",
+      "turnedPro": "2023",
+      "age": "25"
+     }
+    },
+    {
+     "id": "34021",
+     "isActive": true,
+     "firstName": "Bud",
+     "lastName": "Cauley",
+     "shortName": "B Cauley",
+     "displayName": "Bud Cauley",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "34021",
+      "education": "University of Alabama",
+      "turnedPro": "2011",
+      "age": "36"
+     }
+    },
+    {
+     "id": "52372",
+     "isActive": true,
+     "firstName": "Cameron",
+     "lastName": "Champ",
+     "shortName": "C Champ",
+     "displayName": "Cameron Champ",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "52372",
+      "education": "Texas A&M University",
+      "turnedPro": "2017",
+      "age": "31"
+     }
+    },
+    {
+     "id": "59006",
+     "isActive": true,
+     "firstName": "Davis",
+     "lastName": "Chatfield",
+     "shortName": "D Chatfield",
+     "displayName": "Davis Chatfield",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "59006",
+      "education": "University of Notre Dame",
+      "turnedPro": "2022",
+      "age": "27"
+     }
+    },
+    {
+     "id": "66743",
+     "isActive": true,
+     "firstName": "Luke",
+     "lastName": "Clanton",
+     "shortName": "L Clanton",
+     "displayName": "Luke Clanton",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "66743",
+      "education": "Florida State University",
+      "turnedPro": "2025",
+      "age": "23"
+     }
+    },
+    {
+     "id": "51766",
+     "isActive": true,
+     "firstName": "Wyndham",
+     "lastName": "Clark",
+     "shortName": "W Clark",
+     "displayName": "Wyndham Clark",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "51766",
+      "education": "University of Oregon",
+      "turnedPro": "2017",
+      "age": "32"
+     }
+    },
+    {
+     "id": "47591",
+     "isActive": true,
+     "firstName": "Eric",
+     "lastName": "Cole",
+     "shortName": "E Cole",
+     "displayName": "Eric Cole",
+     "alphaSort": "C",
+     "country": "United States",
+     "countryFlag": "USA",
+     "playerBio": {
+      "id": "47591",
+      "education": "Nova Southeastern University",
+      "turnedPro": "2009",
+      "age": "38"
+     }
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,575 @@
+{
+ "data": {
+  "statDetails": {
+   "__typename": "StatDetails",
+   "tourCode": "R",
+   "year": 2024,
+   "displaySeason": "2024",
+   "statId": "02396",
+   "statType": "YTD",
+   "tournamentPills": [],
+   "yearPills": [
+    {
+     "year": 2026,
+     "displaySeason": "2026"
+    },
+    {
+     "year": 2025,
+     "displaySeason": "2025"
+    },
+    {
+     "year": 2024,
+     "displaySeason": "2024"
+    },
+    {
+     "year": 2023,
+     "displaySeason": "2022-2023"
+    },
+    {
+     "year": 2021,
+     "displaySeason": "2020-2021"
+    },
+    {
+     "year": 2020,
+     "displaySeason": "2019-2020"
+    },
+    {
+     "year": 2019,
+     "displaySeason": "2018-2019"
+    },
+    {
+     "year": 2018,
+     "displaySeason": "2017-2018"
+    },
+    {
+     "year": 2017,
+     "displaySeason": "2016-2017"
+    },
+    {
+     "year": 2016,
+     "displaySeason": "2015-2016"
+    },
+    {
+     "year": 2015,
+     "displaySeason": "2014-2015"
+    },
+    {
+     "year": 2014,
+     "displaySeason": "2013-2014"
+    },
+    {
+     "year": 2013,
+     "displaySeason": "2013"
+    },
+    {
+     "year": 2012,
+     "displaySeason": "2012"
+    },
+    {
+     "year": 2011,
+     "displaySeason": "2011"
+    },
+    {
+     "year": 2010,
+     "displaySeason": "2010"
+    },
+    {
+     "year": 2009,
+     "displaySeason": "2009"
+    },
+    {
+     "year": 2008,
+     "displaySeason": "2008"
+    },
+    {
+     "year": 2007,
+     "displaySeason": "2007"
+    }
+   ],
+   "statTitle": "FedExCup Bonus Money",
+   "statDescription": "The bonus money that the player has earned in the FedExCup points race. (2396)",
+   "tourAvg": null,
+   "lastProcessed": "Through the TOUR Championship, Sep 1",
+   "statHeaders": [
+    "Money"
+   ],
+   "rows": [
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46046",
+     "playerName": "Scottie Scheffler",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 1,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "25,000,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "50525",
+     "playerName": "Collin Morikawa",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 2,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "12,500,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51634",
+     "playerName": "Sahith Theegala",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 3,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "7,500,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "34098",
+     "playerName": "Russell Henley",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 4,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "4,833,333",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "48081",
+     "playerName": "Xander Schauffele",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 4,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "4,833,333",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "24502",
+     "playerName": "Adam Scott",
+     "country": "Australia",
+     "countryFlag": "AUS",
+     "rank": 4,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "4,833,333",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "39971",
+     "playerName": "Sungjae Im",
+     "country": "Republic of Korea",
+     "countryFlag": "KOR",
+     "rank": 7,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "2,750,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "51766",
+     "playerName": "Wyndham Clark",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 8,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "2,250,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33204",
+     "playerName": "Shane Lowry",
+     "country": "Ireland",
+     "countryFlag": "IRL",
+     "rank": 9,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "1,608,333",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "32839",
+     "playerName": "Hideki Matsuyama",
+     "country": "Japan",
+     "countryFlag": "JPN",
+     "rank": 9,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "1,608,333",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "28237",
+     "playerName": "Rory McIlroy",
+     "country": "Northern Ireland",
+     "countryFlag": "NIR",
+     "rank": 9,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "1,608,333",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "47504",
+     "playerName": "Sam Burns",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 12,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "1,000,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46717",
+     "playerName": "Viktor Hovland",
+     "country": "Norway",
+     "countryFlag": "NOR",
+     "rank": 12,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "1,000,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "40250",
+     "playerName": "Taylor Pendrith",
+     "country": "Canada",
+     "countryFlag": "CAN",
+     "rank": 14,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "905,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33448",
+     "playerName": "Justin Thomas",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 14,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "905,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "52955",
+     "playerName": "Ludvig Åberg",
+     "country": "Sweden",
+     "countryFlag": "SWE",
+     "rank": 16,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "795,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "35450",
+     "playerName": "Patrick Cantlay",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 17,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "755,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "52215",
+     "playerName": "Robert MacIntyre",
+     "country": "Scotland",
+     "countryFlag": "SCO",
+     "rank": 17,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "755,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "48153",
+     "playerName": "Matthieu Pavon",
+     "country": "France",
+     "countryFlag": "FRA",
+     "rank": 17,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "755,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "30911",
+     "playerName": "Tommy Fleetwood",
+     "country": "England",
+     "countryFlag": "ENG",
+     "rank": 20,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "715,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33948",
+     "playerName": "Byeong Hun An",
+     "country": "Republic of Korea",
+     "countryFlag": "KOR",
+     "rank": 21,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "660,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "33141",
+     "playerName": "Keegan Bradley",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 21,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "660,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "29725",
+     "playerName": "Tony Finau",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 23,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "615,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "29420",
+     "playerName": "Billy Horschel",
+     "country": "United States",
+     "countryFlag": "USA",
+     "rank": 23,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "615,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    },
+    {
+     "__typename": "StatDetailsPlayer",
+     "playerId": "46414",
+     "playerName": "Aaron Rai",
+     "country": "England",
+     "countryFlag": "ENG",
+     "rank": 23,
+     "rankDiff": "-",
+     "rankChangeTendency": "CONSTANT",
+     "stats": [
+      {
+       "statName": "Money",
+       "statValue": "615,000",
+       "color": "GREEN",
+       "supportingData": null,
+       "supportingDataColor": null
+      }
+     ]
+    }
+   ]
+  }
+ }
+}
