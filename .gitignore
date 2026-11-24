@@ -25,5 +25,11 @@ credentials/
 .claude/worktrees/
 CLAUDE.local.md
 
+# Generated data (data/manual/ stays tracked)
+data/raw/
+data/*.duckdb*
+data/tiers/
+reports/
+
 # macOS
 .DS_Store
