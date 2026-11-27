@@ -14,7 +14,9 @@ init_schema = store.init_schema
 make_id = store.make_id
 upsert = store.upsert
 
-# The contract from the ticket: table -> (columns in order, declared types, primary key columns).
+# The contract from the ticket, widened by the owner's round-1 answer (season_label in
+# stat_catalog's key, measure in season_stats' key, round_scores, players.career_earnings and
+# player_exemptions): table -> (columns in order, declared types, primary key columns).
 # Columns without a type in the ticket are not pinned to a type here.
 SCHEMA = {
     "players": (
@@ -29,9 +31,25 @@ SCHEMA = {
             "birth_date",
             "turned_pro",
             "amateur",
+            "career_earnings",
         ],
-        {"birth_date": "DATE", "turned_pro": "INTEGER", "amateur": "BOOLEAN"},
+        {
+            "birth_date": "DATE",
+            "turned_pro": "INTEGER",
+            "amateur": "BOOLEAN",
+            "career_earnings": "DOUBLE",
+        },
         {"player_id"},
+    ),
+    "player_exemptions": (
+        ["source", "player_id", "tour", "description", "expiration_date", "through_season"],
+        {
+            "tour": "VARCHAR",
+            "description": "VARCHAR",
+            "expiration_date": "DATE",
+            "through_season": "INTEGER",
+        },
+        {"source", "player_id", "tour", "description"},
     ),
     "player_xref": (
         ["player_id", "source", "source_player_id"],
@@ -99,6 +117,11 @@ SCHEMA = {
         },
         {"event_id", "player_id"},
     ),
+    "round_scores": (
+        ["event_id", "player_id", "round", "strokes", "to_par"],
+        {"round": "INTEGER", "strokes": "INTEGER", "to_par": "INTEGER"},
+        {"event_id", "player_id", "round"},
+    ),
     "earnings_other": (
         ["source", "player_id", "season_label", "component", "amount_usd", "paid_date"],
         {
@@ -110,9 +133,9 @@ SCHEMA = {
         {"source", "player_id", "season_label", "component"},
     ),
     "stat_catalog": (
-        ["source", "stat_id", "name", "category", "unit", "higher_is_better"],
-        {"higher_is_better": "BOOLEAN"},
-        {"source", "stat_id"},
+        ["source", "season_label", "stat_id", "name", "category", "unit", "higher_is_better"],
+        {"season_label": "INTEGER", "higher_is_better": "BOOLEAN"},
+        {"source", "season_label", "stat_id"},
     ),
     "season_stats": (
         [
@@ -120,6 +143,7 @@ SCHEMA = {
             "player_id",
             "season_label",
             "stat_id",
+            "measure",
             "value",
             "value_text",
             "rank",
@@ -128,12 +152,13 @@ SCHEMA = {
         ],
         {
             "season_label": "INTEGER",
+            "measure": "VARCHAR",
             "value": "DOUBLE",
             "rank": "INTEGER",
             "rounds": "INTEGER",
             "events": "INTEGER",
         },
-        {"source", "player_id", "season_label", "stat_id"},
+        {"source", "player_id", "season_label", "stat_id", "measure"},
     ),
     "rankings": (
         ["source", "ranking", "as_of_date", "player_id", "rank", "points"],
@@ -159,9 +184,27 @@ SAMPLE = {
             "birth_date": date(1996, 6, 21),
             "turned_pro": 2018,
             "amateur": False,
+            "career_earnings": 130955999.0,
         },
         ("country", "United States"),
         {"player_id": "pgatour:28237"},
+    ),
+    "player_exemptions": (
+        {
+            "source": "pgatour",
+            "player_id": "pgatour:46046",
+            "tour": "R",
+            "description": "Winner, PGA Championship (thru 2031)",
+            "expiration_date": date(2031, 12, 31),
+            "through_season": 2031,
+        },
+        ("through_season", 2030),
+        {
+            "source": "espn",
+            "player_id": "pgatour:28237",
+            "tour": "S",
+            "description": "Winner, Masters Tournament (thru 2029)",
+        },
     ),
     "player_xref": (
         {"player_id": "pgatour:46046", "source": "pgatour", "source_player_id": "46046"},
@@ -208,6 +251,17 @@ SAMPLE = {
         ("position", 2),
         {"event_id": "pgatour:R2024018", "player_id": "pgatour:28237"},
     ),
+    "round_scores": (
+        {
+            "event_id": "pgatour:R2024014",
+            "player_id": "pgatour:46046",
+            "round": 1,
+            "strokes": 66,
+            "to_par": -6,
+        },
+        ("strokes", 67),
+        {"event_id": "pgatour:R2024018", "player_id": "pgatour:28237", "round": 4},
+    ),
     "earnings_other": (
         {
             "source": "pgatour",
@@ -228,6 +282,7 @@ SAMPLE = {
     "stat_catalog": (
         {
             "source": "pgatour",
+            "season_label": 2024,
             "stat_id": "02675",
             "name": "SG: Total",
             "category": "strokes_gained",
@@ -235,7 +290,7 @@ SAMPLE = {
             "higher_is_better": True,
         },
         ("name", "Strokes Gained: Total"),
-        {"source": "datagolf", "stat_id": "02674"},
+        {"source": "datagolf", "season_label": 2019, "stat_id": "02674"},
     ),
     "season_stats": (
         {
@@ -243,6 +298,7 @@ SAMPLE = {
             "player_id": "pgatour:46046",
             "season_label": 2024,
             "stat_id": "02675",
+            "measure": "Avg",
             "value": 2.95,
             "value_text": "2.950",
             "rank": 1,
@@ -255,6 +311,7 @@ SAMPLE = {
             "player_id": "pgatour:28237",
             "season_label": 2019,
             "stat_id": "02674",
+            "measure": "Total SG:T",
         },
     ),
     "rankings": (
@@ -317,6 +374,7 @@ def primary_key_of(con, table):
 def test_connect_creates_all_tables():
     con = connect(":memory:")
     assert isinstance(con, duckdb.DuckDBPyConnection)
+    assert len(SCHEMA) == 10
     assert set(SCHEMA) | {"schema_version"} <= base_tables(con)
 
 
@@ -417,6 +475,7 @@ def test_upsert_returns_rows_written(n):
     batch = [
         {
             "source": "pgatour",
+            "season_label": 2024,
             "stat_id": f"{i:05d}",
             "name": f"stat {i}",
             "higher_is_better": i % 2 == 0,
@@ -443,6 +502,116 @@ def test_upsert_partial_row_leaves_other_columns_null():
     (got,) = rows(con, "players", columns)
     expected = {c: None for c in columns} | {"player_id": "espn:9478", "full_name": "Rory McIlroy"}
     assert got == tuple(expected[c] for c in columns)
+
+
+# A row that leaves a column out keeps the stored value on conflict; a column present with None
+# clears it (the owner's round-1 answer).
+
+
+def stored(con, table):
+    columns = SCHEMA[table][0]
+    (got,) = rows(con, table, columns)
+    return dict(zip(columns, got, strict=True))
+
+
+@pytest.mark.parametrize("table", TABLES)
+def test_upsert_sparse_row_keeps_omitted_columns_and_none_clears(table):
+    columns, _, key = SCHEMA[table]
+    row, (changed, new_value), _ = SAMPLE[table]
+    key_only = {c: row[c] for c in key}
+    cleared = next((c for c in columns if c not in key and c != changed), changed)
+    assert row[cleared] is not None
+    con = connect()
+    upsert(con, table, [row])
+
+    assert upsert(con, table, [key_only]) == 1
+    assert stored(con, table) == row
+
+    assert upsert(con, table, [key_only | {changed: new_value}]) == 1
+    assert stored(con, table) == row | {changed: new_value}
+
+    assert upsert(con, table, [key_only | {cleared: None}]) == 1
+    assert stored(con, table) == row | {changed: new_value, cleared: None}
+    assert count(con, table) == 1
+
+
+def test_bio_then_sparse_result_player_upsert_keeps_bio_fields():
+    bio = {
+        "player_id": "pgatour:46046",
+        "source": "pgatour",
+        "source_player_id": "46046",
+        "full_name": "Scottie Scheffler",
+        "first_name": "Scottie",
+        "last_name": "Scheffler",
+        "country": "United States",
+        "birth_date": date(1996, 6, 21),
+        "turned_pro": 2018,
+        "career_earnings": 130955999.0,
+    }
+    from_result = {
+        "player_id": "pgatour:46046",
+        "source": "pgatour",
+        "source_player_id": "46046",
+        "full_name": "Scottie Scheffler",
+        "country": "USA",
+        "amateur": False,
+    }
+    con = connect()
+    upsert(con, "players", [bio])
+    upsert(con, "players", [from_result])
+
+    expected = {c: None for c in SCHEMA["players"][0]} | bio | from_result
+    assert stored(con, "players") == expected
+    assert expected["birth_date"] == date(1996, 6, 21)
+    assert expected["turned_pro"] == 2018
+
+    upsert(con, "players", [{"player_id": "pgatour:46046", "turned_pro": None}])
+    assert stored(con, "players") == expected | {"turned_pro": None}
+
+
+def test_upsert_merges_rows_sharing_a_key_within_one_batch():
+    con = connect()
+    batch = [
+        {"player_id": "pgatour:46046", "country": "United States", "birth_date": date(1996, 6, 21)},
+        {"player_id": "pgatour:28237", "full_name": "Rory McIlroy", "turned_pro": 2007},
+        {"player_id": "pgatour:46046", "country": "USA", "amateur": False},
+        {"player_id": "pgatour:28237", "turned_pro": None, "country": "NIR"},
+    ]
+    assert upsert(con, "players", batch) == 4
+    got = {
+        player: (country, birth_date, amateur, full_name, turned_pro)
+        for player, country, birth_date, amateur, full_name, turned_pro in rows(
+            con,
+            "players",
+            ["player_id", "country", "birth_date", "amateur", "full_name", "turned_pro"],
+        )
+    }
+    assert got == {
+        "pgatour:46046": ("USA", date(1996, 6, 21), False, None, None),
+        "pgatour:28237": ("NIR", None, None, "Rory McIlroy", None),
+    }
+
+
+def test_upsert_sparse_batch_updates_each_row_by_its_own_columns():
+    con = connect()
+    full = [
+        {**SAMPLE["results"][0], "event_id": f"pgatour:R20240{n:02d}", "position": n}
+        for n in range(1, 5)
+    ]
+    upsert(con, "results", full)
+    sparse = [
+        {"event_id": "pgatour:R2024001", "player_id": "pgatour:46046", "fedex_points": 10.0},
+        {"event_id": "pgatour:R2024002", "player_id": "pgatour:46046", "position": None},
+        {"event_id": "pgatour:R2024003", "player_id": "pgatour:46046", "status": "wd"},
+    ]
+    assert upsert(con, "results", sparse) == 3
+    got = rows(con, "results", ["event_id", "position", "status", "fedex_points", "total_to_par"])
+    assert got == [
+        ("pgatour:R2024001", 1, "finished", 10.0, -11),
+        ("pgatour:R2024002", None, "finished", 750.0, -11),
+        ("pgatour:R2024003", 3, "wd", 750.0, -11),
+        ("pgatour:R2024004", 4, "finished", 750.0, -11),
+    ]
 
 
 @pytest.mark.parametrize(
@@ -627,4 +796,177 @@ def test_reopen_file_keeps_rows(tmp_path, as_str):
         columns = SCHEMA[table][0]
         assert rows(con, table, columns) == [tuple(SAMPLE[table][0][c] for c in columns)], table
     assert len(con.execute("SELECT * FROM schema_version").fetchall()) == 1
+    con.close()
+
+
+# --- the widened schema (owner's round-1 answer) -----------------------------------------------
+
+
+def test_stat_catalog_keeps_each_seasons_classification_across_reopen(tmp_path):
+    path = tmp_path / "catalog.duckdb"
+    entries = [
+        ("pgatour", 2012, "02675", "SG: Total", "STROKES_GAINED"),
+        ("pgatour", 2019, "02675", "SG: Total", "SCORING"),
+        ("pgatour", 2024, "02675", "SG: Total", "STROKES_GAINED"),
+        ("pgatour", 2019, "109", "Official Money", "MONEY_FINISHES"),
+        ("pgatour", 2024, "109", "Official Money", "MONEY"),
+        ("datagolf", 2024, "02675", "SG Total", "SG"),
+    ]
+    con = connect(path)
+    for source, season, stat_id, name, category in entries:
+        upsert(
+            con,
+            "stat_catalog",
+            [
+                {
+                    "source": source,
+                    "season_label": season,
+                    "stat_id": stat_id,
+                    "name": name,
+                    "category": category,
+                }
+            ],
+        )
+    con.close()
+
+    con = connect(path)
+    got = rows(con, "stat_catalog", ["source", "season_label", "stat_id", "name", "category"])
+    assert got == sorted(entries)
+    by_season = dict(
+        con.execute(
+            "SELECT season_label, category FROM stat_catalog"
+            " WHERE source = 'pgatour' AND stat_id = '02675'"
+        ).fetchall()
+    )
+    assert by_season == {2012: "STROKES_GAINED", 2019: "SCORING", 2024: "STROKES_GAINED"}
+    con.close()
+
+
+def test_season_stats_holds_every_measure_of_one_stat():
+    # Stat 109's statHeaders are ["Money", "YTD Victories"]: one row per measure.
+    money = [
+        ("pgatour:46046", 2024, 29228357.0, "$29,228,357", 7.0, "7", 1),
+        ("pgatour:47959", 2024, 20564233.0, "$20,564,233", 1.0, "1", 2),
+        ("pgatour:34046", 2019, 9684006.0, "$9,684,006", 3.0, "3", 1),
+    ]
+    stat_rows = []
+    for player, season, dollars, dollars_text, wins, wins_text, rank in money:
+        base = {
+            "source": "pgatour",
+            "player_id": player,
+            "season_label": season,
+            "stat_id": "109",
+            "rank": rank,
+        }
+        stat_rows.append(base | {"measure": "Money", "value": dollars, "value_text": dollars_text})
+        stat_rows.append(
+            base | {"measure": "YTD Victories", "value": wins, "value_text": wins_text}
+        )
+    con = connect()
+    assert upsert(con, "season_stats", stat_rows) == 2 * len(money)
+    assert count(con, "season_stats") == 2 * len(money)
+
+    for player, season, dollars, dollars_text, wins, wins_text, rank in money:
+        got = con.execute(
+            "SELECT measure, value, value_text, rank FROM season_stats"
+            " WHERE source = 'pgatour' AND player_id = ? AND season_label = ? AND stat_id = '109'"
+            " ORDER BY measure",
+            [player, season],
+        ).fetchall()
+        assert got == [
+            ("Money", dollars, dollars_text, rank),
+            ("YTD Victories", wins, wins_text, rank),
+        ], player
+
+    # Rewriting one measure leaves the other alone.
+    upsert(
+        con,
+        "season_stats",
+        [
+            {
+                "source": "pgatour",
+                "player_id": "pgatour:46046",
+                "season_label": 2024,
+                "stat_id": "109",
+                "measure": "YTD Victories",
+                "value": 8.0,
+            }
+        ],
+    )
+    got = con.execute(
+        "SELECT measure, value FROM season_stats"
+        " WHERE player_id = 'pgatour:46046' AND stat_id = '109' ORDER BY measure"
+    ).fetchall()
+    assert got == [("Money", 29228357.0), ("YTD Victories", 8.0)]
+
+
+def test_round_scores_survive_reopening_a_file(tmp_path):
+    # From the 2024 Masters fixture: Scheffler 66 72 71 68 (-6 E -1 -4); a cut player 74 77.
+    scores = {
+        ("pgatour:R2024014", "pgatour:46046"): [(66, -6), (72, 0), (71, -1), (68, -4)],
+        ("pgatour:R2024014", "pgatour:30911"): [(74, 2), (77, 5)],
+        ("pgatour:R2019464", "pgatour:46046"): [(70, -2), (65, -7), (69, -3)],
+    }
+    score_rows = [
+        {"event_id": e, "player_id": p, "round": n, "strokes": s, "to_par": t}
+        for (e, p), rounds in scores.items()
+        for n, (s, t) in enumerate(rounds, start=1)
+    ]
+    path = tmp_path / "rounds.duckdb"
+    con = connect(path)
+    assert upsert(con, "round_scores", score_rows) == 9
+    con.close()
+
+    con = connect(path)
+    for (event, player), rounds in scores.items():
+        got = con.execute(
+            "SELECT round, strokes, to_par FROM round_scores"
+            " WHERE event_id = ? AND player_id = ? ORDER BY round",
+            [event, player],
+        ).fetchall()
+        assert got == [(n, s, t) for n, (s, t) in enumerate(rounds, start=1)]
+    totals = con.execute(
+        "SELECT sum(strokes), sum(to_par) FROM round_scores"
+        " WHERE event_id = 'pgatour:R2024014' AND player_id = 'pgatour:46046'"
+    ).fetchone()
+    assert totals == (277, -11)
+    con.close()
+
+
+def test_career_earnings_and_exemptions_round_trip(tmp_path):
+    players = [
+        {"player_id": "pgatour:46046", "full_name": "S. Scheffler", "career_earnings": 130955999.0},
+        {"player_id": "pgatour:28237", "full_name": "R. McIlroy", "career_earnings": 98000000.5},
+        {"player_id": "pgatour:01810", "full_name": "Phil Mickelson"},
+    ]
+    exemptions = [
+        ("pgatour", "pgatour:46046", "R", "Winner, PGA Championship (thru 2031)", None, 2031),
+        ("pgatour", "pgatour:46046", "R", "Winner, Masters Tournament (thru 2029)", None, 2029),
+        ("pgatour", "pgatour:46046", "S", "Winner, PGA Championship (thru 2031)", None, 2031),
+        ("pgatour", "pgatour:28237", "R", "Career money top 50", date(2026, 12, 31), None),
+        ("dpworld", "pgatour:28237", "E", "Race to Dubai winner", date(2027, 11, 30), 2027),
+    ]
+    columns = SCHEMA["player_exemptions"][0]
+    path = tmp_path / "bio.duckdb"
+    con = connect(path)
+    upsert(con, "players", players)
+    exemption_rows = [dict(zip(columns, e, strict=True)) for e in exemptions]
+    assert upsert(con, "player_exemptions", exemption_rows) == len(exemptions)
+    con.close()
+
+    con = connect(path)
+    assert rows(con, "players", ["player_id", "career_earnings"]) == sorted(
+        (p["player_id"], p.get("career_earnings")) for p in players
+    )
+    got = con.execute(
+        f"SELECT {', '.join(columns)} FROM player_exemptions"
+        " ORDER BY source, player_id, tour, description"
+    ).fetchall()
+    assert got == sorted(exemptions, key=lambda e: e[:4])
+    per_player = dict(
+        con.execute(
+            "SELECT player_id, count(*) FROM player_exemptions GROUP BY player_id"
+        ).fetchall()
+    )
+    assert per_player == {"pgatour:46046": 3, "pgatour:28237": 2}
     con.close()
