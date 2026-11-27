@@ -25,10 +25,12 @@ def rank_tiers(
     `samples` has shape (n_players, n_draws), in dollars, rows following `player_ids`. `tiers` has
     `tier` and `player_id` columns, optionally `input_name`. Tiers come out in order of first
     appearance in `tiers`. Within a tier, projected players are ranked by `rank_by` ("mean" or
-    "p_top", descending, ties keep their `tiers` order); players without usable draws (no row, an
+    "p_top", descending, ties keep their `tiers` order); players without a finite draw (no row, an
     all-NaN row or no draws) follow, unranked by any statistic, with `projected=False` and NaN
-    statistics. `p_top` is the share of draws in which a player has the tier's maximum, ties
-    splitting the draw evenly. Quantile columns are labelled `p<percent>` (`p2.5`, `p50`, `p97.5`).
+    statistics. NaN draws are skipped: mean and quantiles use a player's finite draws, and `p_top`
+    is the share of draws in which a player has the maximum among the tier's players finite in that
+    draw, ties splitting the draw evenly; draws with no finite tier player are left out. Quantile
+    columns are labelled `p<percent>` (`p2.5`, `p50`, `p97.5`).
     """
     if rank_by not in RANK_KEYS:
         raise ValueError(f"rank_by must be one of {RANK_KEYS}, got {rank_by!r}")
@@ -36,9 +38,10 @@ def rank_tiers(
     if samples.ndim != 2 or samples.shape[0] != len(player_ids):
         raise ValueError("samples must have shape (len(player_ids), n_draws)")
 
-    # A player is projected only with at least one usable draw: a row that is not all NaN, so a
-    # zero-draw matrix projects nobody.
-    has_draws = (~np.isnan(samples)).any(axis=1)
+    # NaN (or infinite) draws are skipped. A player is projected with at least one finite draw, so
+    # an all-NaN row and a zero-draw matrix project nobody.
+    finite_all = np.isfinite(samples)
+    has_draws = finite_all.any(axis=1)
     row_of = {pid: i for i, pid in enumerate(player_ids) if has_draws[i]}
     qcols = [_quantile_column(q) for q in quantiles]
     stat_cols = ["mean", *qcols, "p_top"]
@@ -61,11 +64,22 @@ def rank_tiers(
 
         proj = members["projected"].to_numpy()
         if proj.any():
-            sub = samples[rows[proj].astype(int).to_numpy()]
-            is_max = sub == sub.max(axis=0)
-            members.loc[proj, "mean"] = sub.mean(axis=1)
-            members.loc[proj, qcols] = np.quantile(sub, quantiles, axis=1).T
-            members.loc[proj, "p_top"] = (is_max / is_max.sum(axis=0)).mean(axis=1)
+            idx = rows[proj].astype(int).to_numpy()
+            sub = samples[idx]
+            finite = finite_all[idx]
+            # Mean and quantiles over each player's own finite draws.
+            own = [row[ok] for row, ok in zip(sub, finite, strict=True)]
+            members.loc[proj, "mean"] = [x.mean() for x in own]
+            members.loc[proj, qcols] = np.array([np.quantile(x, quantiles) for x in own]).reshape(
+                len(own), len(qcols)
+            )
+            # p_top per draw among the tier's players finite in that draw; draws nobody finished
+            # leave the denominator.
+            masked = np.where(finite, sub, -np.inf)
+            is_max = finite & (masked == masked.max(axis=0))
+            winners = is_max.sum(axis=0)
+            usable = winners > 0
+            members.loc[proj, "p_top"] = (is_max[:, usable] / winners[usable]).mean(axis=1)
 
         # Unprojected players sort last (NaN key); mergesort keeps ties in input order.
         order = np.argsort(-members[rank_by].to_numpy(), kind="mergesort")

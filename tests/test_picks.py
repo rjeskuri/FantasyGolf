@@ -366,6 +366,207 @@ def test_all_nan_row_does_not_disturb_other_tiers_or_players():
     assert pd.isna(b["mean"].iloc[0])
 
 
+# --- partially failed draws -------------------------------------------------------------------
+# Ruling: NaN draws are skipped. A player with at least one finite draw is projected; mean and
+# quantiles use that player's finite draws; p_top is computed per draw among the tier's players
+# finite in that draw (ties split evenly); draws where no tier player is finite leave the
+# denominator, so p_top sums to 1 in every tier with a projected player.
+
+STATS = ("mean", "p10", "p50", "p90", "p_top")
+
+
+def brute_force_p_top_nan(draws):
+    """p_top per player (rows of draws) under the NaN-skipping policy, by looping over draws."""
+    n_players, n_draws = draws.shape
+    p = np.zeros(n_players)
+    used = 0
+    for d in range(n_draws):
+        col = draws[:, d]
+        finite = np.flatnonzero(np.isfinite(col))
+        if len(finite) == 0:
+            continue
+        used += 1
+        best = col[finite].max()
+        winners = [i for i in finite if col[i] == best]
+        for i in winners:
+            p[i] += 1.0 / len(winners)
+    return p / used
+
+
+@pytest.mark.filterwarnings("error")
+def test_player_with_one_failed_draw_is_projected_and_the_draw_goes_to_the_other_player():
+    samples = np.array([[3.0, np.nan, 3.0], [1.0, 5.0, 1.0]])
+    ids = ["a", "b"]
+    tiers = make_tiers([("A", "a", "Alpha"), ("A", "b", "Bravo")])
+    rows = tier_rows(rank_tiers(samples, ids, tiers), "A")
+
+    # a: finite draws [3, 3] -> mean 3; b: [1, 5, 1] -> mean 7/3. a ranks first.
+    assert list(rows["player_id"]) == ["a", "b"]
+    assert rows["projected"].tolist() == [True, True]
+    assert rows["mean"].tolist() == pytest.approx([3.0, 7.0 / 3.0])
+    assert rows["p50"].tolist() == pytest.approx([3.0, 1.0])
+    # Draw 1: a (3 > 1). Draw 2: only b is finite, so b wins. Draw 3: a (3 > 1).
+    assert rows["p_top"].tolist() == pytest.approx([2.0 / 3.0, 1.0 / 3.0])
+    assert rows["p_top"].sum() == pytest.approx(1.0)
+    for col in STATS:
+        assert rows[col].notna().all(), col
+
+
+@pytest.mark.filterwarnings("error")
+def test_partial_nan_rank_by_mean_uses_finite_draws_not_zero_fill():
+    # a's finite draws average 10; if NaN counted as 0 its mean would be 5 and it would trail b.
+    samples = np.array([[10.0, np.nan], [6.0, 6.0]])
+    tiers = make_tiers([("A", "b", "Bravo"), ("A", "a", "Alpha")])
+    rows = tier_rows(rank_tiers(samples, ["a", "b"], tiers), "A")
+    assert list(rows["player_id"]) == ["a", "b"]
+    assert rows["mean"].tolist() == pytest.approx([10.0, 6.0])
+    # Draw 1: a (10 > 6). Draw 2: only b is finite.
+    assert rows["p_top"].tolist() == pytest.approx([0.5, 0.5])
+
+
+@pytest.mark.filterwarnings("error")
+def test_draw_that_failed_for_every_tier_player_is_left_out_of_the_denominator():
+    samples = np.array(
+        [
+            [3.0, np.nan, 1.0],  # a
+            [1.0, np.nan, 3.0],  # b
+            [10.0, 20.0, 30.0],  # c: other tier, finite in draw 2
+            [1.0, 2.0, 3.0],  # d
+        ]
+    )
+    ids = ["a", "b", "c", "d"]
+    tiers = make_tiers(
+        [("A", "a", "Alpha"), ("A", "b", "Bravo"), ("B", "c", "Charlie"), ("B", "d", "Delta")]
+    )
+    out = rank_tiers(samples, ids, tiers)
+
+    a = tier_rows(out, "A").set_index("player_id")
+    # Draw 2 is excluded for tier A: a wins draw 1, b wins draw 3 -> 1/2 each (not 1/3 each).
+    assert a.loc["a", "p_top"] == pytest.approx(0.5)
+    assert a.loc["b", "p_top"] == pytest.approx(0.5)
+    assert a["p_top"].sum() == pytest.approx(1.0)
+    assert a.loc["a", "mean"] == pytest.approx(2.0)
+    assert a.loc["b", "mean"] == pytest.approx(2.0)
+    assert a["projected"].all()
+
+    # The same draw is finite in tier B, so it counts there: c wins all three.
+    b = tier_rows(out, "B").set_index("player_id")
+    assert b.loc["c", "p_top"] == pytest.approx(1.0)
+    assert b.loc["d", "p_top"] == pytest.approx(0.0)
+
+
+@pytest.mark.filterwarnings("error")
+def test_p_top_sums_to_one_when_a_draw_is_all_nan_for_a_tier_of_three():
+    samples = np.array(
+        [
+            [5.0, np.nan, 5.0, 1.0],
+            [5.0, np.nan, 2.0, np.nan],
+            [1.0, np.nan, 9.0, 4.0],
+        ]
+    )
+    ids = ["a", "b", "c"]
+    tiers = make_tiers([("A", p, f"n{p}") for p in ids])
+    rows = rank_tiers(samples, ids, tiers).set_index("player_id")
+    # Draw 1: a,b tie at 5 -> 1/2 each. Draw 2 excluded. Draw 3: c. Draw 4: a=1 < c=4 -> c.
+    # Three usable draws.
+    assert rows.loc["a", "p_top"] == pytest.approx(1.0 / 6.0)
+    assert rows.loc["b", "p_top"] == pytest.approx(1.0 / 6.0)
+    assert rows.loc["c", "p_top"] == pytest.approx(2.0 / 3.0)
+    assert rows["p_top"].sum() == pytest.approx(1.0)
+
+
+@pytest.mark.filterwarnings("error")
+def test_partial_nan_mean_and_quantiles_equal_numpy_on_the_finite_draws():
+    samples = np.array(
+        [
+            [8.0, np.nan, 2.0, 6.0, np.nan, 4.0, 10.0, 0.0],  # a
+            [np.nan, 1.0, 1.5, np.nan, 9.0, 3.0, 7.5, 2.5],  # b
+            [4.0, 4.5, np.nan, 3.5, 5.0, np.nan, np.nan, 6.0],  # c
+        ]
+    )
+    ids = ["a", "b", "c"]
+    tiers = make_tiers([("A", p, f"n{p}") for p in ids])
+    out = rank_tiers(samples, ids, tiers).set_index("player_id")
+    for i, pid in enumerate(ids):
+        finite = samples[i][np.isfinite(samples[i])]
+        q = np.quantile(finite, [0.1, 0.5, 0.9])
+        assert out.loc[pid, "mean"] == pytest.approx(finite.mean(), rel=1e-12), pid
+        assert out.loc[pid, "p10"] == pytest.approx(q[0], rel=1e-12), pid
+        assert out.loc[pid, "p50"] == pytest.approx(q[1], rel=1e-12), pid
+        assert out.loc[pid, "p90"] == pytest.approx(q[2], rel=1e-12), pid
+    assert out["projected"].all()
+
+
+@pytest.mark.filterwarnings("error")
+def test_partial_nan_custom_quantiles_use_finite_draws():
+    draws = np.linspace(0.0, 1000.0, 21)
+    row = draws.copy()
+    row[[2, 5, 11]] = np.nan
+    samples = np.vstack([row, np.full(21, 1.0)])
+    tiers = make_tiers([("A", "a", "na"), ("A", "b", "nb")])
+    out = rank_tiers(samples, ["a", "b"], tiers, quantiles=(0.025, 0.975)).set_index("player_id")
+    finite = row[np.isfinite(row)]
+    assert out.loc["a", "p2.5"] == pytest.approx(np.quantile(finite, 0.025))
+    assert out.loc["a", "p97.5"] == pytest.approx(np.quantile(finite, 0.975))
+
+
+@pytest.mark.filterwarnings("error")
+def test_p_top_matches_nan_skipping_brute_force_on_random_draws():
+    rng = np.random.default_rng(42)
+    samples = np.round(rng.normal(50.0, 20.0, size=(7, 300)))  # rounding creates ties
+    samples[rng.random(samples.shape) < 0.35] = np.nan
+    samples[:, 17] = np.nan  # a draw that failed for everyone
+    samples[[0, 2, 4], 40] = np.nan  # a draw that failed for all of tier X only
+    for i in range(7):  # every row keeps at least one finite draw
+        samples[i, i] = 25.0 + i
+    ids = [f"p{i}" for i in range(7)]
+    members = {"X": [0, 2, 4], "Y": [1, 3, 5, 6]}
+    tiers = make_tiers([(t, ids[i], f"n{i}") for t, idx in members.items() for i in idx])
+    out = rank_tiers(samples, ids, tiers)
+    for tier, idx in members.items():
+        expected = brute_force_p_top_nan(samples[idx])
+        got = out[out["tier"] == tier].set_index("player_id")["p_top"]
+        assert got.loc[[ids[i] for i in idx]].tolist() == pytest.approx(expected.tolist())
+        assert got.sum() == pytest.approx(1.0)
+    by_id = out.set_index("player_id")
+    for i, pid in enumerate(ids):
+        finite = samples[i][np.isfinite(samples[i])]
+        assert by_id.loc[pid, "mean"] == pytest.approx(finite.mean(), rel=1e-12)
+        assert by_id.loc[pid, "p50"] == pytest.approx(np.quantile(finite, 0.5), rel=1e-12)
+
+
+@pytest.mark.filterwarnings("error")
+def test_all_nan_row_beside_partial_nan_rows_stays_unprojected_without_warnings():
+    samples = np.array(
+        [
+            [3.0, np.nan, 3.0],  # a: partial
+            [np.nan, np.nan, np.nan],  # n: unusable
+            [1.0, 5.0, 1.0],  # b
+        ]
+    )
+    ids = ["a", "n", "b"]
+    tiers = make_tiers([("A", "n", "Nan"), ("A", "a", "Alpha"), ("A", "b", "Bravo")])
+    for rank_by in ("mean", "p_top"):
+        rows = tier_rows(rank_tiers(samples, ids, tiers, rank_by=rank_by), "A")
+        assert list(rows["player_id"]) == ["a", "b", "n"], rank_by
+        assert rows["projected"].tolist() == [True, True, False]
+        for col in STATS:
+            assert pd.isna(rows.iloc[2][col]), col
+        assert rows["p_top"].iloc[:2].tolist() == pytest.approx([2.0 / 3.0, 1.0 / 3.0])
+
+
+@pytest.mark.filterwarnings("error")
+def test_markdown_renders_partial_nan_players_with_values():
+    samples = np.array([[3.0, np.nan, 3.0], [1.0, 5.0, 1.0]])
+    tiers = make_tiers([("A", "a", "Alpha"), ("A", "b", "Bravo")])
+    md = render_picks_markdown(rank_tiers(samples, ["a", "b"], tiers), "Partial")
+    (block,) = table_blocks(md)
+    alpha, bravo = block[2], block[3]
+    assert "Alpha" in alpha and "$3" in alpha and "66.7%" in alpha
+    assert "Bravo" in bravo and "$2" in bravo and "33.3%" in bravo
+    assert "nan" not in md.lower()
+
+
 @pytest.mark.parametrize("n_players", [1, 3])
 def test_zero_draw_columns_leave_everyone_unprojected(n_players):
     ids = [f"p{i}" for i in range(n_players)]
