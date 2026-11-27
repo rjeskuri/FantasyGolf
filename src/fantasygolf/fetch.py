@@ -3,7 +3,9 @@
 `RawCache` stores each successful response once under `<root>/<source>/<key[:2]>/<key>.json`;
 `PoliteClient` reads it first, so nothing is fetched twice. The key follows the request httpx
 actually sends (method, full URL with its query, body), so two calls share an entry only when
-they would send the same request. Request headers never reach the cache: they are excluded from
+they would send the same request. A file is served only when its stored request matches the one
+being made (canonically) and its stored response is a healthy 2xx; otherwise the client fetches and
+overwrites it. Request headers never reach the cache: they are excluded from
 the key and from the stored file. A 2xx body carrying GraphQL `errors` is a failure: it is
 retried like a 5xx and never cached.
 """
@@ -58,28 +60,28 @@ class RawCache:
         `?a=1&b=2` and `?b=2&a=1` share a key, but a repeated name keeps its value order, so
         `?sort=score&sort=date` and `?sort=date&sort=score` do not.
         """
-        effective = httpx.Request(method, url, params=params).url
         canonical = json.dumps(
-            {
-                "method": method.upper(),
-                "url": str(effective.copy_with(query=None)),
-                "query": sorted(effective.params.multi_items(), key=lambda item: item[0]),
-                "body": body,
-            },
-            sort_keys=True,
-            separators=(",", ":"),
+            _canonical_request(method, url, params, body), sort_keys=True, separators=(",", ":")
         )
         return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
     def path(self, source: str, key: str) -> Path:
         return self.root / source / key[:2] / f"{key}.json"
 
-    def get(self, source: str, key: str) -> dict | None:
-        """The stored body, or None on a miss."""
+    def get(self, source: str, key: str, request: dict | None = None) -> dict | None:
+        """The stored body, or None on a miss.
+
+        With `request` (`method`, `url`, optional `params` and `body`), the file is a hit only when
+        its stored request is that request in the key's canonical form and its stored response is
+        a 2xx without GraphQL `errors`; a missing or malformed stored request is a miss.
+        """
         path = self.path(source, key)
         if not path.is_file():
             return None
-        return json.loads(path.read_text(encoding="utf-8"))["body"]
+        record = json.loads(path.read_text(encoding="utf-8"))
+        if request is not None and not _serves(record, request):
+            return None
+        return record["body"]
 
     def put(self, source: str, key: str, request: dict, status: int, body: dict) -> Path:
         """Write atomically: a temp file in the same directory, then a rename over the target."""
@@ -159,18 +161,18 @@ class PoliteClient:
         request = self._http.build_request(method, url, params=params, json=body)
         effective_url = str(request.url)
         key = self.cache.key(method, effective_url, None, body)
+        record = {"method": method, "url": effective_url, "body": body}
         if not refresh:
-            cached = self.cache.get(self.source, key)
+            cached = self.cache.get(self.source, key, record)
             if cached is not None:
                 return cached
         with self._lock:
             if not refresh:
                 # Another thread may have fetched it while this one waited for the lock.
-                cached = self.cache.get(self.source, key)
+                cached = self.cache.get(self.source, key, record)
                 if cached is not None:
                     return cached
             status, payload = self._request_with_retries(request, url)
-            record = {"method": method, "url": effective_url, "body": body}
             self.cache.put(self.source, key, record, status, payload)
         return payload
 
@@ -214,6 +216,38 @@ class PoliteClient:
             if wait > 0:
                 self.sleep(wait)
         self._last_call = self.clock()
+
+
+def _canonical_request(method: str, url: str, params: dict | None, body) -> dict:
+    """The request as the cache key sees it: parameters ordered by name, repeated values kept."""
+    effective = httpx.Request(method, url, params=params).url
+    return {
+        "method": method.upper(),
+        "url": str(effective.copy_with(query=None)),
+        "query": sorted(effective.params.multi_items(), key=lambda item: item[0]),
+        "body": body,
+    }
+
+
+def _serves(record, request: dict) -> bool:
+    """Whether a stored record is a healthy 2xx response to `request`, compared canonically."""
+    if not isinstance(record, dict):
+        return False
+    stored, status = record.get("request"), record.get("status")
+    if not isinstance(stored, dict) or not isinstance(status, int) or not 200 <= status < 300:
+        return False
+    if _graphql_errors(record.get("body")):
+        return False
+    try:
+        have = _canonical_request(
+            stored["method"], stored["url"], stored.get("params"), stored.get("body")
+        )
+    except (KeyError, TypeError, AttributeError, ValueError, httpx.InvalidURL):
+        return False
+    want = _canonical_request(
+        request["method"], request["url"], request.get("params"), request.get("body")
+    )
+    return have == want
 
 
 def _graphql_errors(payload) -> list:

@@ -704,3 +704,244 @@ def test_every_5xx_but_501_and_505_is_retried(tmp_path):
         assert info.value.status == status
         assert sum(clock.sleeps) < 1.0
         assert cached_files(root / "raw") == []
+
+
+# --- stored-request check on cache hits (PR #23 round 3) --------------------------------------
+# Ruling (owner): no legacy-key migration, since no cache predates this PR. A hit counts only when
+# the file's stored request is the effective request being made and its stored response is a
+# healthy 2xx; anything else is a miss: one network call, then the file at that path is rewritten.
+
+
+def tagged(tag: str):
+    """An echo responder whose bodies name the server they came from."""
+
+    def respond(request: httpx.Request, n: int) -> httpx.Response:
+        payload = {"server": tag, "n": n, "method": request.method, "url": str(request.url)}
+        if request.content:
+            payload["sent"] = json.loads(request.content)
+        return httpx.Response(200, json=payload)
+
+    return respond
+
+
+def fresh_client(root: Path, tag: str):
+    clock = FakeClock()
+    server = Server(clock, tagged(tag))
+    client = PoliteClient(
+        "pgatour",
+        RawCache(root),
+        transport=httpx.MockTransport(server),
+        clock=clock,
+        sleep=clock.sleep,
+        min_interval=0.0,
+        max_retries=0,
+    )
+    return client, server
+
+
+def call(client: PoliteClient, req: tuple):
+    method, url, params, body = req
+    if method == "GET":
+        return client.get_json(url, params)
+    return client.post_json(url, body)
+
+
+def fetch_and_locate(root: Path, req: tuple, tag: str) -> tuple[dict, Path]:
+    """Fetch `req` once into `root` and return its body and the one new cache file it wrote."""
+    before = set(cached_files(root))
+    client, _ = fresh_client(root, tag)
+    body = call(client, req)
+    (path,) = set(cached_files(root)) - before
+    return body, path
+
+
+def effective_url(req: tuple) -> str:
+    method, url, params, body = req
+    with httpx.Client() as builder:
+        return str(builder.build_request(method, url, params=params, json=body).url)
+
+
+# (request A, request B): B's valid cache file is planted at A's path.
+MISMATCHED = [
+    pytest.param(
+        ("GET", URL, {"season": 2019}, None),
+        ("GET", URL, {"season": 2020}, None),
+        id="other-param-value",
+    ),
+    pytest.param(
+        ("GET", URL, {"sort": ["date", "score"]}, None),
+        ("GET", URL, {"sort": ["score", "date"]}, None),
+        id="repeated-param-order",
+    ),
+    pytest.param(
+        ("GET", f"{BASE}/x", None, None), ("GET", f"{BASE}/y", None, None), id="other-path"
+    ),
+    pytest.param(("POST", URL, None, {"q": 1}), ("GET", URL, None, None), id="other-method"),
+    pytest.param(
+        ("POST", URL, None, {"operationName": "q", "variables": {"season": 2019}}),
+        ("POST", URL, None, {"operationName": "q", "variables": {"season": 2020}}),
+        id="other-body",
+    ),
+]
+
+
+@pytest.mark.parametrize(("req_a", "req_b"), MISMATCHED)
+def test_cache_file_for_another_request_is_a_miss_and_is_rewritten(tmp_path, req_a, req_b):
+    root = tmp_path / "raw"
+    _, path_a = fetch_and_locate(root, req_a, "seed")
+    body_b, path_b = fetch_and_locate(root, req_b, "seed")
+    assert path_a != path_b
+    # A's path now holds B's complete, valid record.
+    path_a.write_text(path_b.read_text(encoding="utf-8"), encoding="utf-8")
+    files_before = cached_files(root)
+
+    client, server = fresh_client(root, "live")
+    got = call(client, req_a)
+
+    # A miss: one network call, and A's own response, never B's body.
+    assert server.calls == 1
+    assert client.network_calls == 1
+    assert got != body_b
+    assert got["server"] == "live"
+    assert got["method"] == req_a[0]
+    assert got["url"] == effective_url(req_a)
+    if req_a[3] is not None:
+        assert got["sent"] == req_a[3]
+
+    # The file at A's path was overwritten in place with A's record, and B's file is untouched.
+    assert cached_files(root) == files_before
+    stored = json.loads(path_a.read_text(encoding="utf-8"))
+    assert stored["status"] == 200
+    assert stored["body"] == got
+    assert json.loads(path_b.read_text(encoding="utf-8"))["body"] == body_b
+
+    # A new client serves both from cache, each its own body, with zero network calls.
+    later, later_server = fresh_client(root, "later")
+    assert call(later, req_a) == got
+    assert call(later, req_b) == body_b
+    assert later_server.calls == 0
+    assert later.network_calls == 0
+
+
+@pytest.mark.parametrize("bad_request", [{}, None, "GET https://api.example.test/x"])
+def test_cache_file_without_a_usable_stored_request_is_a_miss(tmp_path, bad_request):
+    root = tmp_path / "raw"
+    req = ("GET", URL, {"season": 2019}, None)
+    _, path = fetch_and_locate(root, req, "seed")
+    record = json.loads(path.read_text(encoding="utf-8"))
+    record["request"] = bad_request
+    record["body"] = {"planted": True}
+    path.write_text(json.dumps(record), encoding="utf-8")
+
+    client, server = fresh_client(root, "live")
+    got = call(client, req)
+    assert server.calls == 1
+    assert got["server"] == "live" and got["url"] == effective_url(req)
+    assert json.loads(path.read_text(encoding="utf-8"))["body"] == got
+
+    later, later_server = fresh_client(root, "later")
+    assert call(later, req) == got
+    assert later_server.calls == 0
+
+
+# (first, second, an equivalent spelling of first). The stored-request check uses the key's
+# canonical form: parameter-name order is no difference, so it must never refetch or thrash.
+REPEATED_FORMS = [
+    pytest.param(
+        ("GET", URL + "?sort=score&sort=date", None, None),
+        ("GET", URL + "?sort=date&sort=score", None, None),
+        ("GET", URL, {"sort": ["score", "date"]}, None),
+        id="query-string",
+    ),
+    pytest.param(
+        ("GET", URL, {"sort": ["score", "date"]}, None),
+        ("GET", URL, {"sort": ["date", "score"]}, None),
+        ("GET", URL + "?sort=score&sort=date", None, None),
+        id="list-param",
+    ),
+    pytest.param(
+        ("GET", URL, {"sort": ["score", "date"], "tour": "R"}, None),
+        ("GET", URL, {"tour": "R", "sort": ["date", "score"]}, None),
+        ("GET", URL + "?tour=R&sort=score&sort=date", None, None),
+        id="list-param-with-other-names",
+    ),
+]
+
+
+@pytest.mark.parametrize(("first", "second", "first_again"), REPEATED_FORMS)
+def test_repeated_param_orders_are_each_served_their_own_body(tmp_path, first, second, first_again):
+    root = tmp_path / "raw"
+    body_1, path_1 = fetch_and_locate(root, first, "seed")
+    body_2, path_2 = fetch_and_locate(root, second, "seed")
+    assert path_1 != path_2
+    assert body_1["url"] == effective_url(first) and body_2["url"] == effective_url(second)
+
+    # Swap the two files: each path now holds the other order's valid record, as if one hash had
+    # been filled by the other request. Neither may be served the other's rows.
+    text_1, text_2 = path_1.read_text(encoding="utf-8"), path_2.read_text(encoding="utf-8")
+    path_1.write_text(text_2, encoding="utf-8")
+    path_2.write_text(text_1, encoding="utf-8")
+
+    client, server = fresh_client(root, "live")
+    got_1 = call(client, first)
+    got_2 = call(client, second)
+    # An equivalent spelling of `first` is the same request: a hit on the rewritten file.
+    assert call(client, first_again) == got_1
+    assert server.calls == 2
+    assert got_1["url"] == effective_url(first)
+    assert got_2["url"] == effective_url(second)
+    assert got_1["server"] == got_2["server"] == "live"
+
+    later, later_server = fresh_client(root, "later")
+    for _ in range(2):
+        assert call(later, first) == got_1
+        assert call(later, first_again) == got_1
+        assert call(later, second) == got_2
+    assert later_server.calls == 0
+    assert later.network_calls == 0
+
+
+# Stored responses that must never be served, even under the right request.
+UNHEALTHY = [
+    pytest.param(500, None, id="500"),
+    pytest.param(503, None, id="503"),
+    pytest.param(404, None, id="404"),
+    pytest.param(429, None, id="429"),
+    pytest.param(304, None, id="304"),
+    pytest.param(200, {"data": None, "errors": [{"message": "boom"}]}, id="graphql-errors"),
+]
+
+
+@pytest.mark.parametrize(("status", "planted_body"), UNHEALTHY)
+def test_cached_error_response_is_never_served(tmp_path, status, planted_body):
+    root = tmp_path / "raw"
+    req = ("POST", URL, None, {"operationName": "q", "variables": {"season": 2019}})
+    _, path = fetch_and_locate(root, req, "seed")
+    record = json.loads(path.read_text(encoding="utf-8"))
+    record["status"] = status
+    record["body"] = planted_body if planted_body is not None else {"error": status}
+    path.write_text(json.dumps(record), encoding="utf-8")
+
+    client, server = fresh_client(root, "live")
+    got = call(client, req)
+    assert server.calls == 1
+    assert got["server"] == "live" and got["sent"] == req[3]
+
+    stored = json.loads(path.read_text(encoding="utf-8"))
+    assert stored["status"] == 200
+    assert stored["body"] == got
+
+    later, later_server = fresh_client(root, "later")
+    assert call(later, req) == got
+    assert later_server.calls == 0
+
+    # A planted non-2xx status under a GET is refused too.
+    if status != 200:
+        get_req = ("GET", URL, {"season": 2019}, None)
+        _, get_path = fetch_and_locate(root, get_req, "seed")
+        record = json.loads(get_path.read_text(encoding="utf-8"))
+        record["status"], record["body"] = status, {"error": status}
+        get_path.write_text(json.dumps(record), encoding="utf-8")
+        client, server = fresh_client(root, "live2")
+        assert call(client, get_req)["server"] == "live2"
+        assert server.calls == 1
