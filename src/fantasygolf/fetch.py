@@ -25,6 +25,8 @@ import httpx
 from fantasygolf import __version__
 
 DEFAULT_USER_AGENT = f"fantasygolf/{__version__} (personal research; low rate)"
+# The request fields a cache file stores; anything else (headers above all) is dropped.
+REQUEST_FIELDS = ("method", "url", "params", "body")
 # 5xx statuses that are not transient: the server answers the same way every time.
 PERMANENT_5XX = frozenset({501, 505})
 
@@ -60,9 +62,7 @@ class RawCache:
         `?a=1&b=2` and `?b=2&a=1` share a key, but a repeated name keeps its value order, so
         `?sort=score&sort=date` and `?sort=date&sort=score` do not.
         """
-        canonical = json.dumps(
-            _canonical_request(method, url, params, body), sort_keys=True, separators=(",", ":")
-        )
+        canonical = _canonical_json(method, url, params, body)
         return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
     def path(self, source: str, key: str) -> Path:
@@ -84,11 +84,14 @@ class RawCache:
         return record["body"]
 
     def put(self, source: str, key: str, request: dict, status: int, body: dict) -> Path:
-        """Write atomically: a temp file in the same directory, then a rename over the target."""
+        """Write atomically: a temp file in the same directory, then a rename over the target.
+
+        Only the request fields in `REQUEST_FIELDS` are stored, so headers never reach disk.
+        """
         path = self.path(source, key)
         path.parent.mkdir(parents=True, exist_ok=True)
         record = {
-            "request": request,
+            "request": {name: request[name] for name in REQUEST_FIELDS if name in request},
             "fetched_at": datetime.now(UTC).isoformat(),
             "status": status,
             "body": body,
@@ -132,6 +135,8 @@ class PoliteClient:
         self.sleep = sleep
         self.network_calls = 0
         self._last_call: float | None = None
+        # A Retry-After from a request that gave up holds the next network call until then.
+        self._cooldown_until: float | None = None
         # Serializes cache miss, fetch and write, so concurrent same requests make one call.
         self._lock = threading.Lock()
         self._http = httpx.Client(
@@ -202,6 +207,8 @@ class PoliteClient:
                     if not is_retryable_status(status):
                         raise FetchError(url, status, detail)
             if attempt == self.max_retries:
+                if retry_after > 0:
+                    self._cooldown_until = self.clock() + retry_after
                 break
             # The cap bounds only the computed backoff, never the server's Retry-After.
             backoff = min(self.backoff_base * 2**attempt, self.max_backoff)
@@ -210,11 +217,16 @@ class PoliteClient:
         raise FetchError(url, status, f"{detail} after {attempts} attempts")
 
     def _throttle(self) -> None:
-        """Keep at least `min_interval` between network calls, retries included."""
+        """Keep at least `min_interval` between network calls, retries included, and honor the
+        Retry-After of a request that ran out of retries."""
+        wait = 0.0
         if self._last_call is not None:
             wait = self.min_interval - (self.clock() - self._last_call)
-            if wait > 0:
-                self.sleep(wait)
+        if self._cooldown_until is not None:
+            wait = max(wait, self._cooldown_until - self.clock())
+            self._cooldown_until = None
+        if wait > 0:
+            self.sleep(wait)
         self._last_call = self.clock()
 
 
@@ -229,6 +241,16 @@ def _canonical_request(method: str, url: str, params: dict | None, body) -> dict
     }
 
 
+def _canonical_json(method: str, url: str, params: dict | None, body) -> str:
+    """The canonical request as JSON text, which the key hashes and a stored request must match.
+
+    JSON spells a tuple as an array, so a tuple body equals the list with the same items here.
+    """
+    return json.dumps(
+        _canonical_request(method, url, params, body), sort_keys=True, separators=(",", ":")
+    )
+
+
 def _serves(record, request: dict) -> bool:
     """Whether a stored record is a healthy 2xx response to `request`, compared canonically."""
     if not isinstance(record, dict):
@@ -239,12 +261,12 @@ def _serves(record, request: dict) -> bool:
     if _graphql_errors(record.get("body")):
         return False
     try:
-        have = _canonical_request(
+        have = _canonical_json(
             stored["method"], stored["url"], stored.get("params"), stored.get("body")
         )
     except (KeyError, TypeError, AttributeError, ValueError, httpx.InvalidURL):
         return False
-    want = _canonical_request(
+    want = _canonical_json(
         request["method"], request["url"], request.get("params"), request.get("body")
     )
     return have == want

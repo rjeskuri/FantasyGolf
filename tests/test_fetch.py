@@ -945,3 +945,135 @@ def test_cached_error_response_is_never_served(tmp_path, status, planted_body):
         client, server = fresh_client(root, "live2")
         assert call(client, get_req)["server"] == "live2"
         assert server.calls == 1
+
+
+# --- review fixes (PR #23 round 4) -----------------------------------------------------------
+
+# Bodies holding tuples: JSON sends and stores them as arrays, so a tuple and the list with the
+# same items are the same request.
+TUPLE_BODIES = [
+    pytest.param({"ids": ("p1", "p2", "p3")}, id="top-level"),
+    pytest.param(
+        {"operationName": "q", "variables": {"season": 2019, "playerIds": ("39971", "46046")}},
+        id="nested",
+    ),
+    pytest.param({"pairs": (("a", 1), ("b", 2)), "x": [("c", 3)]}, id="tuples-in-tuples"),
+]
+
+
+def as_json(value):
+    """`value` as it reads back from JSON: tuples become lists, recursively."""
+    return json.loads(json.dumps(value))
+
+
+@pytest.mark.parametrize("body", TUPLE_BODIES)
+def test_identical_tuple_bodies_make_one_network_call(tmp_path, body):
+    client, server, _, _ = make_client(tmp_path)
+
+    first = client.post_json(URL, body)
+    second = client.post_json(URL, body)
+    # The list spelling of the same body is the same request too.
+    third = client.post_json(URL, as_json(body))
+
+    assert server.calls == 1
+    assert client.network_calls == 1
+    assert first == second == third
+    assert first["sent"] == as_json(body)
+
+    # A new client on the same root serves it from disk.
+    later, later_server = fresh_client(tmp_path / "raw", "later")
+    assert later.post_json(URL, body) == first
+    assert later.post_json(URL, as_json(body)) == first
+    assert later_server.calls == 0
+    assert later.network_calls == 0
+
+    # A different tuple is still a different request.
+    other = dict(body)
+    name = next(iter(other))
+    other[name] = ("zz",)
+    assert client.post_json(URL, other)["sent"][name] == ["zz"]
+    assert server.calls == 2
+
+
+ALLOWED_REQUEST_FIELDS = {"method", "url", "params", "body"}
+SECRET_NAME, SECRET_VALUE = "X-Api-Key", "tok-5e81aa04c"
+LEAKY_REQUESTS = [
+    pytest.param(
+        {
+            "method": "GET",
+            "url": URL,
+            "params": {"season": 2019},
+            "headers": {SECRET_NAME: SECRET_VALUE, "User-Agent": "fantasygolf/0 (x)"},
+        },
+        id="get-with-headers",
+    ),
+    pytest.param(
+        {
+            "method": "POST",
+            "url": URL,
+            "body": {"operationName": "q", "variables": {"season": 2020}},
+            "headers": [[SECRET_NAME, SECRET_VALUE]],
+            "extensions": {"timeout": 30, "token": SECRET_VALUE},
+        },
+        id="post-with-headers-and-extra-keys",
+    ),
+    pytest.param(
+        {
+            "method": "GET",
+            "url": f"{BASE}/y",
+            SECRET_NAME: SECRET_VALUE,
+            "cookies": {"session": SECRET_VALUE},
+        },
+        id="header-as-top-level-key",
+    ),
+]
+
+
+@pytest.mark.parametrize("request_meta", LEAKY_REQUESTS)
+def test_raw_cache_put_stores_only_the_request_fields(tmp_path, request_meta):
+    root = tmp_path / "raw"
+    cache = RawCache(root)
+    kept = {k: v for k, v in request_meta.items() if k in ALLOWED_REQUEST_FIELDS}
+    key = cache.key(kept["method"], kept["url"], kept.get("params"), kept.get("body"))
+    body = {"rows": [1, 2, 3]}
+
+    path = cache.put("pgatour", key, request_meta, 200, body)
+
+    text = Path(path).read_text(encoding="utf-8")
+    assert SECRET_VALUE not in text
+    assert SECRET_NAME.lower() not in text.lower()
+    assert "headers" not in text
+    assert "user-agent" not in text.lower()
+    stored = json.loads(text)
+    assert stored["request"] == kept
+    assert stored["body"] == body
+    # The file still serves its own request.
+    assert cache.get("pgatour", key, kept) == body
+    assert cache.get("pgatour", key) == body
+
+
+@pytest.mark.parametrize("max_retries", [0, 2])
+@pytest.mark.parametrize("retry_after", [7, 13])
+def test_retry_after_on_the_last_attempt_still_holds_the_next_call(
+    tmp_path, max_retries, retry_after
+):
+    client, server, clock, _ = make_client(
+        tmp_path,
+        status_then_ok(429, failures=max_retries + 1, headers={"Retry-After": str(retry_after)}),
+        min_interval=0.5,
+        max_retries=max_retries,
+        backoff_base=0.25,
+        max_backoff=60.0,
+    )
+    with pytest.raises(FetchError) as info:
+        client.get_json(URL, {"season": 2019})
+    assert info.value.status == 429
+    assert server.calls == max_retries + 1
+    last_429 = server.times[-1]
+
+    # The caller moves on to a different, uncached request.
+    result = client.get_json(URL, {"season": 2020})
+    assert result == {"ok": True, "n": max_retries + 2}
+    assert server.calls == max_retries + 2
+    gap = server.times[-1] - last_429
+    assert gap >= retry_after - 1e-9, (retry_after, gap, clock.sleeps)
