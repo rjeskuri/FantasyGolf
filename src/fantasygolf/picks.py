@@ -9,7 +9,7 @@ RANK_KEYS = ("mean", "p_top")
 
 
 def _quantile_column(q: float) -> str:
-    return f"p{round(q * 100)}"
+    return f"p{round(q * 100, 6):g}"
 
 
 def rank_tiers(
@@ -25,9 +25,10 @@ def rank_tiers(
     `samples` has shape (n_players, n_draws), in dollars, rows following `player_ids`. `tiers` has
     `tier` and `player_id` columns, optionally `input_name`. Tiers come out in order of first
     appearance in `tiers`. Within a tier, projected players are ranked by `rank_by` ("mean" or
-    "p_top", descending, ties keep their `tiers` order); players without draws follow, unranked by
-    any statistic, with `projected=False` and NaN statistics. `p_top` is the share of draws in which
-    a player has the tier's maximum, ties splitting the draw evenly.
+    "p_top", descending, ties keep their `tiers` order); players without usable draws (no row, an
+    all-NaN row or no draws) follow, unranked by any statistic, with `projected=False` and NaN
+    statistics. `p_top` is the share of draws in which a player has the tier's maximum, ties
+    splitting the draw evenly. Quantile columns are labelled `p<percent>` (`p2.5`, `p50`, `p97.5`).
     """
     if rank_by not in RANK_KEYS:
         raise ValueError(f"rank_by must be one of {RANK_KEYS}, got {rank_by!r}")
@@ -35,7 +36,10 @@ def rank_tiers(
     if samples.ndim != 2 or samples.shape[0] != len(player_ids):
         raise ValueError("samples must have shape (len(player_ids), n_draws)")
 
-    row_of = {pid: i for i, pid in enumerate(player_ids)}
+    # A player is projected only with at least one usable draw: a row that is not all NaN, so a
+    # zero-draw matrix projects nobody.
+    has_draws = (~np.isnan(samples)).any(axis=1)
+    row_of = {pid: i for i, pid in enumerate(player_ids) if has_draws[i]}
     qcols = [_quantile_column(q) for q in quantiles]
     stat_cols = ["mean", *qcols, "p_top"]
     names = tiers["input_name"] if "input_name" in tiers else tiers["player_id"]
@@ -87,20 +91,20 @@ def render_picks_markdown(ranked: pd.DataFrame, title: str) -> str:
     """One markdown table per tier, in the order tiers appear in `ranked`."""
     stat_cols = list(ranked.columns[list(ranked.columns).index("mean") :])
     quantile_cols = stat_cols[1:-1]
-    header = ["Rank", "Player", "Mean", *(c.upper() for c in quantile_cols), "P(top)"]
+    header = ["Rank", "Player", "Mean", *(f"P{c[1:]}" for c in quantile_cols), "P(top)"]
 
     lines = [f"# {title}"]
     for tier in dict.fromkeys(ranked["tier"]):
         lines += ["", f"## Tier {tier}", ""]
         lines.append("| " + " | ".join(header) + " |")
         lines.append("|" + "|".join(["---"] * len(header)) + "|")
-        for row in ranked[ranked["tier"] == tier].itertuples(index=False):
+        for row in ranked[ranked["tier"] == tier].to_dict("records"):
             cells = [
-                str(row.rank),
-                str(row.input_name),
-                _dollars(row.mean),
-                *(_dollars(getattr(row, c)) for c in quantile_cols),
-                _percent(row.p_top),
+                str(row["rank"]),
+                str(row["input_name"]),
+                _dollars(row["mean"]),
+                *(_dollars(row[c]) for c in quantile_cols),
+                _percent(row["p_top"]),
             ]
             lines.append("| " + " | ".join(cells) + " |")
     return "\n".join(lines) + "\n"

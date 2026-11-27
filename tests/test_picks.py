@@ -9,6 +9,7 @@ import re
 import numpy as np
 import pandas as pd
 import pytest
+
 from fantasygolf.picks import rank_tiers, render_picks_markdown
 
 COLUMNS = [
@@ -319,6 +320,68 @@ def test_unprojected_players_listed_last():
     assert proj["p_top"].sum() == pytest.approx(1.0)
 
 
+def test_all_nan_samples_row_is_unprojected():
+    samples = np.array(
+        [
+            [1.0, 2.0, 3.0],
+            [np.nan, np.nan, np.nan],  # b: a row in samples, but no usable draws
+            [3.0, 1.0, 5.0],
+        ]
+    )
+    ids = ["a", "b", "c"]
+    # b is listed first in the tier and would win on position alone.
+    tiers = make_tiers([("A", "b", "Bravo"), ("A", "a", "Alpha"), ("A", "c", "Charlie")])
+    for rank_by in ("mean", "p_top"):
+        rows = tier_rows(rank_tiers(samples, ids, tiers, rank_by=rank_by), "A")
+        assert list(rows["player_id"]) == ["c", "a", "b"], rank_by
+        assert list(rows["rank"]) == [1, 2, 3]
+        assert rows["projected"].tolist() == [True, True, False]
+        last = rows.iloc[2]
+        for col in ("mean", "p10", "p50", "p90", "p_top"):
+            assert pd.isna(last[col]), col
+        proj = rows[rows["projected"]]
+        for col in ("mean", "p10", "p50", "p90", "p_top"):
+            assert proj[col].notna().all(), col
+        # Draws: a = [1, 2, 3], c = [3, 1, 5]; c tops draws 1 and 3, a tops draw 2.
+        assert proj["mean"].tolist() == pytest.approx([3.0, 2.0])
+        assert proj["p_top"].sum() == pytest.approx(1.0)
+        assert dict(zip(proj["player_id"], proj["p_top"], strict=True)) == pytest.approx(
+            {"c": 2 / 3, "a": 1 / 3}
+        )
+
+
+def test_all_nan_row_does_not_disturb_other_tiers_or_players():
+    samples = np.array([[np.nan, np.nan], [4.0, 8.0], [6.0, 2.0]])
+    ids = ["n", "x", "y"]
+    tiers = make_tiers(
+        [("A", "n", "Nan"), ("A", "x", "Xi"), ("A", "y", "Yo"), ("B", "n", "Nan again")]
+    )
+    out = rank_tiers(samples, ids, tiers)
+    a = tier_rows(out, "A")
+    assert a["projected"].tolist() == [True, True, False]
+    assert a["p_top"].iloc[:2].tolist() == pytest.approx([0.5, 0.5])
+    assert a["p_top"].iloc[:2].sum() == pytest.approx(1.0)
+    b = tier_rows(out, "B")
+    assert b["projected"].tolist() == [False]
+    assert pd.isna(b["mean"].iloc[0])
+
+
+@pytest.mark.parametrize("n_players", [1, 3])
+def test_zero_draw_columns_leave_everyone_unprojected(n_players):
+    ids = [f"p{i}" for i in range(n_players)]
+    samples = np.empty((n_players, 0))
+    tiers = make_tiers([("A", pid, f"Name {pid}") for pid in ids] + [("B", ids[0], "Again")])
+    out = rank_tiers(samples, ids, tiers)
+    assert len(out) == n_players + 1
+    assert list(out.columns) == COLUMNS
+    assert not out["projected"].any()
+    for col in ("mean", "p10", "p50", "p90", "p_top"):
+        assert out[col].isna().all(), col
+    a = tier_rows(out, "A")
+    assert sorted(a["player_id"]) == sorted(ids)
+    assert list(a["rank"]) == list(range(1, n_players + 1))
+
+
 def test_unprojected_last_regardless_of_rank_by():
     samples = np.array([[1.0, 1.0], [2.0, 2.0]])
     tiers = make_tiers([("A", "ghost", "G"), ("A", "a", "na"), ("A", "b", "nb")])
@@ -403,6 +466,72 @@ def test_deterministic_with_exact_ties_in_the_ranking_key():
         pd.testing.assert_frame_equal(runs[0], r)
     assert list(runs[0]["rank"]) == [1, 2, 3, 4, 5]
     assert runs[0]["p_top"].tolist() == pytest.approx([0.2] * 5)
+
+
+# --- quantile labels -------------------------------------------------------------------------
+
+QUANTILE_LABELS = [
+    ((0.1, 0.5, 0.9), ["p10", "p50", "p90"]),
+    ((0.025, 0.5, 0.975), ["p2.5", "p50", "p97.5"]),
+    ((0.05, 0.95), ["p5", "p95"]),
+    ((0.125, 0.875), ["p12.5", "p87.5"]),
+    ((0.07, 0.29), ["p7", "p29"]),  # 0.07 * 100 and 0.29 * 100 are not exact in floating point
+]
+
+
+def quantile_case():
+    draws = np.array(
+        [
+            np.linspace(0.0, 1_000_000.0, 41),  # a
+            np.linspace(0.0, 2_000_000.0, 41) + 7_000.0,  # b
+        ]
+    )
+    ids = ["a", "b"]
+    tiers = make_tiers([("A", "a", "Abe Ay"), ("A", "b", "Bo Bee")])
+    return draws, ids, tiers
+
+
+@pytest.mark.parametrize(("quantiles", "labels"), QUANTILE_LABELS)
+def test_quantile_columns_are_labelled_without_losing_precision(quantiles, labels):
+    draws, ids, tiers = quantile_case()
+    out = rank_tiers(draws, ids, tiers, quantiles=quantiles)
+    assert list(out.columns) == [
+        "tier",
+        "rank",
+        "player_id",
+        "input_name",
+        "projected",
+        "mean",
+        *labels,
+        "p_top",
+    ]
+    by_id = out.set_index("player_id")
+    for pid, row in zip(ids, draws, strict=True):
+        for q, label in zip(quantiles, labels, strict=True):
+            assert by_id.loc[pid, label] == pytest.approx(np.quantile(row, q)), (pid, label)
+
+
+@pytest.mark.parametrize(
+    ("quantiles", "headers"),
+    [
+        ((0.025, 0.5, 0.975), ["P2.5", "P50", "P97.5"]),
+        ((0.1, 0.5, 0.9), ["P10", "P50", "P90"]),
+        ((0.05, 0.95), ["P5", "P95"]),
+    ],
+)
+def test_markdown_headers_and_values_follow_quantile_labels(quantiles, headers):
+    draws, ids, tiers = quantile_case()
+    md = render_picks_markdown(rank_tiers(draws, ids, tiers, quantiles=quantiles), "Q")
+    (block,) = table_blocks(md)
+    header = [c.strip() for c in block[0].strip().strip("|").split("|")]
+    assert header[2] == "Mean"
+    assert header[3 : 3 + len(headers)] == headers
+    assert header[-1] == "P(top)"
+    for pid, line in zip(("b", "a"), block[2:], strict=True):  # b has the higher mean
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        row = draws[ids.index(pid)]
+        expected = [f"${np.quantile(row, q):,.0f}" for q in quantiles]
+        assert cells[3 : 3 + len(headers)] == expected, pid
 
 
 # --- markdown --------------------------------------------------------------------------------
