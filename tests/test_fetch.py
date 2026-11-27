@@ -579,6 +579,60 @@ def test_cache_key_follows_the_effective_request_url(tmp_path):
     assert server.calls == 3
 
 
+# Ruling: the key canonicalizes parameter-name order but keeps each repeated name's value order.
+SAME_KEY = [
+    ("?a=1&b=2", "?b=2&a=1"),
+    ("?sort=x&a=1&sort=y", "?a=1&sort=x&sort=y"),
+    ("?b=2&sort=x&a=1&sort=y", "?sort=x&sort=y&a=1&b=2"),
+]
+DIFFERENT_KEY = [
+    ("?sort=score&sort=date", "?sort=date&sort=score"),
+    ("?sort=x&a=1&sort=y", "?a=1&sort=y&sort=x"),
+    ("?a=1&sort=x&sort=y&sort=z", "?a=1&sort=x&sort=z&sort=y"),
+]
+
+
+@pytest.mark.parametrize(("left", "right"), SAME_KEY)
+def test_cache_key_ignores_parameter_name_order(tmp_path, left, right):
+    cache = RawCache(tmp_path / "raw")
+    assert cache.key("GET", URL + left) == cache.key("GET", URL + right)
+
+
+@pytest.mark.parametrize(("left", "right"), DIFFERENT_KEY)
+def test_cache_key_keeps_the_value_order_of_a_repeated_parameter(tmp_path, left, right):
+    cache = RawCache(tmp_path / "raw")
+    assert cache.key("GET", URL + left) != cache.key("GET", URL + right)
+
+
+def test_cache_key_keeps_list_param_value_order(tmp_path):
+    cache = RawCache(tmp_path / "raw")
+    # A list value in `params` is sent in its own order, so the order is part of the key.
+    assert cache.key("GET", URL, {"sort": ["score", "date"]}) != cache.key(
+        "GET", URL, {"sort": ["date", "score"]}
+    )
+    assert cache.key("GET", URL, {"sort": ["score", "date"], "a": 1}) == cache.key(
+        "GET", URL, {"a": 1, "sort": ["score", "date"]}
+    )
+
+
+def test_repeated_parameter_value_order_is_a_separate_cache_entry(tmp_path):
+    client, server, _, _ = make_client(tmp_path)
+    first_url = URL + "?sort=score&sort=date"
+    second_url = URL + "?sort=date&sort=score"
+
+    first = client.get_json(first_url)
+    second = client.get_json(second_url)
+
+    assert server.calls == 2
+    assert client.network_calls == 2
+    assert first["url"] == first_url
+    assert second["url"] == second_url
+    # Each is now cached under its own key: repeats make no call and return their own body.
+    assert client.get_json(first_url)["url"] == first_url
+    assert client.get_json(second_url)["url"] == second_url
+    assert server.calls == 2
+
+
 def test_concurrent_same_request_makes_one_network_call(tmp_path):
     import threading
 

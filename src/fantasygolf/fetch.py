@@ -53,15 +53,17 @@ class RawCache:
         """sha256 of the canonical request; dict order does not matter, headers are not part.
 
         `url` and `params` merge the way httpx merges them for the request it sends
-        (`params=None` keeps the URL's query, `{}` drops it, anything else replaces it), and the
-        query is sorted, so the key follows the effective request URL.
+        (`params=None` keeps the URL's query, `{}` drops it, anything else replaces it), so the key
+        follows the effective request URL. Parameters are ordered by name only (a stable sort):
+        `?a=1&b=2` and `?b=2&a=1` share a key, but a repeated name keeps its value order, so
+        `?sort=score&sort=date` and `?sort=date&sort=score` do not.
         """
         effective = httpx.Request(method, url, params=params).url
         canonical = json.dumps(
             {
                 "method": method.upper(),
                 "url": str(effective.copy_with(query=None)),
-                "query": sorted(effective.params.multi_items()),
+                "query": sorted(effective.params.multi_items(), key=lambda item: item[0]),
                 "body": body,
             },
             sort_keys=True,
