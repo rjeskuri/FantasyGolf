@@ -1,5 +1,6 @@
 """The source-agnostic DuckDB store: schema, primary keys, upsert, make_id, persistence."""
 
+import re
 from datetime import date
 from pathlib import Path
 
@@ -16,7 +17,8 @@ upsert = store.upsert
 
 # The contract from the ticket, widened by the owner's round-1 answer (season_label in
 # stat_catalog's key, measure in season_stats' key, round_scores, players.career_earnings and
-# player_exemptions): table -> (columns in order, declared types, primary key columns).
+# player_exemptions), and by the round-2 rulings (event_teams and team_round_scores for team
+# events, reported once per team): table -> (columns in order, declared types, primary key).
 # Columns without a type in the ticket are not pinned to a type here.
 SCHEMA = {
     "players": (
@@ -122,6 +124,16 @@ SCHEMA = {
         {"round": "INTEGER", "strokes": "INTEGER", "to_par": "INTEGER"},
         {"event_id", "player_id", "round"},
     ),
+    "event_teams": (
+        ["event_id", "team_id", "player_id"],
+        {"team_id": "VARCHAR"},
+        {"event_id", "team_id", "player_id"},
+    ),
+    "team_round_scores": (
+        ["event_id", "team_id", "round", "strokes", "to_par"],
+        {"team_id": "VARCHAR", "round": "INTEGER", "strokes": "INTEGER", "to_par": "INTEGER"},
+        {"event_id", "team_id", "round"},
+    ),
     "earnings_other": (
         ["source", "player_id", "season_label", "component", "amount_usd", "paid_date"],
         {
@@ -169,8 +181,8 @@ SCHEMA = {
 
 TABLES = sorted(SCHEMA)
 
-# One full row per table, the value to change in a non-key column, and an alternative value
-# for every primary-key column.
+# One full row per table, the value to change in a non-key column (None for a table whose
+# columns are all key), and an alternative value for every primary-key column.
 SAMPLE = {
     "players": (
         {
@@ -262,6 +274,22 @@ SAMPLE = {
         ("strokes", 67),
         {"event_id": "pgatour:R2024018", "player_id": "pgatour:28237", "round": 4},
     ),
+    "event_teams": (
+        {"event_id": "pgatour:R2024018", "team_id": "00087", "player_id": "pgatour:33204"},
+        None,
+        {"event_id": "pgatour:R2023018", "team_id": "00126", "player_id": "pgatour:28237"},
+    ),
+    "team_round_scores": (
+        {
+            "event_id": "pgatour:R2024018",
+            "team_id": "00087",
+            "round": 1,
+            "strokes": 61,
+            "to_par": -11,
+        },
+        ("strokes", 60),
+        {"event_id": "pgatour:R2023018", "team_id": "00126", "round": 4},
+    ),
     "earnings_other": (
         {
             "source": "pgatour",
@@ -333,6 +361,9 @@ SAMPLE = {
     ),
 }
 
+# Tables with a non-key column, for the tests that change a stored value.
+VALUE_TABLES = [table for table in TABLES if SAMPLE[table][1] is not None]
+
 
 def rows(con, table, columns):
     order = ", ".join(columns)
@@ -374,7 +405,7 @@ def primary_key_of(con, table):
 def test_connect_creates_all_tables():
     con = connect(":memory:")
     assert isinstance(con, duckdb.DuckDBPyConnection)
-    assert len(SCHEMA) == 10
+    assert len(SCHEMA) == 12
     assert set(SCHEMA) | {"schema_version"} <= base_tables(con)
 
 
@@ -441,13 +472,17 @@ def test_init_schema_on_a_bare_connection_creates_the_tables():
 @pytest.mark.parametrize("table", TABLES)
 def test_upsert_is_idempotent_by_primary_key(table):
     columns = SCHEMA[table][0]
-    row, (column, new_value), _ = SAMPLE[table]
+    row, change, _ = SAMPLE[table]
     con = connect()
 
     assert upsert(con, table, [row]) == 1
     assert upsert(con, table, [row]) == 1
     assert count(con, table) == 1
+    assert rows(con, table, columns) == [tuple(row[c] for c in columns)]
+    if change is None:
+        return
 
+    column, new_value = change
     updated = {**row, column: new_value}
     assert upsert(con, table, [updated]) == 1
     assert rows(con, table, columns) == [tuple(updated[c] for c in columns)]
@@ -514,7 +549,7 @@ def stored(con, table):
     return dict(zip(columns, got, strict=True))
 
 
-@pytest.mark.parametrize("table", TABLES)
+@pytest.mark.parametrize("table", VALUE_TABLES)
 def test_upsert_sparse_row_keeps_omitted_columns_and_none_clears(table):
     columns, _, key = SCHEMA[table]
     row, (changed, new_value), _ = SAMPLE[table]
@@ -612,6 +647,78 @@ def test_upsert_sparse_batch_updates_each_row_by_its_own_columns():
         ("pgatour:R2024003", 3, "wd", 750.0, -11),
         ("pgatour:R2024004", 4, "finished", 750.0, -11),
     ]
+
+
+# A key value given in two Python spellings of one SQL value (a date and its ISO string, an int
+# and its digits) is one key: the batch merges by the value as its column's SQL type, in order
+# (round-2 ruling). Each case: table, the fixed key columns, the varied key column (three
+# spellings of one value, the value as read back, and a different value), a column every update
+# sets (the last wins), and a column only the middle update sets.
+NORMALIZED_KEY_CASES = [
+    (
+        "rankings",
+        {"source": "owgr", "ranking": "owgr", "player_id": "pgatour:46046"},
+        (
+            "as_of_date",
+            [date(2024, 12, 29), "2024-12-29", date(2024, 12, 29)],
+            date(2024, 12, 29),
+            date(2024, 12, 22),
+        ),
+        ("rank", [5, 4, 3]),
+        ("points", 19.1),
+    ),
+    (
+        "stat_catalog",
+        {"source": "pgatour", "stat_id": "02675"},
+        ("season_label", [2024, "2024", 2024], 2024, 2019),
+        ("name", ["SG Total", "SG: Tot", "SG: Total"]),
+        ("category", "STROKES_GAINED"),
+    ),
+    (
+        "team_round_scores",
+        {"event_id": "pgatour:R2024018", "team_id": "00087"},
+        ("round", ["2", 2, "2"], 2, 3),
+        ("strokes", [72, 71, 70]),
+        ("to_par", -2),
+    ),
+]
+
+
+@pytest.mark.parametrize(
+    ("table", "fixed", "varied", "every", "middle_only"),
+    NORMALIZED_KEY_CASES,
+    ids=[case[0] for case in NORMALIZED_KEY_CASES],
+)
+def test_upsert_merges_one_key_given_as_different_python_values(
+    table, fixed, varied, every, middle_only
+):
+    key_column, spellings, stored_value, other_value = varied
+    every_column, every_values = every
+    middle_column, middle_value = middle_only
+    batch = [
+        fixed | {key_column: spelling, every_column: value}
+        for spelling, value in zip(spellings, every_values, strict=True)
+    ]
+    batch[1][middle_column] = middle_value
+    other = fixed | {key_column: other_value, every_column: every_values[0]}
+    con = connect()
+
+    assert upsert(con, table, [batch[0], other, batch[1], batch[2]]) == 4
+
+    got = rows(con, table, [key_column, every_column, middle_column])
+    assert got == sorted(
+        [
+            (stored_value, every_values[-1], middle_value),
+            (other_value, every_values[0], None),
+        ]
+    )
+    assert count(con, table) == 2
+
+    # The same holds across batches: a later spelling updates the one stored row.
+    upsert(con, table, [fixed | {key_column: spellings[1], every_column: every_values[1]}])
+    got = rows(con, table, [key_column, every_column, middle_column])
+    assert (stored_value, every_values[1], middle_value) in got
+    assert count(con, table) == 2
 
 
 @pytest.mark.parametrize(
@@ -795,8 +902,79 @@ def test_reopen_file_keeps_rows(tmp_path, as_str):
     for table in TABLES:
         columns = SCHEMA[table][0]
         assert rows(con, table, columns) == [tuple(SAMPLE[table][0][c] for c in columns)], table
-    assert len(con.execute("SELECT * FROM schema_version").fetchall()) == 1
+    assert con.execute("SELECT version FROM schema_version").fetchall() == [(SCHEMA_VERSION,)]
+    init_schema(con)  # a same-version file opens again without error
     con.close()
+
+
+# A file recording another schema version is refused, not migrated (round-2 ruling): connect and
+# init_schema raise RuntimeError naming both versions and leave the file as it was.
+
+
+def older_shaped_file(path):
+    # Version 1's shape: stat_catalog keyed without season_label, no team tables.
+    con = duckdb.connect(str(path))
+    con.execute("CREATE TABLE players (player_id TEXT, full_name TEXT, PRIMARY KEY (player_id))")
+    con.execute(
+        "CREATE TABLE stat_catalog (source TEXT, stat_id TEXT, name TEXT,"
+        " PRIMARY KEY (source, stat_id))"
+    )
+    con.execute("INSERT INTO players VALUES ('pgatour:46046', 'Scottie Scheffler')")
+    con.execute("INSERT INTO stat_catalog VALUES ('pgatour', '02675', 'SG: Total')")
+    con.execute("CREATE TABLE schema_version (version INTEGER NOT NULL)")
+    con.execute("INSERT INTO schema_version VALUES (1)")
+    con.close()
+    return 1
+
+
+def newer_populated_file(path):
+    con = connect(path)
+    for table in TABLES:
+        upsert(con, table, [SAMPLE[table][0]])
+    recorded = SCHEMA_VERSION + 1
+    con.execute("UPDATE schema_version SET version = ?", [recorded])
+    # A table the newer version no longer has: reopening must not create it again.
+    con.execute("DROP TABLE team_round_scores")
+    con.close()
+    return recorded
+
+
+def snapshot(path):
+    con = duckdb.connect(str(path))
+    found = {
+        table: (
+            columns_of(con, table),
+            con.execute(f'SELECT * FROM "{table}" ORDER BY ALL').fetchall(),
+        )
+        for table in sorted(base_tables(con))
+    }
+    con.close()
+    return found
+
+
+@pytest.mark.parametrize("opener", ["connect", "init_schema"])
+@pytest.mark.parametrize("build", [older_shaped_file, newer_populated_file])
+def test_reopening_a_file_at_another_schema_version_raises_and_writes_nothing(
+    tmp_path, build, opener
+):
+    path = tmp_path / "other.duckdb"
+    recorded = build(path)
+    assert recorded != SCHEMA_VERSION
+    before = snapshot(path)
+
+    if opener == "connect":
+        with pytest.raises(RuntimeError) as raised:
+            connect(path)
+    else:
+        con = duckdb.connect(str(path))
+        with pytest.raises(RuntimeError) as raised:
+            init_schema(con)
+        con.close()
+
+    message = str(raised.value)
+    assert re.search(rf"\b{recorded}\b", message), message
+    assert re.search(rf"\b{SCHEMA_VERSION}\b", message), message
+    assert snapshot(path) == before
 
 
 # --- the widened schema (owner's round-1 answer) -----------------------------------------------
@@ -969,4 +1147,97 @@ def test_career_earnings_and_exemptions_round_trip(tmp_path):
         ).fetchall()
     )
     assert per_player == {"pgatour:46046": 3, "pgatour:28237": 2}
+    con.close()
+
+
+# --- team events (round-2 ruling) ---------------------------------------------------------------
+
+
+def test_team_event_rounds_are_stored_once_per_team_across_reopen(tmp_path):
+    # The 2024 Zurich Classic fixture reports rounds once per team: Lowry/McIlroy (team 00087)
+    # 61 70 64 68 and Trainer/Ramey (00126) 66 69 65 63, both 263 (-25).
+    event = "pgatour:R2024018"
+    teams = {
+        "00087": (["33204", "28237"], [(61, -11), (70, -2), (64, -8), (68, -4)]),
+        "00126": (["35617", "47983"], [(66, -6), (69, -3), (65, -7), (63, -9)]),
+    }
+    links = [
+        {"event_id": event, "team_id": team, "player_id": make_id("pgatour", player)}
+        for team, (players, _) in teams.items()
+        for player in players
+    ]
+    scores = [
+        {"event_id": event, "team_id": team, "round": n, "strokes": strokes, "to_par": to_par}
+        for team, (_, rounds) in teams.items()
+        for n, (strokes, to_par) in enumerate(rounds, start=1)
+    ]
+    path = tmp_path / "zurich.duckdb"
+    con = connect(path)
+    assert upsert(con, "event_teams", links) == 4
+    assert upsert(con, "team_round_scores", scores) == 8
+    # Each partner still has a player result, and an individual event's rounds share the file.
+    upsert(
+        con,
+        "results",
+        [
+            {"event_id": event, "player_id": link["player_id"], "total_to_par": -25}
+            for link in links
+        ],
+    )
+    upsert(
+        con,
+        "round_scores",
+        [
+            {
+                "event_id": "pgatour:R2024014",
+                "player_id": "pgatour:28237",
+                "round": 1,
+                "strokes": 71,
+                "to_par": -1,
+            }
+        ],
+    )
+    con.close()
+
+    con = connect(path)
+    for team, (_, rounds) in teams.items():
+        got = con.execute(
+            "SELECT round, strokes, to_par FROM team_round_scores"
+            " WHERE event_id = ? AND team_id = ? ORDER BY round",
+            [event, team],
+        ).fetchall()
+        assert got == [(n, s, t) for n, (s, t) in enumerate(rounds, start=1)], team
+    assert con.execute(
+        "SELECT count(*), sum(strokes), sum(to_par) FROM team_round_scores WHERE event_id = ?",
+        [event],
+    ).fetchone() == (8, 526, -50)
+
+    team_of = dict(
+        con.execute(
+            "SELECT player_id, team_id FROM event_teams WHERE event_id = ?", [event]
+        ).fetchall()
+    )
+    assert team_of == {
+        "pgatour:33204": "00087",
+        "pgatour:28237": "00087",
+        "pgatour:35617": "00126",
+        "pgatour:47983": "00126",
+    }
+    per_partner = dict(
+        con.execute(
+            "SELECT t.player_id, sum(s.strokes) FROM event_teams t"
+            " JOIN team_round_scores s USING (event_id, team_id)"
+            " WHERE t.event_id = ? GROUP BY t.player_id",
+            [event],
+        ).fetchall()
+    )
+    assert per_partner == dict.fromkeys(team_of, 263)
+
+    # No team rounds leak into the player-only table.
+    assert con.execute(
+        "SELECT count(*), sum(strokes) FROM round_scores WHERE event_id = ?", [event]
+    ).fetchone() == (0, None)
+    assert rows(con, "round_scores", ["event_id", "player_id", "round"]) == [
+        ("pgatour:R2024014", "pgatour:28237", 1)
+    ]
     con.close()

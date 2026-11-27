@@ -1,10 +1,12 @@
 """The source-agnostic DuckDB store: tables, primary keys, upsert and source-scoped ids."""
 
+from datetime import date, datetime
 from pathlib import Path
 
 import duckdb
 
-SCHEMA_VERSION = 2
+# The shape of the tables below; a file recording another version is refused, not migrated.
+SCHEMA_VERSION = 3
 
 # Rows per multi-row INSERT in upsert: far faster than one statement per row.
 _ROWS_PER_STATEMENT = 500
@@ -91,6 +93,21 @@ TABLES: dict[str, tuple[list[tuple[str, str]], tuple[str, ...]]] = {
         ],
         ("event_id", "player_id", "round"),
     ),
+    # Team events: which players formed each team, and the rounds reported once per team.
+    "event_teams": (
+        [("event_id", "TEXT"), ("team_id", "TEXT"), ("player_id", "TEXT")],
+        ("event_id", "team_id", "player_id"),
+    ),
+    "team_round_scores": (
+        [
+            ("event_id", "TEXT"),
+            ("team_id", "TEXT"),
+            ("round", "INTEGER"),
+            ("strokes", "INTEGER"),
+            ("to_par", "INTEGER"),
+        ],
+        ("event_id", "team_id", "round"),
+    ),
     "earnings_other": (
         [
             ("source", "TEXT"),
@@ -151,7 +168,16 @@ def connect(path: str | Path = ":memory:") -> duckdb.DuckDBPyConnection:
 
 
 def init_schema(con: duckdb.DuckDBPyConnection) -> None:
-    """Create any missing table and record SCHEMA_VERSION once; safe to run again."""
+    """Create any missing table and record SCHEMA_VERSION once; safe to run again.
+
+    Raises RuntimeError, before writing anything, when the database records another version.
+    """
+    recorded = _recorded_version(con)
+    if recorded is not None and recorded != SCHEMA_VERSION:
+        raise RuntimeError(
+            f"database schema version {recorded} does not match this store's version"
+            f" {SCHEMA_VERSION}; rebuild the database (there is no migration)"
+        )
     for table, (columns, key) in TABLES.items():
         body = ", ".join(f'"{name}" {kind}' for name, kind in columns)
         primary = ", ".join(f'"{name}"' for name in key)
@@ -161,6 +187,39 @@ def init_schema(con: duckdb.DuckDBPyConnection) -> None:
         "INSERT INTO schema_version SELECT ? WHERE NOT EXISTS (SELECT 1 FROM schema_version)",
         [SCHEMA_VERSION],
     )
+
+
+def _recorded_version(con: duckdb.DuckDBPyConnection) -> int | None:
+    """The version in the schema_version table, or None when there is no table or no row."""
+    exists = con.execute(
+        "SELECT 1 FROM information_schema.tables"
+        " WHERE table_schema = current_schema() AND table_name = 'schema_version'"
+    ).fetchone()
+    if exists is None:
+        return None
+    return con.execute("SELECT max(version) FROM schema_version").fetchone()[0]
+
+
+def _as_sql_value(kind: str, value: object) -> object:
+    """value as its column's SQL type stores it, so one key compares equal in Python.
+
+    Only the common spellings are normalized (digits for an INTEGER, an ISO string or a
+    datetime for a DATE, an int for TEXT); anything else is left for DuckDB to cast or reject.
+    """
+    if value is None or isinstance(value, bool):
+        return value
+    try:
+        if kind == "TEXT" and isinstance(value, int):
+            return str(value)
+        if kind == "INTEGER" and isinstance(value, str):
+            return int(value.strip())
+        if kind == "DATE" and isinstance(value, datetime):
+            return value.date()
+        if kind == "DATE" and isinstance(value, str):
+            return date.fromisoformat(value.strip())
+    except ValueError:
+        pass
+    return value
 
 
 def upsert(con: duckdb.DuckDBPyConnection, table: str, rows: list[dict]) -> int:
@@ -175,16 +234,18 @@ def upsert(con: duckdb.DuckDBPyConnection, table: str, rows: list[dict]) -> int:
         raise ValueError(f"unknown table: {table!r}")
     columns, key = TABLES[table]
     names = [name for name, _ in columns]
+    kinds = dict(columns)
     known = set(names)
     for row in rows:
         unknown = sorted(set(row) - known)
         if unknown:
             raise ValueError(f"unknown column(s) for {table}: {', '.join(unknown)}")
-    # One merged row per key: a multi-row ON CONFLICT DO UPDATE cannot touch a key twice.
+    # One merged row per key: a multi-row ON CONFLICT DO UPDATE cannot touch a key twice. Keys
+    # compare as their SQL values, so a date and its ISO string (or 2 and "2") are one key.
     merged: dict[tuple, dict] = {}
     for row in rows:
-        row_key = tuple(row.get(name) for name in key)
-        merged[row_key] = merged.get(row_key, {}) | row
+        row_key = tuple(_as_sql_value(kinds[name], row.get(name)) for name in key)
+        merged[row_key] = merged.get(row_key, {}) | row | dict(zip(key, row_key, strict=True))
     # Rows naming the same columns share one statement.
     groups: dict[tuple[str, ...], list[dict]] = {}
     for row in merged.values():
