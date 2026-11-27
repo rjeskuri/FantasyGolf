@@ -457,3 +457,196 @@ def test_custom_user_agent_and_headers_do_not_split_the_cache(tmp_path):
     )
     assert second.get_json(URL) == first
     assert second_server.calls == 0
+
+
+# --- review fixes (PR #23) -------------------------------------------------------------------
+
+
+def graphql_errors_then_ok(failures: int):
+    def respond(request: httpx.Request, n: int) -> httpx.Response:
+        if n <= failures:
+            return httpx.Response(200, json={"data": None, "errors": [{"message": f"boom {n}"}]})
+        return httpx.Response(200, json={"data": {"ok": True}, "n": n})
+
+    return respond
+
+
+def test_graphql_errors_are_retried_and_the_healthy_body_is_cached(tmp_path):
+    for failures in [1, 3]:
+        root = tmp_path / str(failures)
+        client, server, clock, cache = make_client(
+            root, graphql_errors_then_ok(failures), max_retries=5, backoff_base=0.5
+        )
+        result = client.post_json(URL, {"operationName": "q", "variables": {"season": 2019}})
+
+        assert result == {"data": {"ok": True}, "n": failures + 1}, failures
+        assert server.calls == failures + 1
+        # Retried with backoff, like a 5xx.
+        gaps = server.gaps()
+        assert len(gaps) == failures
+        for attempt, gap in enumerate(gaps):
+            assert gap >= 0.5 * 2**attempt - 1e-9, gaps
+
+        # Only the healthy body is on disk, and it serves the repeat with no call.
+        files = cached_files(root / "raw")
+        assert len(files) == 1
+        stored = json.loads(files[0].read_text(encoding="utf-8"))
+        assert stored["body"] == result
+        assert "errors" not in json.dumps(stored["body"])
+        again = client.post_json(URL, {"variables": {"season": 2019}, "operationName": "q"})
+        assert again == result
+        assert server.calls == failures + 1
+
+    # An empty errors list is a healthy response: returned and cached at once.
+    def empty_errors(request, n):
+        return httpx.Response(200, json={"data": {"x": n}, "errors": []})
+
+    client, server, _, _ = make_client(tmp_path / "empty", empty_errors)
+    assert client.get_json(URL) == {"data": {"x": 1}, "errors": []}
+    assert client.get_json(URL) == {"data": {"x": 1}, "errors": []}
+    assert server.calls == 1
+
+
+def test_graphql_errors_forever_raise_and_cache_nothing(tmp_path):
+    for max_retries in [1, 3]:
+        root = tmp_path / str(max_retries)
+        client, server, _, cache = make_client(
+            root, graphql_errors_then_ok(10_000), max_retries=max_retries, backoff_base=0.25
+        )
+        body = {"operationName": "q", "variables": {"season": 2020}}
+        with pytest.raises(FetchError) as info:
+            client.post_json(URL, body)
+
+        assert server.calls == max_retries + 1
+        assert info.value.status == 200
+        assert info.value.url == URL
+        assert cached_files(root / "raw") == []
+        assert cache.get("pgatour", cache.key("POST", URL, body=body)) is None
+
+        # Not cached: asking again goes back to the network.
+        with pytest.raises(FetchError):
+            client.post_json(URL, body)
+        assert server.calls == 2 * (max_retries + 1)
+
+
+def test_retry_after_is_never_shortened_by_max_backoff(tmp_path):
+    for retry_after in [7, 13]:
+        client, server, clock, _ = make_client(
+            tmp_path / str(retry_after),
+            status_then_ok(429, headers={"Retry-After": str(retry_after)}),
+            backoff_base=0.25,
+            max_backoff=5.0,
+        )
+        assert client.get_json(URL) == {"ok": True, "n": 2}
+        (gap,) = server.gaps()
+        assert gap >= retry_after - 1e-9, (retry_after, gap, clock.sleeps)
+
+    # The cap still bounds the computed backoff when Retry-After is shorter than it.
+    client, server, _, _ = make_client(
+        tmp_path / "short",
+        status_then_ok(503, headers={"Retry-After": "1"}),
+        backoff_base=10.0,
+        max_backoff=5.0,
+    )
+    assert client.get_json(URL) == {"ok": True, "n": 2}
+    (gap,) = server.gaps()
+    assert 5.0 - 1e-9 <= gap <= 5.0 + 1e-9, gap
+
+
+def test_cache_key_follows_the_effective_request_url(tmp_path):
+    # httpx 0.28: params={} drops the URL's own query, params={...} replaces it, None keeps it.
+    url = f"{BASE}/x?season=2019"
+    client, server, _, _ = make_client(tmp_path)
+
+    calls = [
+        (url, None),
+        (url, {}),
+        (url, {"tour": "R"}),
+        (url, None),
+        (url, {}),
+        (url, {"tour": "R"}),
+    ]
+    with httpx.Client() as builder:
+        for i, (u, params) in enumerate(calls):
+            got = client.get_json(u, params)
+            # The URL httpx sends for this exact call, built by an independent client.
+            effective = str(builder.build_request("GET", u, params=params).url)
+            assert got["url"] == effective, (i, params, got, effective)
+
+    # Three distinct effective requests, each fetched once; the repeats were cache hits.
+    sent = [str(r.url) for r in server.requests]
+    assert len(set(sent)) == len(sent) == server.calls
+    assert server.calls == 3
+
+
+def test_concurrent_same_request_makes_one_network_call(tmp_path):
+    import threading
+
+    entered = threading.Event()
+    release = threading.Event()
+    lock = threading.Lock()
+    hits: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        with lock:
+            hits.append(str(request.url))
+            first = len(hits) == 1
+        if first:
+            entered.set()
+            release.wait(timeout=3.0)
+        return httpx.Response(200, json={"url": str(request.url), "n": len(hits)})
+
+    client = PoliteClient(
+        "pgatour",
+        RawCache(tmp_path / "raw"),
+        transport=httpx.MockTransport(handler),
+        min_interval=0.0,
+        max_retries=0,
+    )
+    results: dict[str, dict] = {}
+    errors: list[BaseException] = []
+
+    def worker(name: str) -> None:
+        try:
+            results[name] = client.get_json(URL, {"season": 2019})
+        except BaseException as exc:  # surfaced in the main thread below
+            errors.append(exc)
+
+    t1 = threading.Thread(target=worker, args=("a",), daemon=True)
+    t1.start()
+    assert entered.wait(timeout=3.0), "first request never reached the server"
+    t2 = threading.Thread(target=worker, args=("b",), daemon=True)
+    t2.start()
+    # Give the second thread time to reach the network if nothing stops it.
+    t2.join(timeout=0.3)
+    release.set()
+    t1.join(timeout=5.0)
+    t2.join(timeout=5.0)
+    client.close()
+
+    assert not t1.is_alive() and not t2.is_alive(), "a thread hung"
+    assert errors == []
+    assert len(hits) == 1, hits
+    assert results["a"] == results["b"]
+    assert results["a"]["n"] == 1 and "season=2019" in results["a"]["url"]
+
+
+def test_every_5xx_but_501_and_505_is_retried(tmp_path):
+    for status in [520, 507, 508, 599]:
+        client, server, _, _ = make_client(
+            tmp_path / f"ok-{status}", status_then_ok(status, failures=1), backoff_base=0.5
+        )
+        assert client.get_json(URL) == {"ok": True, "n": 2}, status
+        assert server.calls == 2, status
+
+    for status in [501, 505]:
+        root = tmp_path / f"no-{status}"
+        client, server, clock, _ = make_client(
+            root, status_then_ok(status, failures=1), max_retries=5, backoff_base=1.0
+        )
+        with pytest.raises(FetchError) as info:
+            client.get_json(URL)
+        assert server.calls == 1, status
+        assert info.value.status == status
+        assert sum(clock.sleeps) < 1.0
+        assert cached_files(root / "raw") == []

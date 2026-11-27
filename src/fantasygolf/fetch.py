@@ -1,14 +1,18 @@
 """The polite fetcher: a raw response cache, a throttle, retries with backoff, a clear User-Agent.
 
 `RawCache` stores each successful response once under `<root>/<source>/<key[:2]>/<key>.json`;
-`PoliteClient` reads it first, so nothing is fetched twice. Request headers never reach the
-cache: they are excluded from the key and from the stored file.
+`PoliteClient` reads it first, so nothing is fetched twice. The key follows the request httpx
+actually sends (method, full URL with its query, body), so two calls share an entry only when
+they would send the same request. Request headers never reach the cache: they are excluded from
+the key and from the stored file. A 2xx body carrying GraphQL `errors` is a failure: it is
+retried like a 5xx and never cached.
 """
 
 import hashlib
 import json
 import os
 import tempfile
+import threading
 import time
 from datetime import UTC, datetime
 from email.utils import parsedate_to_datetime
@@ -19,7 +23,13 @@ import httpx
 from fantasygolf import __version__
 
 DEFAULT_USER_AGENT = f"fantasygolf/{__version__} (personal research; low rate)"
-RETRYABLE_STATUSES = frozenset({429, 500, 502, 503, 504})
+# 5xx statuses that are not transient: the server answers the same way every time.
+PERMANENT_5XX = frozenset({501, 505})
+
+
+def is_retryable_status(status: int) -> bool:
+    """429 and every 5xx except 501 and 505."""
+    return status == 429 or (500 <= status < 600 and status not in PERMANENT_5XX)
 
 
 class FetchError(Exception):
@@ -40,9 +50,20 @@ class RawCache:
     def key(
         self, method: str, url: str, params: dict | None = None, body: dict | None = None
     ) -> str:
-        """sha256 of the canonical request; dict order does not matter, headers are not part."""
+        """sha256 of the canonical request; dict order does not matter, headers are not part.
+
+        `url` and `params` merge the way httpx merges them for the request it sends
+        (`params=None` keeps the URL's query, `{}` drops it, anything else replaces it), and the
+        query is sorted, so the key follows the effective request URL.
+        """
+        effective = httpx.Request(method, url, params=params).url
         canonical = json.dumps(
-            {"method": method.upper(), "url": url, "params": params or {}, "body": body},
+            {
+                "method": method.upper(),
+                "url": str(effective.copy_with(query=None)),
+                "query": sorted(effective.params.multi_items()),
+                "body": body,
+            },
             sort_keys=True,
             separators=(",", ":"),
         )
@@ -107,6 +128,8 @@ class PoliteClient:
         self.sleep = sleep
         self.network_calls = 0
         self._last_call: float | None = None
+        # Serializes cache miss, fetch and write, so concurrent same requests make one call.
+        self._lock = threading.Lock()
         self._http = httpx.Client(
             transport=transport,
             headers={"User-Agent": user_agent or DEFAULT_USER_AGENT, **(headers or {})},
@@ -131,41 +154,54 @@ class PoliteClient:
     def _fetch(
         self, method: str, url: str, *, params: dict | None, body: dict | None, refresh: bool
     ) -> dict:
-        key = self.cache.key(method, url, params, body)
+        request = self._http.build_request(method, url, params=params, json=body)
+        effective_url = str(request.url)
+        key = self.cache.key(method, effective_url, None, body)
         if not refresh:
             cached = self.cache.get(self.source, key)
             if cached is not None:
                 return cached
-        status, payload = self._request_with_retries(method, url, params, body)
-        request = {"method": method, "url": url, "params": params, "body": body}
-        self.cache.put(self.source, key, request, status, payload)
+        with self._lock:
+            if not refresh:
+                # Another thread may have fetched it while this one waited for the lock.
+                cached = self.cache.get(self.source, key)
+                if cached is not None:
+                    return cached
+            status, payload = self._request_with_retries(request, url)
+            record = {"method": method, "url": effective_url, "body": body}
+            self.cache.put(self.source, key, record, status, payload)
         return payload
 
-    def _request_with_retries(
-        self, method: str, url: str, params: dict | None, body: dict | None
-    ) -> tuple[int, dict]:
+    def _request_with_retries(self, request: httpx.Request, url: str) -> tuple[int, dict]:
         for attempt in range(self.max_retries + 1):
             self._throttle()
             self.network_calls += 1
+            retry_after = 0.0
             try:
-                response = self._http.request(method, url, params=params, json=body)
+                response = self._http.send(request)
             except httpx.TransportError as exc:
-                status, detail, retry_after = None, f"{type(exc).__name__}: {exc}", 0.0
+                status, detail = None, f"{type(exc).__name__}: {exc}"
             else:
                 status = response.status_code
+                retry_after = _retry_after_seconds(response.headers.get("Retry-After"))
                 if 200 <= status < 300:
                     try:
-                        return status, response.json()
+                        payload = response.json()
                     except ValueError as exc:
                         raise FetchError(url, status, f"status {status}, body is not JSON") from exc
-                detail = f"status {status}"
-                if status not in RETRYABLE_STATUSES:
-                    raise FetchError(url, status, detail)
-                retry_after = _retry_after_seconds(response.headers.get("Retry-After"))
+                    errors = _graphql_errors(payload)
+                    if not errors:
+                        return status, payload
+                    detail = f"status {status} with GraphQL errors: {_first_message(errors)}"
+                else:
+                    detail = f"status {status}"
+                    if not is_retryable_status(status):
+                        raise FetchError(url, status, detail)
             if attempt == self.max_retries:
                 break
-            wait = max(retry_after, self.backoff_base * 2**attempt)
-            self.sleep(min(wait, self.max_backoff))
+            # The cap bounds only the computed backoff, never the server's Retry-After.
+            backoff = min(self.backoff_base * 2**attempt, self.max_backoff)
+            self.sleep(max(retry_after, backoff))
         attempts = self.max_retries + 1
         raise FetchError(url, status, f"{detail} after {attempts} attempts")
 
@@ -176,6 +212,21 @@ class PoliteClient:
             if wait > 0:
                 self.sleep(wait)
         self._last_call = self.clock()
+
+
+def _graphql_errors(payload) -> list:
+    """The non-empty top-level GraphQL `errors` list of a body, or [] when it is healthy."""
+    if isinstance(payload, dict):
+        errors = payload.get("errors")
+        if isinstance(errors, list) and errors:
+            return errors
+    return []
+
+
+def _first_message(errors: list) -> str:
+    first = errors[0]
+    message = first.get("message") if isinstance(first, dict) else None
+    return str(first if message is None else message)[:200]
 
 
 def _retry_after_seconds(value: str | None) -> float:
